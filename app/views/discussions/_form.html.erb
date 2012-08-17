@@ -1,13 +1,32 @@
-<%= simple_form_for(@discussion) do |f| %>
-  <%= f.error_notification %>
+<%= nested_form_for(@discussion) do |f| %>
+  <% if @discussion.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@discussion.errors.count, "error") %> prohibited this discussion from being saved:</h2>
 
-  <div class="form-inputs">
-    <%= f.input :title %>
-    <%= f.association :group %>
-    <%= f.association :user %>
+      <ul>
+      <% @discussion.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :title %>
+    <%= f.text_field :title %>
+		<%= f.label :group %>
+		<%= f.collection_select :group_id, @groups, :id, :name %>
   </div>
-
-  <div class="form-actions">
-    <%= f.button :submit %>
+	<br />
+	<p><strong>Create the first message:</strong></p>
+	<%= f.fields_for :discussion_messages do |messages_form| %>
+		<%= messages_form.text_area :body, :rows => 5 %>
+		
+		<%= messages_form.hidden_field :user_id, :value => current_user.id %>
+	<% end %>
+	<%= f.hidden_field :user_id, :value => current_user.id %>
+  <div class="actions">
+    <%= f.submit "Create discussion", :class => "btn btn-primary" %>
+		<%= link_to 'Back', discussions_path, :class => "btn btn-primary" %>		
   </div>
 <% end %>

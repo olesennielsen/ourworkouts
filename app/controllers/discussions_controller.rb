@@ -3,7 +3,15 @@ class DiscussionsController < ApplicationController
   # GET /discussions
   # GET /discussions.json
   def index
-    @discussions = Discussion.all
+    @discussions = []
+    @groups = current_user.groups
+    
+    @groups.each do |group|
+      tmp_discs = Discussion.where(:group_id => group.id)
+      tmp_discs.each do |tmp_disc|
+        @discussions.push(tmp_disc)
+      end
+    end
 
     respond_to do |format|
       format.html # index.html.erb
@@ -15,7 +23,9 @@ class DiscussionsController < ApplicationController
   # GET /discussions/1.json
   def show
     @discussion = Discussion.find(params[:id])
-
+    @initial_message = @discussion.discussion_messages.first
+    @messages = @discussion.discussion_messages.drop(1)    
+    
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @discussion }
@@ -26,7 +36,9 @@ class DiscussionsController < ApplicationController
   # GET /discussions/new.json
   def new
     @discussion = Discussion.new
-
+    @discussion.discussion_messages.build 
+    @groups = current_user.groups
+    
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @discussion }

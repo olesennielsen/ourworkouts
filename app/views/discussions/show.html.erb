@@ -1,20 +1,30 @@
-<p id="notice"><%= notice %></p>
+<h2><%= @discussion.title %></h2>
+<br />
+<%= link_to 'Back', :back, :class => 'btn btn-primary pull-right' %>
+<strong>Initial message:</strong>
+<br />
+<br />
+<div class="row-fluid">
+  <div class="span12">
+		<%= render @initial_message %>
+	</div>
+</div>
+</div>
+<div class="row-fluid">
+  <div class="span6" id="discussion_messages" >
+		<%= render :partial => 'discussion_message', :collection => @messages.reverse %>
+	</div>
+	<div class="span6">
+		<strong>Write new message:</strong>
+		<%= form_for DiscussionMessage.new, :remote => true do |f| %>			
+			<%= f.text_area :body, :rows => 5 %><br />
+			
+			<%= f.hidden_field :user_id, :value => current_user.id %>
+			<%= f.hidden_field :discussion_id, :value => @discussion.id %>
+			<%= f.submit "Add message", :class => "btn btn-primary" %>		
+		<% end %>
+	</div>
+</div>
 
-<p>
-  <b>Title:</b>
-  <%= @discussion.title %>
-</p>
+<br />
 
-<p>
-  <b>Group:</b>
-  <%= @discussion.group %>
-</p>
-
-<p>
-  <b>User:</b>
-  <%= @discussion.user %>
-</p>
-
-
-<%= link_to 'Edit', edit_discussion_path(@discussion) %> |
-<%= link_to 'Back', discussions_path %>

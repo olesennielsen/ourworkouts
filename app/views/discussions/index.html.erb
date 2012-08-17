@@ -1,27 +1,28 @@
 <h1>Listing discussions</h1>
 
-<table>
-  <tr>
-    <th>Title</th>
-    <th>Group</th>
-    <th>User</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
-
-<% @discussions.each do |discussion| %>
-  <tr>
-    <td><%= discussion.title %></td>
-    <td><%= discussion.group %></td>
-    <td><%= discussion.user %></td>
-    <td><%= link_to 'Show', discussion %></td>
-    <td><%= link_to 'Edit', edit_discussion_path(discussion) %></td>
-    <td><%= link_to 'Destroy', discussion, confirm: 'Are you sure?', method: :delete %></td>
-  </tr>
-<% end %>
-</table>
+<br />
+<%= link_to 'New Discussion', new_discussion_path, :class => "btn btn-primary" %>
 
 <br />
 
-<%= link_to 'New Discussion', new_discussion_path %>
+<br />
+<table class="table">
+  <thead>
+	<tr>
+    <th>Title</th>
+    <th>Last message</th>
+    <th>Last contributor</th>
+		<th>Group</th>
+  </tr>
+	</thead>
+	<tbody>
+<% @discussions.each do |discussion| %>
+  <tr>
+    <td><%= link_to discussion.title, discussion %></td>
+    <td><%= discussion.last_message %></td>
+		<td><%= discussion.last_contributor%></td>
+		<td><%= discussion.group.name %></td>  
+  </tr>
+<% end %>
+</tbody>
+</table>

@@ -11,7 +11,65 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120817093807) do
+ActiveRecord::Schema.define(:version => 20120817184118) do
+
+  create_table "discussion_messages", :force => true do |t|
+    t.text     "body"
+    t.integer  "discussion_id"
+    t.integer  "user_id"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
+  end
+
+  add_index "discussion_messages", ["discussion_id"], :name => "index_discussion_messages_on_discussion_id"
+  add_index "discussion_messages", ["user_id"], :name => "index_discussion_messages_on_user_id"
+
+  create_table "discussions", :force => true do |t|
+    t.string   "title"
+    t.integer  "group_id"
+    t.integer  "user_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "discussions", ["group_id"], :name => "index_discussions_on_group_id"
+  add_index "discussions", ["user_id"], :name => "index_discussions_on_user_id"
+
+  create_table "entries", :force => true do |t|
+    t.integer  "event_id"
+    t.integer  "user_id"
+    t.boolean  "organizer"
+    t.text     "comment"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "entries", ["event_id"], :name => "index_entries_on_event_id"
+  add_index "entries", ["user_id"], :name => "index_entries_on_user_id"
+
+  create_table "event_messages", :force => true do |t|
+    t.integer  "event_id"
+    t.integer  "user_id"
+    t.text     "body"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "event_messages", ["event_id"], :name => "index_event_messages_on_event_id"
+  add_index "event_messages", ["user_id"], :name => "index_event_messages_on_user_id"
+
+  create_table "events", :force => true do |t|
+    t.datetime "start_time"
+    t.datetime "end_time"
+    t.string   "title"
+    t.text     "notes"
+    t.boolean  "milestone"
+    t.integer  "group_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "events", ["group_id"], :name => "index_events_on_group_id"
 
   create_table "groups", :force => true do |t|
     t.string   "name"
@@ -20,6 +78,14 @@ ActiveRecord::Schema.define(:version => 20120817093807) do
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
   end
+
+  create_table "groups_users", :id => false, :force => true do |t|
+    t.integer "user_id"
+    t.integer "group_id"
+  end
+
+  add_index "groups_users", ["group_id"], :name => "index_groups_users_on_group_id"
+  add_index "groups_users", ["user_id"], :name => "index_groups_users_on_user_id"
 
   create_table "roles", :force => true do |t|
     t.string   "name"
@@ -31,6 +97,20 @@ ActiveRecord::Schema.define(:version => 20120817093807) do
 
   add_index "roles", ["name", "resource_type", "resource_id"], :name => "index_roles_on_name_and_resource_type_and_resource_id"
   add_index "roles", ["name"], :name => "index_roles_on_name"
+
+  create_table "sports", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "sports_groups", :id => false, :force => true do |t|
+    t.integer "sport_id"
+    t.integer "group_id"
+  end
+
+  add_index "sports_groups", ["group_id"], :name => "index_sports_groups_on_group_id"
+  add_index "sports_groups", ["sport_id"], :name => "index_sports_groups_on_sport_id"
 
   create_table "users", :force => true do |t|
     t.string   "email",                                :default => "", :null => false
@@ -62,14 +142,6 @@ ActiveRecord::Schema.define(:version => 20120817093807) do
   add_index "users", ["invitation_token"], :name => "index_users_on_invitation_token"
   add_index "users", ["invited_by_id"], :name => "index_users_on_invited_by_id"
   add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true
-
-  create_table "users_groups", :id => false, :force => true do |t|
-    t.integer "user_id"
-    t.integer "group_id"
-  end
-
-  add_index "users_groups", ["group_id"], :name => "index_users_groups_on_group_id"
-  add_index "users_groups", ["user_id"], :name => "index_users_groups_on_user_id"
 
   create_table "users_roles", :id => false, :force => true do |t|
     t.integer "user_id"

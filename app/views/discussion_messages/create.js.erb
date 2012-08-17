@@ -1,0 +1,5 @@
+/* Add the new comment to the bottom of the messages list */
+$("#discussion_messages").prepend("<%= escape_javascript(render @discussion_message) %>");
+alert(<%= @discussion_message.body %>);
+/* Reset the message form */
+$("#new_discussion_message")[0].reset();

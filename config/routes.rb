@@ -1,6 +1,8 @@
 Ourworkouts::Application.routes.draw do
   resources :events
 
+  resources :discussion_messages
+
   resources :event_messages
 
   resources :discussions
