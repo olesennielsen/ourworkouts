@@ -1,5 +1,10 @@
 class User < ActiveRecord::Base
   has_and_belongs_to_many :groups
+  has_many :entries
+  has_many :events, :through => :entries
+  has_many :discussions
+  has_many :discussion_messages
+  has_many :event_messages
   
   rolify
   # Include default devise modules. Others available are:

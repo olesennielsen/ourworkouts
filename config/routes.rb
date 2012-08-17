@@ -1,4 +1,8 @@
 Ourworkouts::Application.routes.draw do
+  resources :events
+
+  resources :event_messages
+
   resources :discussions
 
   resources :groups
