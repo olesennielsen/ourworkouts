@@ -1,4 +1,8 @@
 Ourworkouts::Application.routes.draw do
+  resources :discussions
+
+  resources :groups
+
   authenticated :user do
     root :to => 'home#index'
   end
