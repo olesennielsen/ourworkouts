@@ -15,3 +15,7 @@ user2 = User.create! :name => 'Second User', :email => 'user2@example.com', :pas
 puts 'New user created: ' << user2.name
 user.add_role :admin
 user.groups << group
+
+direct_messages = DirectMessage.create!([{body: "besked 1", sender_id: 1, recipient_id: 2}, 
+                                          {body: "svar til besked 1", sender_id: 2, recipient_id: 1},
+                                          {body: "besked 2", sender_id: 2, recipient_id: 1}])

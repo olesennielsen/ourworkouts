@@ -8,7 +8,7 @@ Ourworkouts::Application.routes.draw do
   resources :discussions
 
   resources :groups
-
+  resources :direct_messages
   authenticated :user do
     root :to => 'home#index'
   end
