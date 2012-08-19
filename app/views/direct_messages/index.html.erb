@@ -1,9 +1,27 @@
 <h1>Direct Messages for <%= current_user.name %></h1>
 <br />
-<br />
+<hr />
 
-<% @direct_messages.each do |user, messages| %>
-	<h3><%= user.name %></h3>
-	<br />
-	<%= render :partial => 'direct_message', :collection => messages %>
-<% end %>
+
+<div class="row-fluid">
+	<div class="span6" id="direct_messages">
+		<% @direct_messages.each do |user, messages| %>
+			<h3><%= user.name %></h3>
+			<br />
+			<div id="<%= user.id %>">
+				<%= render :partial => 'direct_message', :collection => messages.reverse %>
+			</div>
+		<% end %>
+  </div>
+	<div class="span6">
+		<strong>Write new message:</strong>
+		<%= form_for DirectMessage.new, :remote => true do |f| %>			
+			<%= f.text_area :body, :rows => 5 %><br />
+			<%= f.label :recipient_id, "Recipient:" %>
+			<%= f.collection_select :recipient_id, @recipients, :id, :name %>
+			<%= f.hidden_field :sender_id, :value => current_user.id %>
+			<br />
+			<%= f.submit "Add message", :class => "btn btn-primary" %>		
+		<% end %>
+	</div>
+</div>

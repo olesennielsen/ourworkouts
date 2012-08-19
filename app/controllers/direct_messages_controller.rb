@@ -5,6 +5,8 @@ class DirectMessagesController < ApplicationController
   # GET /direct_messages.json
   def index
     @direct_messages = DirectMessage.get_direct_messages(current_user)
+    
+    @recipients = User.reachable_users(current_user)
 
     respond_to do |format|
       format.html # index.html.erb
