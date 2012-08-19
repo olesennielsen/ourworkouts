@@ -5,20 +5,25 @@ class DirectMessage < ActiveRecord::Base
   attr_accessible :body, :sender_id, :recipient_id, :created_at
   
   def self.get_direct_messages(user)
-    direct_messages = []
+    direct_messages = Hash.new
     
-    sent_messages = DirectMessage.where(:sender_id => user).group_by(&:recipient_id)
-    received_messages = DirectMessage.where(:recipient_id => user).group_by(&:sender_id)
+    sent = DirectMessage.where(:sender_id => user).group_by(&:recipient_id)
+    received = DirectMessage.where(:recipient_id => user).group_by(&:sender_id)
     
-    sent_messages.each do |recipient_id, direct_messages|
-      tmp_messages = received_messages[recipient_id]
-      tmp_messages.sort_by {|message| message.created_at}
-      tmp_messages.each do |t_m|
-        direct_messages.push(t_m)
+    if sent.size > received.size
+      sent.each do |id, messages|
+        tmp = received.fetch(id) + messages
+        tmp = tmp.sort_by!(&:created_at)
+        direct_messages[User.find(id)] = tmp
+      end
+    else
+      received.each do |id, messages|
+        tmp = sent.fetch(id) + messages
+        tmp = tmp.sort_by!(&:created_at)
+        direct_messages[User.find(id)] = tmp
       end
     end
     
-    return direct_messages
-     
+    return direct_messages     
   end
 end

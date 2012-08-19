@@ -1,1 +1,9 @@
-<%= @direct_messages %>
+<h1>Direct Messages for <%= current_user.name %></h1>
+<br />
+<br />
+
+<% @direct_messages.each do |user, messages| %>
+	<h3><%= user.name %></h3>
+	<br />
+	<%= render :partial => 'direct_message', :collection => messages %>
+<% end %>
