@@ -19,7 +19,9 @@ class DirectMessagesController < ApplicationController
   def show
     @direct_message = DirectMessage.find(params[:id])
     
-    @json_request = {coach_name: @direct_message.coach.fullname, athlete_name: @direct_message.athlete.fullname}
+    r_name = User.find(@direct_message.recipient_id)    
+    
+    @json_request = {recipient_name: r_name}
     respond_to do |format|
       #format.html # show.html.erb
       format.json { render json: @json_request }

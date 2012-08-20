@@ -1,4 +1,4 @@
-<h1>Direct Messages for <%= current_user.name %></h1>
+<h1>Direct Messages</h1>
 <br />
 <hr />
 
@@ -6,7 +6,7 @@
 <div class="row-fluid">
 	<div class="span6" id="direct_messages">
 		<% @direct_messages.each do |user, messages| %>
-			<h3><%= user.name %></h3>
+			<h4><%= user.name %></h4>
 			<br />
 			<div id="<%= user.id %>">
 				<%= render :partial => 'direct_message', :collection => messages.reverse %>

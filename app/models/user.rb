@@ -29,5 +29,4 @@ class User < ActiveRecord::Base
     end
     return users
   end
-  
 end
