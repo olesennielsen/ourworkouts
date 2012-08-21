@@ -1,18 +1,17 @@
-$.get('/direct_messages/' + <%= @direct_message.id %> + '.json', function(data) {  
-	
-	var recipient_name = data.recipient_name;
-	
-	<% if DirectMessage.where(:sender_id => @direct_message.sender_id).where(:recipient_id => @direct_message.recipient_id).count == 1 %>
-		html_output += "<h4>" + recipient_name + "</h4><br />";
+<% if DirectMessage.where(:sender_id => @direct_message.sender_id).where(:recipient_id => @direct_message.recipient_id).count == 1 %>
+	$.get('/direct_messages/' + <%= @direct_message.id %> + '.json', function(data) {  
+		html_output += "<h4>" + data.recipient + "</h4><br />";
 		html_output += "<div id='" + <%= @direct_message.recipient_id %> + "'></div>";
 		$("#direct_messages").append(html_output);
-	<% end %>
+		alert(data.recipient);
+	});
+<% end %>
 
-	/* Add the new message to the bottom of the correct user id div */
-	$("#" + <%= @direct_message.recipient_id %>).prepend("<%= escape_javascript(render @direct_message) %>");
+/* Add the new message to the bottom of the correct user id div */
+$("#" + <%= @direct_message.recipient_id %>).prepend("<%= escape_javascript(render @direct_message) %>");
 
-	/* Reset the message form */
-	$("#new_direct_message")[0].reset();	
-});
+/* Reset the message form */
+$("#new_direct_message")[0].reset();	
+
 
 
