@@ -12,13 +12,21 @@ class DirectMessage < ActiveRecord::Base
     
     if sent.size > received.size
       sent.each do |id, messages|
-        tmp = received.fetch(id) + messages
+        if received.fetch(id).nil?
+          tmp = messages
+        else
+          tmp = received.fetch(id) + messages
+        end
         tmp = tmp.sort_by!(&:created_at)
         direct_messages[User.find(id)] = tmp
       end
     else
       received.each do |id, messages|
-        tmp = sent.fetch(id) + messages
+        if sent.fetch(id).nil?
+          tmp = messages
+        else
+          tmp = sent.fetch(id) + messages
+        end       
         tmp = tmp.sort_by!(&:created_at)
         direct_messages[User.find(id)] = tmp
       end
