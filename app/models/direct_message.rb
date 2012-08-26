@@ -11,21 +11,21 @@ class DirectMessage < ActiveRecord::Base
     received = DirectMessage.where(:recipient_id => user).group_by(&:sender_id)
     
     if sent.size > received.size
-      sent.each do |id, messages|
-        if received.fetch(id).nil?
-          tmp = messages
+      sent.each do |id, messages|        
+        if received[id].nil?
+          tmp = messages      
         else
-          tmp = received.fetch(id) + messages
+          tmp = received[id] + messages
         end
         tmp = tmp.sort_by!(&:created_at)
         direct_messages[User.find(id)] = tmp
       end
     else
-      received.each do |id, messages|
-        if sent.fetch(id).nil?
+      received.each do |id, messages|        
+        if sent[2].nil?
           tmp = messages
         else
-          tmp = sent.fetch(id) + messages
+          tmp = sent[id] + messages
         end       
         tmp = tmp.sort_by!(&:created_at)
         direct_messages[User.find(id)] = tmp
