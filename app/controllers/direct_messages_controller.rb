@@ -21,7 +21,7 @@ class DirectMessagesController < ApplicationController
     
     r_name = User.find(@direct_message.recipient_id)    
     
-    @json_request = {recipient: r_name}
+    @json_request = {recipient: r_name.name}
     respond_to do |format|
       #format.html # show.html.erb
       format.json { render json: @json_request }
