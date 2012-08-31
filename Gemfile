@@ -18,3 +18,8 @@ gem "rolify", ">= 3.2.0"
 gem "simple_form"
 gem "therubyracer", :group => :assets, :platform => :ruby
 gem "nested_form"
+gem "omniauth"
+gem "omniauth-facebook"
+gem "omniauth-twitter"
+gem 'omniauth-google-oauth2'
+gem 'omniauth-linkedin'
