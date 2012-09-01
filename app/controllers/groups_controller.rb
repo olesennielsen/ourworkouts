@@ -26,8 +26,6 @@ class GroupsController < ApplicationController
   # GET /groups/new.json
   def new
     @group = Group.new
-    
-    @auth = request.env['omniauth.auth'].inspect
 
     respond_to do |format|
       format.html # new.html.erb
