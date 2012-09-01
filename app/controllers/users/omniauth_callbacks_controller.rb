@@ -39,7 +39,11 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   
   def google_oauth2
     render :text => request.env['omniauth.auth'].inspect
-  end  
+  end
+  
+  def email
+    
+  end
   
   def passthru
     render :file => "#{Rails.root}/public/404.html", :status => 404, :layout => false

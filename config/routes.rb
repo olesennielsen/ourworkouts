@@ -12,6 +12,7 @@ Ourworkouts::Application.routes.draw do
 
   resources :direct_messages
 
+  get '/sign_up' => "home#sign_up"
   
   devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" } #do
   #    get 'sign_in', :to => 'users/sessions#new', :as => :new_user_session
