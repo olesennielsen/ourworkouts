@@ -14,6 +14,11 @@ Devise.setup do |config|
   # :mongoid (bson_ext recommended) by default. Other ORMs may be
   # available as additional gems.
   require 'devise/orm/active_record'
+  
+  require 'omniauth-facebook'
+  require 'omniauth-twitter'
+  require 'omniauth-linkedin'
+  require 'omniauth-google-oauth2'
 
   # ==> Configuration for any authentication mechanism
   # Configure which keys are used when authenticating a user. The default is
@@ -228,6 +233,10 @@ Devise.setup do |config|
   # Add a new OmniAuth provider. Check the wiki for more information on setting
   # up on your models and hooks.
   # config.omniauth :github, 'APP_ID', 'APP_SECRET', :scope => 'user,public_repo'
+  config.omniauth :facebook, '405056239556059', 'c10b80f7c63f39da133e59fcc4fd0062'
+  config.omniauth :twitter, '9fSaCMIdpqc3n9E29S2guA', 'XxnqtkMoa3vbO5HX0IORR8Ev3MCnfxqwv0f9AO5M'
+  config.omniauth :linkedin, '07wy3g5tip6x', '5v9WXGlUKhnrcejV'
+  config.omniauth :google_oauth2, '58229183123.apps.googleusercontent.com', 'EzO1-CLurAT3BkN4JEa2fLGm'
 
   # ==> Warden configuration
   # If you want to use other strategies, that are not supported by Devise, or

@@ -11,7 +11,17 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120818152807) do
+ActiveRecord::Schema.define(:version => 20120901075157) do
+
+  create_table "authorizations", :force => true do |t|
+    t.string   "provider"
+    t.string   "uid"
+    t.integer  "user_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "authorizations", ["user_id"], :name => "index_authorizations_on_user_id"
 
   create_table "direct_messages", :force => true do |t|
     t.text     "body"

@@ -21,8 +21,6 @@ Ourworkouts::Application.routes.draw do
   end
 
   root :to => "home#index"
-  #devise_for :users
-  #resources :users, :only => [:show, :index]
   
   devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" } do
     get 'sign_in', :to => 'users/sessions#new', :as => :new_user_session

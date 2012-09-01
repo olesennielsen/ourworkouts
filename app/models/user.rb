@@ -5,6 +5,7 @@ class User < ActiveRecord::Base
   has_many :discussions
   has_many :discussion_messages
   has_many :event_messages
+  has_many :authorizations
   
   rolify
   # Include default devise modules. Others available are:
