@@ -5,7 +5,7 @@ class User < ActiveRecord::Base
   has_many :discussions
   has_many :discussion_messages
   has_many :event_messages
-  has_many :authorizations
+  has_many :authentications
   
   rolify
   # Include default devise modules. Others available are:
@@ -29,5 +29,15 @@ class User < ActiveRecord::Base
       end
     end
     return users
+  end
+  
+  # The apply_omniauth method used to create the user, called from the authentications controller
+  def apply_omniauth(omniauth)
+    self.email = omniauth['info']['email'] if email.blank?
+    authentications.build(:provider => omniauth['provider'], :uid => omniauth['uid'], :token => omniauth['credentials']['token'])
+  end
+
+  def password_required?
+    (authentications.empty? || !password.blank?) && super
   end
 end
