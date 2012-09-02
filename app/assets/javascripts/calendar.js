@@ -71,7 +71,7 @@ $(document).ready(function() {
 	/* Hits the right controller and athlete with the update event */
 function updateEvent(the_event) {
     $.update(
-      "/athletes/" + the_event.athlete_id + "/events/" + the_event.id,
+      "/events/" + the_event.id,
       { event: { title: the_event.title,
                  starts_at: "" + the_event.start,
                  ends_at: "" + the_event.end,

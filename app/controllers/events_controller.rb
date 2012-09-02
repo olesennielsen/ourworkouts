@@ -9,21 +9,10 @@ class EventsController < ApplicationController
     
     # This if statement is necessary for the index to work 
     # both for fullcalendar and rails application
-    if(params['end'] == params['start'])
-      @events = Event.where(:user_id => @athlete.id)
-    else	
-      @events = Event.where("ends_at < ? AND starts_at > ? AND athlete_id = ?", Event.format_date(params['end']), Event.format_date(params['start']), @athlete.id)
-    end
-    
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @events }
       format.js  { render :json => @events }
-    end
-
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @events }
     end
   end
 
@@ -58,6 +47,7 @@ class EventsController < ApplicationController
   # POST /events.json
   def create
     @event = Event.new(params[:event])
+    @event.organizer = current_user
 
     respond_to do |format|
       if @event.save

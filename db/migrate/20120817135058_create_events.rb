@@ -4,7 +4,8 @@ class CreateEvents < ActiveRecord::Migration
       t.datetime :start_time
       t.datetime :end_time
       t.string :title
-      t.text :notes
+      t.boolean :all_day
+      t.text :description
       t.boolean :milestone
       t.integer :organizer
       t.references :group
@@ -13,4 +14,8 @@ class CreateEvents < ActiveRecord::Migration
     end
     add_index :events, :group_id
   end
+  def self.down
+    drop_table :events
+  end
+
 end

@@ -1,32 +1,3 @@
 <div id='calendar'></div>
-<table>
-  <tr>
-    <th>Start time</th>
-    <th>End time</th>
-    <th>Title</th>
-    <th>Notes</th>
-    <th>Milestone</th>
-    <th>Group</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
-
-<% @events.each do |event| %>
-  <tr>
-    <td><%= event.start_time %></td>
-    <td><%= event.end_time %></td>
-    <td><%= event.title %></td>
-    <td><%= event.notes %></td>
-    <td><%= event.milestone %></td>
-    <td><%= event.group %></td>
-    <td><%= link_to 'Show', event %></td>
-    <td><%= link_to 'Edit', edit_event_path(event) %></td>
-    <td><%= link_to 'Destroy', event, confirm: 'Are you sure?', method: :delete %></td>
-  </tr>
-<% end %>
-</table>
-
-<br />
 
 <%= link_to 'New Event', new_event_path %>

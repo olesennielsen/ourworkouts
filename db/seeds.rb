@@ -15,6 +15,7 @@ user2 = User.create! :name => 'Second User', :email => 'user2@example.com', :pas
 puts 'New user created: ' << user2.name
 user3 = User.create! :name => 'Third User', :email => 'user3@example.com', :password => 'please', :password_confirmation => 'please', :confirmed_at => Time.now.utc
 puts 'New user created: ' << user2.name
+user4 = User.create! :email => 'hav@hav.com', :password => 'qwerty', :confirmed_at => Time.now.utc
 user.add_role :admin
 user.groups << group
 user2.groups << group
