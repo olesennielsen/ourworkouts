@@ -13,19 +13,13 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
       flash[:notice] = "Authentication successful."
       redirect_to authentications_url
     else # if it does not exist the user is created by calling the apply_omniauth method
+      @omniauth = omniauth
       @user = User.new
-      @user.groups.build
-      
+      @user.groups.build      
       @user.apply_omniauth(omniauth)
       
-      
-      #       if user.save
-      #         flash[:notice] = "Signed in successfully."
-      #         sign_in_and_redirect(:user, user)
-      #       else
-      #         session[:omniauth] = omniauth.except('extra')
-      #         redirect_to new_user_registration_url
-      #       end
+      @name = omniauth['info']['name']
+      @email = omniauth['info']['email']
     end
   end
   

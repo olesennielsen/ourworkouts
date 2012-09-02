@@ -35,7 +35,7 @@ class User < ActiveRecord::Base
   # The apply_omniauth method used to create the user, called from the authentications controller
   def apply_omniauth(omniauth)
     self.email = omniauth['info']['email'] if email.blank?
-    authentications.build(:provider => omniauth['provider'], :uid => omniauth['uid'], :token => omniauth['credentials']['token'])
+    authentications.create!(:provider => omniauth['provider'], :uid => omniauth['uid'], :token => omniauth['credentials']['token'])
   end
 
   def password_required?

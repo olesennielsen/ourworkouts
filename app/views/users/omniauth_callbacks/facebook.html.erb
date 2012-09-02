@@ -1,1 +1,25 @@
 <h2>Sign up using Facebook</h2>
+<br />
+
+<%= nested_form_for(@user, :url => registration_path(@user)) do |f| %>
+  <%= devise_error_messages! %>
+	
+	<%= f.fields_for :groups, @group do |groups_form| %>
+		<%= groups_form.label :name, "Group name" %>
+		<%= groups_form.text_field :name %>
+	<% end %>
+<br />
+<p><%= f.label :name %>
+<%= f.text_field :name, :value => @name, :readonly => true %></p>
+<br />
+  <div><%= f.label :email %>
+  <%= f.email_field :email, :value => @email, :readonly => true %></div>
+<br />
+	<% if @user.password_required? %>
+	  <%= f.label :password %>
+	  <%= f.password_field :password %>
+	  <%= f.label :password_confirmation %>
+	  <%= f.password_field :password_confirmation %>
+	<% end %>
+  <div><%= f.submit "Sign up", :class => "btn btn-primary" %></div>
+<% end %>
