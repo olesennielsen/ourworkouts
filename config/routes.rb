@@ -21,8 +21,8 @@ Ourworkouts::Application.routes.draw do
 
   devise_scope :user do
     get '/users/auth/:provider' => 'users/omniauth_callbacks#passthru'
-  end
-  
+    get '/email_sign_up' => "users/omniauth_callbacks#email"
+  end  
   
   authenticated :user do
     root :to => 'users#show'

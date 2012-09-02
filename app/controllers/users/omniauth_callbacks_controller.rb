@@ -42,7 +42,8 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   end
   
   def email
-    
+    @user = User.new
+    @user.groups.build
   end
   
   def passthru
