@@ -1,9 +1,25 @@
-
 class EventsController < ApplicationController
   # GET /events
   # GET /events.json
   def index
     @events = Event.all
+    # full_calendar will hit the index method with query parameters
+    # 'start' and 'end' in order to filter the results for the
+    # appropriate month/week/day.      
+    
+    # This if statement is necessary for the index to work 
+    # both for fullcalendar and rails application
+    if(params['end'] == params['start'])
+      @events = Event.where(:user_id => @athlete.id)
+    else	
+      @events = Event.where("ends_at < ? AND starts_at > ? AND athlete_id = ?", Event.format_date(params['end']), Event.format_date(params['start']), @athlete.id)
+    end
+    
+    respond_to do |format|
+      format.html # index.html.erb
+      format.xml  { render :xml => @events }
+      format.js  { render :json => @events }
+    end
 
     respond_to do |format|
       format.html # index.html.erb

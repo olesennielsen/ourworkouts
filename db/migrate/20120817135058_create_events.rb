@@ -6,6 +6,7 @@ class CreateEvents < ActiveRecord::Migration
       t.string :title
       t.text :notes
       t.boolean :milestone
+      t.integer :organizer
       t.references :group
 
       t.timestamps

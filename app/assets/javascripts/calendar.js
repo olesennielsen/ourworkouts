@@ -5,17 +5,6 @@ $(document).ready(function() {
 	var m = date.getMonth();
 	var y = date.getFullYear();
 	
-	/*	Uses the pathname in the browser to retrieve
-		the right athlete_id to create a path to the right
-		event */
-	var pathname = window.location.pathname;
-	var match = pathname.match(/\d+/)
-	
-	if(match)
-	{
-		var athlete_id = parseInt(match[0], 10);
-	}
-	
 	/*	Begin initializing and configurating the 
 		calendar plugin */
 	
@@ -24,7 +13,7 @@ $(document).ready(function() {
 		header: {
             left: 'prev,next today',
             center: 'title',
-            right: 'month,basicWeek'
+            right: 'month,agendaWeek'
         },
 		firstDay: 1,
         defaultView: 'month',
@@ -41,7 +30,7 @@ $(document).ready(function() {
         /* 	This eventsource hits the right athletes eventcontroller on 
 			the index action */
         eventSources: [{
-            url: "/athletes/" + athlete_id + "/events/",
+            url: "/events/",
             color: '#51A351',
             textColor: 'white',
             ignoreTimezone: true
