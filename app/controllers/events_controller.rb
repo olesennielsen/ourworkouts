@@ -2,13 +2,13 @@ class EventsController < ApplicationController
   # GET /events
   # GET /events.json
   def index
-    @events = Event.all
-    # full_calendar will hit the index method with query parameters
-    # 'start' and 'end' in order to filter the results for the
-    # appropriate month/week/day.      
-    
-    # This if statement is necessary for the index to work 
-    # both for fullcalendar and rails application
+    # The events visible should be the ones the belongs to the users groups
+
+    @event = Event.new
+    @events = Event.where(:group_id => current_user.group_ids)
+    @groups = current_user.groups
+
+
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @events }

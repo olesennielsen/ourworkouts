@@ -49,8 +49,6 @@ ActiveRecord::Schema.define(:version => 20120818152807) do
   create_table "entries", :force => true do |t|
     t.integer  "event_id"
     t.integer  "user_id"
-    t.boolean  "organizer"
-    t.text     "comment"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
@@ -73,11 +71,13 @@ ActiveRecord::Schema.define(:version => 20120818152807) do
     t.datetime "start_time"
     t.datetime "end_time"
     t.string   "title"
-    t.text     "notes"
+    t.boolean  "all_day"
+    t.text     "description"
     t.boolean  "milestone"
+    t.integer  "organizer"
     t.integer  "group_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
   end
 
   add_index "events", ["group_id"], :name => "index_events_on_group_id"

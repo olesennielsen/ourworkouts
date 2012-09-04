@@ -1,17 +1,53 @@
-<%= simple_form_for(@event) do |f| %>
-  <%= f.error_notification %>
-
-  <div class="form-inputs">
-    <%= f.input :start_time %>
-    <%= f.input :end_time %>
-    <%= f.input :all_day %>
-    <%= f.input :title %>
-    <%= f.input :description %>
-    <%= f.input :milestone %>
-    <%= f.association :group %>
+<div class="modal hide" id="myModal">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal">&times;</button>
+    <h3>Create a new Event</h3>
   </div>
-
-  <div class="form-actions">
-    <%= f.button :submit %>
+  <div class="modal-body">
+    <%= form_for @event do |f| %>
+    <% if @event.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@event.errors.count, "error") %> prohibited this event from being saved:</h2>
+      <ul>
+	<% @event.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+	<% end %>
+      </ul>
+    </div>
+    <% end %>
+    
+    
+    <div class="field">
+      <%= f.label :title %><br />
+      <%= f.text_field :title %>
+    </div>
+    <div class="field">
+      <%= f.label :group %>
+      <%= f.collection_select :group_id, @groups, :id, :name %>
+    </div>
+    <div class="field">
+      <%= f.label :start_time %><br />
+      <%= f.datetime_select :start_time %>
+    </div>
+    <div class="field">
+      <%= f.label :end_time %><br />
+      <%= f.datetime_select :end_time %>
+    </div>
+    <div class="field">
+      <%= f.label :all_day %><br />
+      <%= f.check_box :all_day %>
+    </div>
+    <div class="field">
+      <%= f.label :description %><br />
+      <%= f.text_area :description %>
+    </div>
+    <div class="actions">
+      <%= f.submit %>
+    </div>
+    
+    <% end %>
   </div>
-<% end %>
+  <div class="modal-footer">
+    <a href="#" class="btn" data-dismiss="modal">Close</a>
+  </div>
+</div>
