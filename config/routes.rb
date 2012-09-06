@@ -25,7 +25,7 @@ Ourworkouts::Application.routes.draw do
   end  
   
   authenticated :user do
-    root :to => 'users#show'
+    root :to => 'events#index'
   end
 
   root :to => "home#index"
