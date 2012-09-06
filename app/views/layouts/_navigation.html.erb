@@ -3,7 +3,7 @@
   <% if user_signed_in? %>
 		<%= link_to 'Direct Messages', direct_messages_path, :class => "btn btn-primary" %>
   	<% if current_user.has_role? :admin %>     
-      <%= link_to 'Admin', users_path, :class => "btn btn-primary" %>      
+      <%= link_to 'Admin', groups_path, :class => "btn btn-primary" %>      
     <% end %>
 		<%= link_to 'Edit account', edit_user_registration_path, :class => "btn btn-primary" %>
     <%= link_to 'Logout', destroy_user_session_path, :method=>'delete', :class => "btn btn-primary" %>     
