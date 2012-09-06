@@ -11,13 +11,18 @@
 </p>
 
 <p>
+  <b>All Day:</b>
+  <%= @event.all_day %>
+</p>
+
+<p>
   <b>Title:</b>
   <%= @event.title %>
 </p>
 
 <p>
-  <b>Notes:</b>
-  <%= @event.notes %>
+  <b>Description:</b>
+  <%= @event.description %>
 </p>
 
 <p>
@@ -27,9 +32,11 @@
 
 <p>
   <b>Group:</b>
-  <%= @event.group %>
+  <%= @event.group.name %>
 </p>
 
 
 <%= link_to 'Edit', edit_event_path(@event) %> |
+<%= link_to 'Delete Event', @event, :method => :delete %> |
 <%= link_to 'Back', events_path %>
+

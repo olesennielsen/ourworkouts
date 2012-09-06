@@ -3,9 +3,7 @@ class CreateEntries < ActiveRecord::Migration
     create_table :entries do |t|
       t.references :event
       t.references :user
-      t.boolean :organizer
-      t.text :comment
-
+      
       t.timestamps
     end
     add_index :entries, :event_id

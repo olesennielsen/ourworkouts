@@ -1,13 +1,18 @@
-
 class EventsController < ApplicationController
   # GET /events
   # GET /events.json
   def index
-    @events = Event.all
+    # The events visible should be the ones the belongs to the users groups
+
+    @event = Event.new
+    @events = Event.where(:group_id => current_user.group_ids)
+    @groups = current_user.groups
+
 
     respond_to do |format|
       format.html # index.html.erb
-      format.json { render json: @events }
+      format.xml  { render :xml => @events }
+      format.js  { render :json => @events }
     end
   end
 
@@ -42,6 +47,7 @@ class EventsController < ApplicationController
   # POST /events.json
   def create
     @event = Event.new(params[:event])
+    @event.organizer = current_user
 
     respond_to do |format|
       if @event.save
