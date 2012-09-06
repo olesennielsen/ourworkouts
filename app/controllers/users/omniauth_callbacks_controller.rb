@@ -13,18 +13,47 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
       flash[:notice] = "Authentication successful."
       redirect_to authentications_url
     else # if it does not exist the user is created by calling the apply_omniauth method
-      @omniauth = omniauth
-      @user = User.new
-      @user.groups.build      
-      @user.apply_omniauth(omniauth)
-      
-      @name = omniauth['info']['name']
-      @email = omniauth['info']['email']
+      group_name = params[:state]      
+      group = Group.create!(:name => group_name)      
+      user = User.new
+      user.apply_facebook_omniauth(omniauth)
+      if user.save
+        flash[:notice] = "Signed in successfully."
+        user.groups << group
+        sign_in_and_redirect(:user, user)
+      else
+        session[:omniauth] = omniauth.except('extra')
+        redirect_to new_user_registration_url
+      end
     end
   end
   
   def twitter
-    render :text => request.env['omniauth.auth'].inspect
+    # the omniauth hash is defined in the callback from facebook
+     omniauth = request.env["omniauth.auth"]
+     # finds if there is an authentication from earlier, with the same provider and uid
+     authentication = Authentication.find_by_provider_and_uid(omniauth['provider'], omniauth['uid'])
+     if authentication # if the authentication exists the user is signed in
+       flash[:notice] = "Signed in successfully."
+       sign_in_and_redirect(:user, authentication.user)
+     elsif current_user # if this authentication is the current_user then this authentication is added to authentications, not used at the moment but possible to add other providers
+       current_user.authentications.create!(:provider => omniauth['provider'], :uid => omniauth['uid'])
+       flash[:notice] = "Authentication successful."
+       redirect_to authentications_url
+     else # if it does not exist the user is created by calling the apply_omniauth method
+       group_name = params[:state]           
+       user = User.new
+       user.apply_twitter_omniauth(omniauth)
+       if user.save
+         flash[:notice] = "Signed in successfully."
+         group = Group.create!(:name => group_name)
+         user.groups << group
+         sign_in_and_redirect(:user, user)
+       else
+         session[:omniauth] = omniauth.except('extra')
+         redirect_to new_user_registration_url
+       end
+     end
   end
   
   def linkedin
@@ -40,7 +69,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
     @user.groups.build
   end
   
-  def passthru
+  def passthru    
     render :file => "#{Rails.root}/public/404.html", :status => 404, :layout => false
     # Or alternatively,
     # raise ActionController::RoutingError.new('Not Found')

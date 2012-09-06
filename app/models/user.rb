@@ -33,9 +33,15 @@ class User < ActiveRecord::Base
   end
   
   # The apply_omniauth method used to create the user, called from the authentications controller
-  def apply_omniauth(omniauth)
+  def apply_facebook_omniauth(omniauth)
     self.email = omniauth['info']['email'] if email.blank?
-    authentications.create!(:provider => omniauth['provider'], :uid => omniauth['uid'], :token => omniauth['credentials']['token'])
+    self.name = omniauth['info']['name'] if name.blank?
+    self.locale = omniauth['extra']['raw_info']['locale'] if locale.blank?
+    authentications.build(:provider => omniauth['provider'], :uid => omniauth['uid'], :token => omniauth['credentials']['token'])
+  end
+  
+  def apply_twitter_omniauth(omniauth)
+    authentications.build(:provider => omniauth['provider'], :uid => omniauth['uid'])
   end
 
   def password_required?
