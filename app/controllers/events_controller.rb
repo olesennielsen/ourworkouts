@@ -6,7 +6,7 @@ class EventsController < ApplicationController
 
 
     if user_signed_in?     
-      if current_user.email == "default@ourworkouts.com"
+      if current_user.email.include? "@ourworkouts.com"
         redirect_to edit_user_registration_path, alert: "Please change your email and add a name while you're at it"
         return
       end

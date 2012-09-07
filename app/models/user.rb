@@ -41,7 +41,23 @@ class User < ActiveRecord::Base
   end
   
   def apply_twitter_omniauth(omniauth)
-    self.email = "default@ourworkouts.com" if email.blank?
+    o =  [('a'..'z'),('A'..'Z')].map{|i| i.to_a}.flatten;  
+    string  =  (0..25).map{ o[rand(o.length)]  }.join;    
+    self.email = string + "@ourworkouts.com" if email.blank?
+    authentications.build(:provider => omniauth['provider'], :uid => omniauth['uid'])
+  end
+  
+  def apply_google_omniauth(omniauth)
+    o =  [('a'..'z'),('A'..'Z')].map{|i| i.to_a}.flatten;  
+    string  =  (0..25).map{ o[rand(o.length)]  }.join;    
+    self.email = string + "@ourworkouts.com" if email.blank?
+    authentications.build(:provider => omniauth['provider'], :uid => omniauth['uid'])
+  end
+  
+  def apply_linkedin_omniauth(omniauth)
+    o =  [('a'..'z'),('A'..'Z')].map{|i| i.to_a}.flatten;  
+    string  =  (0..25).map{ o[rand(o.length)]  }.join;    
+    self.email = string + "@ourworkouts.com" if email.blank?
     authentications.build(:provider => omniauth['provider'], :uid => omniauth['uid'])
   end
 
