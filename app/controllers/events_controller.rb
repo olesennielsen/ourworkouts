@@ -4,6 +4,15 @@ class EventsController < ApplicationController
   def index
     # The events visible should be the ones the belongs to the users groups
 
+
+    if user_signed_in?     
+      if current_user.email == "default@ourworkouts.com"
+        redirect_to edit_user_registration_path, alert: "Please change your email and add a name while you're at it"
+        return
+      end
+    end
+
+
     @event = Event.new
     @events = Event.where(:group_id => current_user.group_ids)
     @groups = current_user.groups

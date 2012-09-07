@@ -41,6 +41,7 @@ class User < ActiveRecord::Base
   end
   
   def apply_twitter_omniauth(omniauth)
+    self.email = "default@ourworkouts.com" if email.blank?
     authentications.build(:provider => omniauth['provider'], :uid => omniauth['uid'])
   end
 
