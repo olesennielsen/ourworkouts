@@ -1,15 +1,18 @@
 <h2><%= @discussion.title %></h2>
-<br />
 <%= link_to 'Back', :back, :class => 'btn btn-primary pull-right' %>
-<strong>Initial message:</strong>
 <br />
 <br />
 <div class="row-fluid">
-  <div class="span12">
-		<%= render @initial_message %>
+  <div class="span12" id="initial-message">
+		<strong>Initial message:</strong>
+		<br />
+		<br />
+		<p>By <strong><%= @initial_message.user.name %></strong> on <%= @initial_message.created_at.strftime("%c") %></p>
+		<p><strong><%= @initial_message.body %></strong></p>
 	</div>
 </div>
-</div>
+<br />
+
 <div class="row-fluid">
   <div class="span6" id="discussion_messages" >
 		<%= render :partial => 'discussion_message', :collection => @messages.reverse %>
