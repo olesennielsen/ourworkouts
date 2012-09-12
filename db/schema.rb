@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120906170533) do
+ActiveRecord::Schema.define(:version => 20120912103433) do
 
   create_table "authentications", :force => true do |t|
     t.string   "provider"
@@ -101,6 +101,14 @@ ActiveRecord::Schema.define(:version => 20120906170533) do
     t.datetime "updated_at",  :null => false
   end
 
+  create_table "groups_sports", :id => false, :force => true do |t|
+    t.integer "sport_id"
+    t.integer "group_id"
+  end
+
+  add_index "groups_sports", ["group_id"], :name => "index_groups_sports_on_group_id"
+  add_index "groups_sports", ["sport_id"], :name => "index_groups_sports_on_sport_id"
+
   create_table "groups_users", :id => false, :force => true do |t|
     t.integer "user_id"
     t.integer "group_id"
@@ -125,14 +133,6 @@ ActiveRecord::Schema.define(:version => 20120906170533) do
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
-
-  create_table "sports_groups", :id => false, :force => true do |t|
-    t.integer "sport_id"
-    t.integer "group_id"
-  end
-
-  add_index "sports_groups", ["group_id"], :name => "index_sports_groups_on_group_id"
-  add_index "sports_groups", ["sport_id"], :name => "index_sports_groups_on_sport_id"
 
   create_table "users", :force => true do |t|
     t.string   "email",                                :default => "", :null => false
