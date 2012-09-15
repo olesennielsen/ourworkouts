@@ -7,10 +7,10 @@
 			<br />
 			<center><p><%= link_to 'Group sign up', sign_up_path, :class => "btn btn-primary btn-large" %><br /><br /></p>
 				<p>Sign in through:</p>
-				<p><%= link_to image_tag("facebook.png", :height => "70", :alt => "Sign in with Facebook", :title => "Sign in with Facebook"), user_omniauth_authorize_path(:facebook) %>
-				<%= link_to image_tag("twitter.png", :height => "70", :alt => "Sign in with Twitter", :title => "Sign in with Twitter"), user_omniauth_authorize_path(:twitter) %>
-				<%= link_to image_tag("google.png", :height => "70", :alt => "Sign in with Google", :title => "Sign in with Google"), user_omniauth_authorize_path(:google_oauth2) %>
-				<%= link_to image_tag("linkedin.png", :height => "70", :alt => "Sign in with LinkedIn", :title => "Sign in with LinkedIn"), user_omniauth_authorize_path(:linkedin) %></p>
+				<p><%= link_to image_tag("facebook.png", :size => "70x70", :alt => "Sign in with Facebook", :title => "Sign in with Facebook"), user_omniauth_authorize_path(:facebook) %>
+				<%= link_to image_tag("twitter.png", :size => "70x70", :alt => "Sign in with Twitter", :title => "Sign in with Twitter"), user_omniauth_authorize_path(:twitter) %>
+				<%= link_to image_tag("google.png", :size => "70x70", :alt => "Sign in with Google", :title => "Sign in with Google"), user_omniauth_authorize_path(:google_oauth2) %>
+				<%= link_to image_tag("linkedin.png", :size => "70x70", :alt => "Sign in with LinkedIn", :title => "Sign in with LinkedIn"), user_omniauth_authorize_path(:linkedin) %></p>
 			<p>Or: </p>	
 			<p><%= link_to 'Sign in with your email', new_user_session_path, :class => "btn btn-primary btn-large" %></p></center>
 	</div>
