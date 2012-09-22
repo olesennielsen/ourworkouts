@@ -1,7 +1,7 @@
 <br />
 <br />
 <div class="row-fluid">
-  <div class="span6">
+  <div class="span5">
 			<h1><center>Our Workouts</center></h1>
 			<br />
 			<br />
@@ -14,14 +14,15 @@
 			<p>Or: </p>	
 			<p><%= link_to 'Sign in with your email', new_user_session_path, :class => "btn btn-primary btn-large" %></p></center>
 	</div>
-	<div class="span6" id="workout_tip">
+	<div class="span7" id="workout_tip">
 		<h1>Workout tip of the day</h1>
 		<br />
 			<%= render :partial => "workout_tip", :object => @tip %>
 		<br />
 		<br />
-		<br />
 		<p class="pull-right"><%= link_to "All workout tips", workout_tips_path, :class => "btn btn-primary" %></p>
+		<br />
+		<br />
 	</div>
 </div>
 <br />
