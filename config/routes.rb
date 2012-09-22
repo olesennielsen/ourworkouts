@@ -16,6 +16,7 @@ Ourworkouts::Application.routes.draw do
   get '/who' => "home#who"
   get '/what' => "home#what"
   get '/how' => "home#how"
+  get '/workout_tips' => "home#workout_tips"
   
   devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" } #do
   #    get 'sign_in', :to => 'users/sessions#new', :as => :new_user_session

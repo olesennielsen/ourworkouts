@@ -28,3 +28,6 @@ user.add_role :admin
 user.groups << group
 user2.groups << group
 user3.groups << group
+
+tip = WorkoutTip.create! :title => 'Workout alot', :tip_date => Date.today, :body => 'Just workout a lot', :author => 'ourworkouts.com'
+tip1 = WorkoutTip.create! :title => 'Workout even more', :tip_date => Date.today + 1, :body => 'Just workout even more', :author => 'ourworkouts.com'

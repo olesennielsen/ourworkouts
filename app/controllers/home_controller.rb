@@ -1,5 +1,6 @@
 class HomeController < ApplicationController
   def index
+    @tip = WorkoutTip.where(:tip_date => Date.today).first
   end
   
   def sign_up
@@ -14,6 +15,10 @@ class HomeController < ApplicationController
   end
   
   def how
+  end
+  
+  def workout_tips
+    @tips = WorkoutTip.find(:all, :order => :tip_date)
   end
   
 end

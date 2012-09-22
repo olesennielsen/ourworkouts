@@ -14,8 +14,13 @@
 			<p>Or: </p>	
 			<p><%= link_to 'Sign in with your email', new_user_session_path, :class => "btn btn-primary btn-large" %></p></center>
 	</div>
-	<div class="span6">
-		
+	<div class="span6" id="workout_tip">
+		<h1>Workout tip of the day</h1>
+		<br />
+			<%= render :partial => "workout_tip", :object => @tip %>
+		<br />
+		<br />
+		<p class="pull-right"><%= link_to "All workout tips", workout_tips_path %></p>
 	</div>
 </div>
 <br />
@@ -27,15 +32,15 @@
 <div class="row-fluid">
   <div class="span4" id="sub-fields">
 		<h2><%= link_to "What?", what_path %></h2>
-		<p><strong>ourworkouts.com is a group based training community for your business, training group or just for a couple of friends. Your group will share a calendar and everybody can create events for everybody else to join. Use your group to get in the shape of your life.</strong></p>
+		<p>ourworkouts.com is a group based training community for your business, training group or just for a couple of friends. Your group will share a calendar and everybody can create events for everybody else to join. Use your group to get in the shape of your life.</p>
 	</div>	
 	<div class="span4" id="sub-fields">
 		<h2><%= link_to "Who?", who_path %></h2>
-		<p><strong>A lot of the groups on ourworkouts.com are open groups where you can apply to become a member. To see a short presentation of the open groups click the Who? link above.</strong></p>
+		<p>A lot of the groups on ourworkouts.com are open groups where you can apply to become a member. To see a short presentation of the open groups click the Who? link above.</p>
 	</div>
 	<div class="span4" id="sub-fields">
 		<h2><%= link_to "How?", how_path %></h2>
-		<p><strong>By clicking the above How? link you can see a step-by-step guide on how easy and simple ourworkouts.com is to use from sign-up to fully-fledged training platform. We hope that this guide and the simplicity of ourworkouts.com will help you train and communicate more instead of sitting in front of your computer.</strong></p>
+		<p>By clicking the above How? link you can see a step-by-step guide on how easy and simple ourworkouts.com is to use from sign-up to fully-fledged training platform. We hope that this guide and the simplicity of ourworkouts.com will help you train and communicate more instead of sitting in front of your computer.</p>
 	</div>
 </div>
 <br />
