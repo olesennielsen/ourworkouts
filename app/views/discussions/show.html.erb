@@ -7,7 +7,7 @@
 		<strong>Initial message:</strong>
 		<br />
 		<br />
-		<p>By <strong><%= @initial_message.user.name %></strong> on <%= @initial_message.created_at.strftime("%c") %></p>
+		<p>By <strong><%= @initial_message.user.name %></strong> on <%= @initial_message.created_at.strftime("%A %B %d %Y - %H:%M") %></p>
 		<p><strong><%= @initial_message.body %></strong></p>
 	</div>
 </div>

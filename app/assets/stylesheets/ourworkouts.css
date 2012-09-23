@@ -1,5 +1,6 @@
 #initial-message {
-	background-color:#F8F8F8;	
+	background-color:#F8F8F8;
+	padding:10px;	
 }
 
 #sub-fields {
@@ -16,4 +17,8 @@
 
 #tip_author {
 	font-size:100%;	
+}
+
+#discussion_messages {
+	padding:10px;
 }
