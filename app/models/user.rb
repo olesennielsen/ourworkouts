@@ -64,4 +64,12 @@ class User < ActiveRecord::Base
   def password_required?
     (authentications.empty? || !password.blank?) && super
   end
+  
+  def self.find_organizer(id)
+    return User.find(id)
+  end
+  
+  def self.find_sender_receiver(id)
+    return User.find(id)
+  end
 end

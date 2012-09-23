@@ -29,7 +29,7 @@ Ourworkouts::Application.routes.draw do
   end  
   
   authenticated :user do
-    root :to => 'events#index'
+    root :to => 'home#dashboard'
   end
 
   root :to => "home#index"

@@ -22,7 +22,7 @@ puts 'New user created: ' << user.name
 user2 = User.create! :name => 'Second User', :email => 'user2@example.com', :password => 'please', :password_confirmation => 'please', :confirmed_at => Time.now.utc
 puts 'New user created: ' << user2.name
 user3 = User.create! :name => 'Third User', :email => 'user3@example.com', :password => 'please', :password_confirmation => 'please', :confirmed_at => Time.now.utc
-puts 'New user created: ' << user2.name
+puts 'New user created: ' << user3.name
 user4 = User.create! :email => 'hav@hav.com', :password => 'qwerty', :confirmed_at => Time.now.utc
 user.add_role :admin
 user.groups << group
@@ -32,3 +32,6 @@ user3.groups << group
 tip = WorkoutTip.create! :title => 'Workout alot', :tip_date => Date.today - 1, :body => 'Just workout a lot', :author => 'ourworkouts.com'
 tip1 = WorkoutTip.create! :title => 'Workout even more', :tip_date => Date.today, :body => 'Just workout even more', :author => 'ourworkouts.com'
 tip2 = WorkoutTip.create! :title => 'Workout even harder', :tip_date => Date.today + 1, :body => 'Just workout even harder', :author => 'ourworkouts.com'
+
+event = Event.create! :title => 'Running', :start_time => DateTime.now, :organizer => 3, :group_id => 1
+

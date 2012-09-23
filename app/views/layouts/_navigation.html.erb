@@ -1,7 +1,6 @@
 <%= link_to "Our Workouts", root_path, :class => 'brand' %>
 <div class="nav pull-right">
   <% if user_signed_in? %>
-		<%= link_to 'Direct Messages', direct_messages_path, :class => "btn btn-primary" %>
   	<% if current_user.has_role? :admin %>     
       <%= link_to 'Admin', groups_path, :class => "btn btn-primary" %>      
     <% end %>

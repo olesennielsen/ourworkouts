@@ -4,7 +4,7 @@ class Event < ActiveRecord::Base
   has_many :entries
   has_many :users, :through => :entries  
   
-  attr_accessible :end_time, :milestone, :description, :start_time, :title, :group_id, :all_day
+  attr_accessible :end_time, :milestone, :description, :start_time, :title, :group_id, :all_day, :organizer
 
   # need to override the json view to return what full_calendar is expecting.
   # http://arshaw.com/fullcalendar/docs/event_data/Event_Object/
