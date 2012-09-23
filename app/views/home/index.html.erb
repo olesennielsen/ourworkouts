@@ -14,15 +14,16 @@
 			<p>Or: </p>	
 			<p><%= link_to 'Sign in with your email', new_user_session_path, :class => "btn btn-primary btn-large" %></p></center>
 	</div>
-	<div class="span7" id="workout_tip">
-		<h1>Workout tip of the day</h1>
-		<br />
+	<div class="span7" >
+		<h1>Workout tip of the day:</h1>
+		<div id="workout_tip">
 			<%= render :partial => "workout_tip", :object => @tip %>
-		<br />
-		<br />
-		<p class="pull-right"><%= link_to "All workout tips", workout_tips_path, :class => "btn btn-primary" %></p>
-		<br />
-		<br />
+			<br />
+			<br />
+			<p class="pull-right"><%= link_to "All workout tips", workout_tips_path, :class => "btn btn-primary" %></p>
+			<br />
+			<br />
+		</div>
 	</div>
 </div>
 <br />

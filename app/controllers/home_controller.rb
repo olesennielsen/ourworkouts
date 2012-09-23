@@ -18,7 +18,7 @@ class HomeController < ApplicationController
   end
   
   def workout_tips
-    @tips = WorkoutTip.find(:all, :order => :tip_date)
+    @tips = WorkoutTip.where('tip_date <= ?', Date.today).order('tip_date DESC')
   end
   
 end
