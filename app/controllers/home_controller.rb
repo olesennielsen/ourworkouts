@@ -4,6 +4,18 @@ class HomeController < ApplicationController
   end
   
   def dashboard
+    # events for the timeline
+    @milestone_events = Event.where(:milestone => true).order("start_time ASC")
+    
+    if Time.now.day + 10 > @milestone_events.first.start_time
+      @milestone_events.drop(1)
+    end
+    
+    @milestone_event = @milestone_events.first
+    
+    @before_milestone_events = Event.where('start_time BETWEEN ? AND ?', DateTime.now.beginning_of_day, @milestone_event.start_time)
+    
+    # rest of the page
     @tip = WorkoutTip.where(:tip_date => Date.today).first
     @direct_messages = DirectMessage.where(:recipient_id => current_user).order('created_at DESC').limit(5)
     
