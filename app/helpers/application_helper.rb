@@ -22,7 +22,7 @@ module ApplicationHelper
   
   def show_tip(tip)
     return_value = ''
-    return_value += '<div class="span6" id="workout_tip"><h2>' + tip.title + '</h2><br /><p>' + tip.body + '</p>'
+    return_value += '<div class="span6" id="workout-tip"><h2>' + tip.title + '</h2><br /><p>' + tip.body + '</p>'
     return_value += '<br /><p class="pull-right">Tip by ' + tip.author + '</p></div>'
     return return_value
   end

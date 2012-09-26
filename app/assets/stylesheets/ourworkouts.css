@@ -8,17 +8,22 @@
 	font-size:115%;
 }
 
-#workout_tip {
+#workout-tip {
 	font-size:115%;
 	border: solid 1px #FF9900;
 	padding:15px;
 	margin-top:30px;
 }
 
-#tip_author {
+#tip-author {
 	font-size:100%;	
 }
 
-#discussion_messages {
+#discussion-messages {
 	padding:10px;
+}
+
+.timeline-container {
+	height:200px;
+	border:solid 1px #FF9900;
 }

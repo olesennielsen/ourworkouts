@@ -5,15 +5,25 @@ class HomeController < ApplicationController
   
   def dashboard
     # events for the timeline
-    @milestone_events = Event.where(:milestone => true).order("start_time ASC")
+    groups = current_user.groups
+    @milestone_events = []
     
-    if Time.now.day + 10 > @milestone_events.first.start_time
+    groups.each do |group|
+      tmp_events = Event.where(:group_id => group.id).where(:milestone => true).order("start_time ASC")
+      tmp_events.each do |tmp_event|
+        @milestone_events.push(tmp_event)
+      end
+    end
+    
+    if Date.today + 10 > @milestone_events.first.start_time.to_date
       @milestone_events.drop(1)
     end
     
     @milestone_event = @milestone_events.first
     
-    @before_milestone_events = Event.where('start_time BETWEEN ? AND ?', DateTime.now.beginning_of_day, @milestone_event.start_time)
+    @days_to_milestone_event = @milestone_event.start_time.to_date - Date.today
+    
+    
     
     # rest of the page
     @tip = WorkoutTip.where(:tip_date => Date.today).first
