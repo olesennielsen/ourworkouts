@@ -33,7 +33,7 @@ tip = WorkoutTip.create! :title => 'Workout alot', :tip_date => Date.today - 1, 
 tip1 = WorkoutTip.create! :title => 'Workout even more', :tip_date => Date.today, :body => 'Just workout even more', :author => 'ourworkouts.com'
 tip2 = WorkoutTip.create! :title => 'Workout even harder', :tip_date => Date.today + 1, :body => 'Just workout even harder', :author => 'ourworkouts.com'
 
-event = Event.create! :title => 'Running', :start_time => DateTime.now, :organizer => 3, :group_id => 1
-event2 = Event.create! :title => 'Biking', :start_time => DateTime.now + 2.days, :organizer => 1, :group_id => 1
-goal = Event.create! :title => '5x5-Stafet', :start_time => DateTime.now + 14.days, :organizer => 2, :group_id => 1, :milestone => true
+event = Event.create! :title => 'Running', :start_time => DateTime.now, :end_time => DateTime.now, :organizer => 3, :group_id => 1
+event2 = Event.create! :title => 'Biking', :start_time => DateTime.now + 2.days, :end_time => DateTime.now + 2.days, :organizer => 1, :group_id => 1
+goal = Event.create! :title => '5x5-Stafet', :start_time => DateTime.now + 30.days, :end_time => DateTime.now + 30.days, :organizer => 2, :group_id => 1, :milestone => true
 

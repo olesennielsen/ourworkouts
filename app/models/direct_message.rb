@@ -22,7 +22,7 @@ class DirectMessage < ActiveRecord::Base
       end
     else
       received.each do |id, messages|        
-        if sent[2].nil?
+        if sent[id].nil?
           tmp = messages
         else
           tmp = sent[id] + messages

@@ -4,48 +4,23 @@ class HomeController < ApplicationController
   end
   
   def dashboard
-    # events for the timeline
-    groups = current_user.groups
-    @milestone_events = []
-    
-    groups.each do |group|
-      tmp_events = Event.where(:group_id => group.id).where(:milestone => true).order("start_time ASC")
-      tmp_events.each do |tmp_event|
-        @milestone_events.push(tmp_event)
+    if user_signed_in?     
+      if current_user.email.include? "@ourworkouts.com"
+        redirect_to edit_user_registration_path, alert: "Please change your email and add a name while you're at it"
+        return
       end
     end
     
-    if Date.today + 10 > @milestone_events.first.start_time.to_date
-      @milestone_events.drop(1)
-    end
-    
-    @milestone_event = @milestone_events.first
-    
-    @days_to_milestone_event = @milestone_event.start_time.to_date - Date.today
-    
-    
+    # the timeline data is handled exclusively by application_helper
     
     # rest of the page
     @tip = WorkoutTip.where(:tip_date => Date.today).first
     @direct_messages = DirectMessage.where(:recipient_id => current_user).order('created_at DESC').limit(5)
-    
-    @groups = current_user.groups
-    @events = []
-    @discussions = []
-    @discussion_messages = []
-    
-    @groups.each do |group|
-      tmp_events = Event.where(:group_id => group.id).where('start_time BETWEEN ? AND ?', DateTime.now.beginning_of_day, DateTime.now.end_of_day)
-      tmp_events.each do |tmp_event|
-        @events.push(tmp_event)
-      end
       
-      tmp_discussions = Discussion.where(:group_id => group.id)
-      tmp_discussions.each do |tmp_discussion|
-        @discussions.push(tmp_discussion)
-      end      
-    end
-    
+    @events = Event.where(:group_id => current_user.group_ids).where('start_time BETWEEN ? AND ?', DateTime.now.beginning_of_day, DateTime.now.end_of_day)
+      
+    @discussions = Discussion.where(:group_id => current_user.group_ids)
+        
     @discussions.each do |discussion|
       tmp_discussion_messages = DiscussionMessage.where(:discussion_id => discussion)
       tmp_discussion_messages.each do |tmp_discussion_message|
@@ -53,7 +28,9 @@ class HomeController < ApplicationController
       end
     end
     
-    @discussion_messages = @discussion_messages.sort_by { |discussion_message| discussion_message.created_at }.reverse.first(5)
+    unless @discussion_messages.nil?    
+      @discussion_messages = @discussion_messages.sort_by { |discussion_message| discussion_message.created_at }.reverse.first(5)
+    end
   end
   
   def sign_up

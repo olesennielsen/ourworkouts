@@ -5,13 +5,6 @@ class EventsController < ApplicationController
     # The events visible should be the ones the belongs to the users groups
 
 
-    if user_signed_in?     
-      if current_user.email.include? "@ourworkouts.com"
-        redirect_to edit_user_registration_path, alert: "Please change your email and add a name while you're at it"
-        return
-      end
-    end
-
 
     @event = Event.new
     @events = Event.where(:group_id => current_user.group_ids)
@@ -94,6 +87,13 @@ class EventsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to events_url }
       format.json { head :no_content }
+    end
+  end
+  
+  def get_by_date
+    @events = Event.where(:group_id => current_user.group_ids).where('start_time BETWEEN ? AND ?', DateTime.parse(params[:date].to_s).beginning_of_day, DateTime.parse(params[:date].to_s).end_of_day)
+    respond_to do |format|
+      format.json { render json: @events }
     end
   end
 end

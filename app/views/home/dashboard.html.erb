@@ -1,10 +1,6 @@
-<h2 class"pull-right"><%= @days_to_milestone_event %> days to goal</h2>
+<%= timeline %>
 
-<div class="timeline-container">
-	<p>Timeline</p>
-</div>
-<hr />
-<br />
+<div id="tester"></div>
 <div class="row-fluid">
 	<div class="span6">
 		<h2>Today's workouts</h2>
@@ -70,6 +66,7 @@
 					</tr>
 				</thead>
 				<tbody>
+					<% unless @discussion_messages.nil? %>
 					<% @discussion_messages.each do |discussion_message| %>
 					<tr>
 						<td><%= discussion_message.body.split(" ").first(4).join(" ") %>...</td>
@@ -77,6 +74,7 @@
 						<td><%= discussion_message.created_at.strftime("%B %d %H:%M") %></td>
 						<td><%= discussion_message.user.name %></td>
 					</tr>
+					<% end %>
 					<% end %>
 				</tbody>
 			</table>
