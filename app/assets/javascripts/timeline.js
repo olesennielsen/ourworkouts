@@ -48,8 +48,10 @@ $(function()
 			{
 				var date_events = '<h4>Events on ' + date + '</h4><hr />';
 				$.each(data, function(i, item) {
+					var datestr = item.start.substring(0, 22);
+					
 					date_events += '<p><strong><a href="' + item.url +'">' + item.title + '</a></strong><br />'
-					date_events += item.start;					
+					date_events += datestr;					
 					date_events += '</p><br />';
 				});
 
