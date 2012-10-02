@@ -1,0 +1,117 @@
+#timeline-container {
+	height:200px;
+	padding-top:20px;
+	padding-left:20px;
+	padding-right:20px;
+}
+
+#timeline-bar {
+	background-color:#646060;
+	border-radius:5px;
+}
+
+#countdown {
+	color:#646060;
+}
+
+.no-event {
+	content: "";
+	min-height: 100%;
+	background-color:#FFF;
+	height: 100%;
+	float:left;
+}
+
+.event {
+	content: "";
+	min-height: 100%;
+	background-color:#FF9900;
+	height: 100%;
+	float:left;
+	border-top-left-radius: 6px 6px;
+	border-top-right-radius: 6px 6px;
+}
+
+.milestone-event {
+	content: "";
+	min-height: 100%;
+	background-color:#E00000;
+	height: 100%;
+	float:left;
+	border-top-left-radius: 6px 6px;
+	border-top-right-radius: 6px 6px;
+}
+
+#eventPopupContainer
+{
+    position:absolute;
+    left:0;
+    top:0;
+    display:none;
+    z-index: 20000;
+}
+
+#eventPopupContent
+{
+    background-color: #FFF;
+    min-width: 175px;
+    min-height: 50px;
+}
+
+.eventPopupPopup
+{
+}
+
+.eventPopupPopup .eventPopupImage
+{
+    margin: 5px;
+    margin-right: 15px;
+}
+
+.eventPopupPopup .corner 
+{
+    width: 19px;
+    height: 15px;
+}
+    
+.eventPopupPopup .topLeft 
+{
+    background: image-url('balloon_topLeft.png') no-repeat;
+}
+    
+.eventPopupPopup .bottomLeft 
+{
+    background: image-url('balloon_bottomLeft.png') no-repeat;
+}
+    
+.eventPopupPopup .left 
+{
+    background: image-url('balloon_left.png') repeat-y;
+}
+    
+.eventPopupPopup .right 
+{
+    background: image-url('balloon_right.png') repeat-y;
+}
+    
+.eventPopupPopup .topRight 
+{
+    background: image-url('balloon_topRight.png') no-repeat;
+}
+    
+.eventPopupPopup .bottomRight 
+{
+    background: image-url('balloon_bottomRight.png') no-repeat;
+}
+    
+.eventPopupPopup .top 
+{
+    background: image-url('balloon_top.png') repeat-x;
+}
+    
+.eventPopupPopup .bottom 
+{
+    background: image-url('balloon_bottom.png') repeat-x;
+    text-align: center;
+}
+
