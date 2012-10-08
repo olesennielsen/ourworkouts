@@ -22,3 +22,10 @@
 #discussion-messages {
 	padding:10px;
 }
+
+.sign-up-container {
+}
+
+.sign-up-container .btn {
+	font-size:24px;
+}
