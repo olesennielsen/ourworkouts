@@ -1,42 +1,29 @@
-<p id="notice"><%= notice %></p>
+<h2><%= @event.title %></h2>
+<br />
+<p>Organized by <strong><%= @event.group.name %></strong> and starts <strong><%= @event.start_time.strftime("%B %d %H:%M") %></strong></p>
 
-<p>
-  <b>Start time:</b>
-  <%= @event.start_time %>
-</p>
-
-<p>
-  <b>End time:</b>
-  <%= @event.end_time %>
-</p>
-
-<p>
-  <b>All Day:</b>
-  <%= @event.all_day %>
-</p>
-
-<p>
-  <b>Title:</b>
-  <%= @event.title %>
-</p>
-
-<p>
-  <b>Description:</b>
-  <%= @event.description %>
-</p>
-
-<p>
-  <b>Milestone:</b>
-  <%= @event.milestone %>
-</p>
-
-<p>
-  <b>Group:</b>
-  <%= @event.group.name %>
-</p>
-
-
-<%= link_to 'Edit', edit_event_path(@event) %> |
-<%= link_to 'Delete Event', @event, :method => :delete %> |
-<%= link_to 'Back', events_path %>
-
+<br />
+<div class="row-fluid">
+	<div class="span6">
+		<p><b>Description:</b> <%= @event.description %></p>
+	</div>
+</div>
+<br />
+<hr />
+<div class="row-fluid">
+	<div class="span6">
+		<h3>Messages</h3>
+		<div id="event-messages">
+			
+		</div>
+	</div>
+	
+	<div class="span6">
+		<h3>Entries</h3>
+		<br />
+		<%= button_to "Join", {:action => "add_entry", :id => @event.id }, :remote => true, :id => "join", :class => "btn btn-primary" %>
+		<div id="entries">
+			
+		</div>
+	</div>
+</div>

@@ -20,6 +20,8 @@ Ourworkouts::Application.routes.draw do
   
   get '/get_by_date/:date' => 'events#get_by_date'
   
+  post 'add_entry' => 'events#add_entry'
+  
   devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" } #do
   #    get 'sign_in', :to => 'users/sessions#new', :as => :new_user_session
   #    get 'sign_out', :to => 'users/sessions#destroy', :as => :destroy_user_session

@@ -22,6 +22,7 @@ class EventsController < ApplicationController
   # GET /events/1.json
   def show
     @event = Event.find(params[:id])
+    @entries = Entry.where(:event_id => params[:id])
 
     respond_to do |format|
       format.html # show.html.erb
@@ -95,5 +96,8 @@ class EventsController < ApplicationController
     respond_to do |format|
       format.json { render json: @events }
     end
+  end
+  
+  def add_entry
   end
 end
