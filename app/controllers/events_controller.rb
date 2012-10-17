@@ -22,7 +22,8 @@ class EventsController < ApplicationController
   # GET /events/1.json
   def show
     @event = Event.find(params[:id])
-    @entries = Entry.where(:event_id => params[:id])
+    @entries = Entry.where(:event_id => params[:id]).order("created_at DESC")
+    @current_user_entry = Entry.where(:event_id => params[:id], :user_id => current_user.id)
 
     respond_to do |format|
       format.html # show.html.erb
@@ -99,5 +100,9 @@ class EventsController < ApplicationController
   end
   
   def add_entry
+    @entry = Entry.create!(:user_id => current_user.id, :event_id => params[:id])
+    respond_to do |format|
+      format.js
+    end
   end
 end

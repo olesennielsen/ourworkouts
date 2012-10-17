@@ -21,9 +21,26 @@
 	<div class="span6">
 		<h3>Entries</h3>
 		<br />
-		<%= button_to "Join", {:action => "add_entry", :id => @event.id }, :remote => true, :id => "join", :class => "btn btn-primary" %>
-		<div id="entries">
-			
+		<div id="join-button">
+			<% if @current_user_entry.empty? %>
+				<%= button_to "Join", {:action => "add_entry", :id => @event.id }, :remote => true, :id => "join", :class => "btn btn-primary" %>
+			<% else %>
+				<p>You've already joined</p>
+			<% end %>
 		</div>
+		<table class="table">
+			<thead>
+				<th>Name</th>
+				<th>Joined on</th>
+			</thead>
+			<tbody id="entries">
+				<% @entries.each do |entry| %>
+					<tr>
+						<td><%= entry.user.name %></td>
+						<td><%= entry.created_at.strftime("%B %d %H:%M") %></td>
+					</tr>
+				<% end %>	
+			</tbody>
+		</table>
 	</div>
 </div>
