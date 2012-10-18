@@ -95,8 +95,13 @@ class EventsController < ApplicationController
   
   def get_by_date
     @events = Event.where(:group_id => current_user.group_ids).where('start_time BETWEEN ? AND ?', DateTime.parse(params[:date].to_s).beginning_of_day, DateTime.parse(params[:date].to_s).end_of_day)
+    
+    @json_events = @events.collect do |event|
+      {:title => event.title, :id => event.id, :start => event.start_time, :entries => event.entries.count}
+    end
+    
     respond_to do |format|
-      format.json { render json: @events }
+      format.json { render json: @json_events }
     end
   end
   
