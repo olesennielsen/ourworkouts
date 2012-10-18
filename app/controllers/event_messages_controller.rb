@@ -1,43 +1,5 @@
 
 class EventMessagesController < ApplicationController
-  # GET /event_messages
-  # GET /event_messages.json
-  def index
-    @event_messages = EventMessage.all
-
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @event_messages }
-    end
-  end
-
-  # GET /event_messages/1
-  # GET /event_messages/1.json
-  def show
-    @event_message = EventMessage.find(params[:id])
-
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json { render json: @event_message }
-    end
-  end
-
-  # GET /event_messages/new
-  # GET /event_messages/new.json
-  def new
-    @event_message = EventMessage.new
-
-    respond_to do |format|
-      format.html # new.html.erb
-      format.json { render json: @event_message }
-    end
-  end
-
-  # GET /event_messages/1/edit
-  def edit
-    @event_message = EventMessage.find(params[:id])
-  end
-
   # POST /event_messages
   # POST /event_messages.json
   def create
@@ -47,6 +9,7 @@ class EventMessagesController < ApplicationController
       if @event_message.save
         format.html { redirect_to @event_message, notice: 'Event message was successfully created.' }
         format.json { render json: @event_message, status: :created, location: @event_message }
+        format.js
       else
         format.html { render action: "new" }
         format.json { render json: @event_message.errors, status: :unprocessable_entity }

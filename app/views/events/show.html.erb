@@ -13,8 +13,24 @@
 <div class="row-fluid">
 	<div class="span6">
 		<h3>Messages</h3>
-		<div id="event-messages">
+		<br />
+		<div id="event-message-form">
+			<strong>Write new message:</strong>
+			<%= form_for EventMessage.new, :remote => true do |f| %>			
+				<%= f.text_area :body, :rows => 5 %><br />
 			
+				<%= f.hidden_field :user_id, :value => current_user.id %>
+				<%= f.hidden_field :event_id, :value => @event.id %>
+				<%= f.submit "Add message", :class => "btn btn-primary" %>		
+			<% end %>
+		</div>
+		
+		<button id="show-event-messages-form" class="btn btn-primary pull-right">Add message</button>
+
+		<br />
+		<br />
+		<div id="event-messages">
+			<%= render :partial => 'event_message', :collection => @messages.reverse %>
 		</div>
 	</div>
 	

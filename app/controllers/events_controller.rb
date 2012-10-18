@@ -24,6 +24,7 @@ class EventsController < ApplicationController
     @event = Event.find(params[:id])
     @entries = Entry.where(:event_id => params[:id]).order("created_at DESC")
     @current_user_entry = Entry.where(:event_id => params[:id], :user_id => current_user.id)
+    @messages = EventMessage.where(:event_id => params[:id])
 
     respond_to do |format|
       format.html # show.html.erb
@@ -100,9 +101,17 @@ class EventsController < ApplicationController
   end
   
   def add_entry
-    @entry = Entry.create!(:user_id => current_user.id, :event_id => params[:id])
-    respond_to do |format|
-      format.js
+    @entry = Entry.new(:user_id => current_user.id, :event_id => params[:id])
+    
+    if @entry.save
+      respond_to do |format|
+        format.html { redirect_to event_path(params[:id]) }
+        format.js
+      end
+    else
+      respond_to do |format|
+        format.html { redirect_to event_path(params[:id]), notice: "You've already joined this event" }
+      end
     end
   end
 end
