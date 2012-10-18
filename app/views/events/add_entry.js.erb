@@ -1,4 +1,2 @@
-$("<%= escape_javascript(render :partial => 'entry', :locals => { :user => @entry.user.name, :joined => @entry.created_at }) %>").hide().prependTo("#entries").fadeIn(100);
-
-$("#join-button").children().remove();
-$("#join-button").html("<p>You've already joined</p>");
+$("<%= escape_javascript(render :partial => 'entry', :locals => { :id => @entry.id, :user => @entry.user.name, :joined => @entry.created_at }) %>").hide().prependTo("#entries").fadeIn(100);
+$("#join").hide();

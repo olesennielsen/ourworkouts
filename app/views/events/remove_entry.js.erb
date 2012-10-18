@@ -1,0 +1,3 @@
+$("#" + <%= @entry.id %>).hide();
+$("#join-button").children().remove();
+$("<%= escape_javascript(render :partial => 'join_button', :locals => { :event => @entry.event.id}) %>").hide().appendTo("#join-button").fadeIn(100);

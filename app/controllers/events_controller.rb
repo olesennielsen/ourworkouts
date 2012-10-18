@@ -23,7 +23,7 @@ class EventsController < ApplicationController
   def show
     @event = Event.find(params[:id])
     @entries = Entry.where(:event_id => params[:id]).order("created_at DESC")
-    @current_user_entry = Entry.where(:event_id => params[:id], :user_id => current_user.id)
+    @current_user_entry = Entry.where(:event_id => params[:id], :user_id => current_user.id).count
     @messages = EventMessage.where(:event_id => params[:id])
 
     respond_to do |format|
@@ -117,6 +117,16 @@ class EventsController < ApplicationController
       respond_to do |format|
         format.html { redirect_to event_path(params[:id]), notice: "You've already joined this event" }
       end
+    end
+  end
+  
+  def remove_entry
+    @entry = Entry.find(params[:id])
+    @entry.destroy
+    
+    respond_to do |format|
+      format.html { redirect_to event_path(params[:id]) }
+      format.js
     end
   end
 end

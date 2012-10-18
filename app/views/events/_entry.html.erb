@@ -1,4 +1,5 @@
-<tr>
+<tr id="<%= id %>">
 	<td><%= user %></td>
 	<td><%= joined.strftime("%B %d %H:%M") %></td>
+	<td><%= button_to "Remove entry", {:action => "remove_entry", :id => id }, :remote => true, :id => "remove", :class => "btn btn-small btn-danger" %></td>
 </tr>

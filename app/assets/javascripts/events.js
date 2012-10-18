@@ -1,4 +1,4 @@
-$(document).ready(function() {
+$(document).ready(function() {	
 $('#event-message-form').hide(); //Initially form wil be hidden.
  $('#show-event-messages-form').click(function() {
   	$('#show-event-messages-form').hide();//Hides the button
