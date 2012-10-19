@@ -1,5 +1,7 @@
 
 class EventMessagesController < ApplicationController
+  authorize_resource
+  
   # POST /event_messages
   # POST /event_messages.json
   def create

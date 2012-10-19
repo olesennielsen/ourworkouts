@@ -1,4 +1,6 @@
 class UsersController < ApplicationController
+  authorize_resource
+  
   before_filter :authenticate_user!
 
   def index

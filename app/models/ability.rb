@@ -1,7 +1,6 @@
 class Ability
   include CanCan::Ability
 
-
   # This method is used later for encapsulating the admin module
   def initialize(user)
     user ||= User.new # guest user (not logged in)

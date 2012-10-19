@@ -1,5 +1,7 @@
 
 class DiscussionsController < ApplicationController
+  authorize_resource
+  
   # GET /discussions
   # GET /discussions.json
   def index

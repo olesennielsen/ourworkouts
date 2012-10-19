@@ -1,4 +1,6 @@
 class DirectMessagesController < ApplicationController
+  authorize_resource
+  
   # GET /direct_messages
   # GET /direct_messages.json
   def index
