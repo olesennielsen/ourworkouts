@@ -12,6 +12,7 @@
     <th>Title</th>
     <th>Last message</th>
     <th>Last contributor</th>
+		<th>Creator</th>
 		<th>Group</th>
   </tr>
 	</thead>
@@ -21,6 +22,7 @@
     <td><%= link_to discussion.title, discussion %></td>
     <td><%= discussion.last_message %></td>
 		<td><%= discussion.last_contributor%></td>
+		<td><%= discussion.user.name %></td>
 		<td><%= discussion.group.name %></td>  
   </tr>
 <% end %>

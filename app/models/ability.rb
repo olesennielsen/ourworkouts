@@ -18,12 +18,23 @@ class Ability
       can [:index, :show, :add_entry, :remove_entry, :get_by_date], Event, :group_id => user.group_ids
       can [:edit, :update, :destroy], Event, :organizer => user.id
       
-      can [:index, :show, :create] 
+      can [:new, :create], Discussion
+      can [:index, :show], Discussion, :group_id => user.group_ids
+      can [:edit, :update, :destroy], Discussion, :user_id => user.id
+      
+      can :manage, DirectMessage
+       
     elsif user.has_role? :
       can [:show], Group, :group_id => user.group_ids
       can [:new, :create], Event
       can [:index, :show, :add_entry, :remove_entry, :get_by_date], Event, :group_id => user.group_ids
       can [:edit, :update, :destroy], Event, :organizer => user.id
+      
+      can [:new, :create], Discussion
+      can [:index, :show], Discussion, :group_id => user.group_ids
+      can [:edit, :update, :destroy], Discussion, :user_id => user.id
+      
+      can :manage, DirectMessage
     end
   end
 end

@@ -1,6 +1,4 @@
 class DirectMessagesController < ApplicationController
-  #before_filter :update_timestamp, :only => :index
-  #after_filter :update_timestamp, :only => :create
   # GET /direct_messages
   # GET /direct_messages.json
   def index
