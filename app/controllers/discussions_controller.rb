@@ -82,7 +82,7 @@ class DiscussionsController < ApplicationController
     @discussion.destroy
 
     respond_to do |format|
-      format.html { redirect_to discussions_url }
+      format.html { redirect_to discussions_url, notice: 'Discussion was removed' }
       format.json { head :no_content }
     end
   end
