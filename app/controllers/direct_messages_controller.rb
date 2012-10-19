@@ -66,8 +66,4 @@ class DirectMessagesController < ApplicationController
       format.js
     end
   end
-  
-  def update_timestamp
-    current_user.update_attributes(:last_look_at_direct_message => DateTime.now + 1.second)
-  end 
 end

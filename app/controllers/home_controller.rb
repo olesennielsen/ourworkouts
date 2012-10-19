@@ -20,13 +20,7 @@ class HomeController < ApplicationController
     @events = Event.where(:group_id => current_user.group_ids).where('start_time BETWEEN ? AND ?', DateTime.now.beginning_of_day, DateTime.now.end_of_day)
       
     @discussions = Discussion.where(:group_id => current_user.group_ids)
-        
-    @discussions.each do |discussion|
-      tmp_discussion_messages = DiscussionMessage.where(:discussion_id => discussion)
-      tmp_discussion_messages.each do |tmp_discussion_message|
-        @discussion_messages.push(tmp_discussion_message)
-      end
-    end
+    @discussion_messages = DiscussionMessage.where(:discussion_id => @discussions)
     
     unless @discussion_messages.nil?    
       @discussion_messages = @discussion_messages.sort_by { |discussion_message| discussion_message.created_at }.reverse.first(5)

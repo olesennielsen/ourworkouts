@@ -3,15 +3,7 @@ class DiscussionsController < ApplicationController
   # GET /discussions
   # GET /discussions.json
   def index
-    @discussions = []
-    @groups = current_user.groups
-    
-    @groups.each do |group|
-      tmp_discs = Discussion.where(:group_id => group.id)
-      tmp_discs.each do |tmp_disc|
-        @discussions.push(tmp_disc)
-      end
-    end
+    @discussions = Discussion.where(:group_id => current_user.group_ids)
 
     respond_to do |format|
       format.html # index.html.erb
@@ -48,6 +40,7 @@ class DiscussionsController < ApplicationController
   # GET /discussions/1/edit
   def edit
     @discussion = Discussion.find(params[:id])
+    @groups = current_user.groups
   end
 
   # POST /discussions
