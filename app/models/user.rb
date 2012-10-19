@@ -37,6 +37,7 @@ class User < ActiveRecord::Base
     self.email = omniauth['info']['email'] if email.blank?
     self.name = omniauth['info']['name'] if name.blank?
     self.locale = omniauth['extra']['raw_info']['locale'] if locale.blank?
+    self.add_role :group_admin
     authentications.build(:provider => omniauth['provider'], :uid => omniauth['uid'], :token => omniauth['credentials']['token'])
   end
   
@@ -44,6 +45,7 @@ class User < ActiveRecord::Base
     o =  [('a'..'z'),('A'..'Z')].map{|i| i.to_a}.flatten;  
     string  =  (0..25).map{ o[rand(o.length)]  }.join;    
     self.email = string + "@ourworkouts.com" if email.blank?
+    self.add_role :group_admin
     authentications.build(:provider => omniauth['provider'], :uid => omniauth['uid'])
   end
   
@@ -51,6 +53,7 @@ class User < ActiveRecord::Base
     data = omniauth.info    
     self.email = data['email'] if email.blank?
     self.name = data['name'] if name.blank?
+    self.add_role :group_admin
     authentications.build(:provider => omniauth['provider'], :uid => omniauth['uid'])
   end
   
@@ -58,6 +61,7 @@ class User < ActiveRecord::Base
     data = omniauth.info    
     self.email = data['email'] if email.blank?
     self.name = data['name'] if name.blank?
+    self.add_role :group_admin
     authentications.build(:provider => omniauth['provider'], :uid => omniauth['uid'])
   end
 

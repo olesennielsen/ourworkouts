@@ -19,6 +19,7 @@ Ourworkouts::Application.routes.draw do
   get '/workout_tips' => "home#workout_tips"
   
   get '/get_by_date/:date' => 'events#get_by_date'
+  get '/invite' => 'home#dashboard' 
   
   post 'add_entry' => 'events#add_entry'
   post 'remove_entry' => 'events#remove_entry'
