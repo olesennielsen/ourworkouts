@@ -1,4 +1,3 @@
-
 class DiscussionsController < ApplicationController
   authorize_resource
   

@@ -25,8 +25,8 @@ user3 = User.create! :name => 'Third User', :email => 'user3@example.com', :pass
 puts 'New user created: ' << user3.name
 
 user.add_role :admin
-user2.add_role :group_admin
-user3.add_role :group_admin
+user2.add_role :ordinary_user
+user3.add_role :ordinary_user
 
 user.groups << group
 user2.groups << group
