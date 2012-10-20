@@ -28,4 +28,9 @@ $(document).ready(function() {
 			window.location = $(this).attr('href') + "&state=" + "ow.com" + $("#group_name").val();				
 		}
 	});
+	
+	var $alert = $('.alert').alert();
+	setTimeout(function () {
+	  	$alert.alert('close');
+	}, 5000);
 });
