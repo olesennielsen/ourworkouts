@@ -24,7 +24,8 @@ puts 'New user created: ' << user2.name
 user3 = User.create! :name => 'Third User', :email => 'user3@example.com', :password => 'please', :password_confirmation => 'please', :confirmed_at => Time.now.utc
 puts 'New user created: ' << user3.name
 
-user.add_role :admin
+user.add_role :group_admin
+GroupAdmin.create! :user_id => 1, :group_id => 1
 user2.add_role :ordinary_user
 user3.add_role :ordinary_user
 

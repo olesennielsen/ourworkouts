@@ -68,4 +68,9 @@ class User < ActiveRecord::Base
   def self.find_sender_receiver(id)
     return User.find(id)
   end
+  
+  def is_group_admin?
+    group_admins = GroupAdmin.where(:user_id => self.id)
+    not group_admins.empty?
+  end  
 end

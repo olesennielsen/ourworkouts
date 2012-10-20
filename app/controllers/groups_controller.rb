@@ -38,6 +38,7 @@ class GroupsController < ApplicationController
   # GET /groups/1/edit
   def edit
     #@group = Group.find(params[:id])
+    @users = @group.users
   end
 
   # POST /groups
@@ -63,7 +64,7 @@ class GroupsController < ApplicationController
 
     respond_to do |format|
       if @group.update_attributes(params[:group])
-        format.html { redirect_to @group, notice: 'Group was successfully updated.' }
+        format.html { redirect_to edit_user_registration_path, notice: 'Group was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
@@ -81,6 +82,16 @@ class GroupsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to groups_url }
       format.json { head :no_content }
+    end
+  end
+  
+  def remove_user
+    @user = User.find(params[:user_id])
+    group = @user.groups.find(params[:group_id])
+    @user.groups.delete(group)
+    
+    respond_to do |format|
+      format.js
     end
   end
 end

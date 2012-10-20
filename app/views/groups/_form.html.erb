@@ -1,13 +1,43 @@
-<%= simple_form_for(@group) do |f| %>
-  <%= f.error_notification %>
+<br />
+<div class="row-fluid">
+	<div class="span4">
+		<%= simple_form_for(@group) do |f| %>
+		  <%= f.error_notification %>
 
-  <div class="form-inputs">
-    <%= f.input :name %>
-    <%= f.input :description %>
-    <%= f.input :public %>
-  </div>
+		  <div class="form-inputs">
+		    <%= f.input :name %>
+		    <%= f.input :description %>
+		    <i>Show your group to all users?</i><%= f.input :public %>
+		  </div>
+			<br />
+		  <%= f.button :submit, :class => "btn btn-primary" %>
 
-  <div class="form-actions">
-    <%= f.button :submit %>
-  </div>
-<% end %>
+		<% end %>		
+	</div>
+	<div class="span8">
+		<h3>Users in <%= @group.name %></h3>
+		<table class="table">
+		  <thead>
+			<tr>
+		    <th>Name</th>
+		    <th>Email</th>
+		    <th></th>
+		  </tr>
+			</thead>
+			<tbody>
+		<% @users.each do |user| %>
+		  <tr id="<%= user.id %>">
+		    <td><%= user.name %></td>
+		    <td><%= user.email %></td>
+		    <td>
+		    	<%= link_to remove_user_path(:user_id => user.id, :group_id => @group.id), :remote => true, :method => :post do %>
+						<i class="icon-remove"></i>
+					<% end %>		
+		    </td>
+		  </tr>
+		<% end %>
+			</tbody>
+		</table>		
+	</div>
+</div>
+

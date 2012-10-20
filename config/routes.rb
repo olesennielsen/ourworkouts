@@ -23,6 +23,7 @@ Ourworkouts::Application.routes.draw do
   
   post 'add_entry' => 'events#add_entry'
   post 'remove_entry' => 'events#remove_entry'
+  post 'remove_user' => 'groups#remove_user'
   
   devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" } #do
   #    get 'sign_in', :to => 'users/sessions#new', :as => :new_user_session
