@@ -1,5 +1,5 @@
 class DirectMessagesController < ApplicationController
-  authorize_resource
+  load_authorize_resource
   
   # GET /direct_messages
   # GET /direct_messages.json
@@ -17,7 +17,7 @@ class DirectMessagesController < ApplicationController
   # GET /direct_messages/1
   # GET /direct_messages/1.json
   def show
-    @direct_message = DirectMessage.find(params[:id])
+    #@direct_message = DirectMessage.find(params[:id])
     
     r_name = User.find(@direct_message.recipient_id)    
     
@@ -42,7 +42,7 @@ class DirectMessagesController < ApplicationController
   # PUT /direct_messages/1
   # PUT /direct_messages/1.json
   def update
-    @direct_message = DirectMessage.find(params[:id])
+    #@direct_message = DirectMessage.find(params[:id])
     respond_to do |format|
       if @direct_message.update_attributes(params[:direct_message])
         format.html { redirect_to @direct_message, notice: 'Direct message was successfully updated.' }
@@ -57,7 +57,7 @@ class DirectMessagesController < ApplicationController
   # DELETE /direct_messages/1
   # DELETE /direct_messages/1.json
   def destroy
-    @direct_message = DirectMessage.find(params[:id])
+    #@direct_message = DirectMessage.find(params[:id])
     @direct_message.destroy
 
     respond_to do |format|

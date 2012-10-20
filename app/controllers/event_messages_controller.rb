@@ -1,11 +1,11 @@
 
 class EventMessagesController < ApplicationController
-  authorize_resource
+  load_authorize_resource
   
   # POST /event_messages
   # POST /event_messages.json
   def create
-    @event_message = EventMessage.new(params[:event_message])
+    #@event_message = EventMessage.new(params[:event_message])
 
     respond_to do |format|
       if @event_message.save
@@ -22,7 +22,7 @@ class EventMessagesController < ApplicationController
   # PUT /event_messages/1
   # PUT /event_messages/1.json
   def update
-    @event_message = EventMessage.find(params[:id])
+    #@event_message = EventMessage.find(params[:id])
 
     respond_to do |format|
       if @event_message.update_attributes(params[:event_message])
@@ -38,7 +38,7 @@ class EventMessagesController < ApplicationController
   # DELETE /event_messages/1
   # DELETE /event_messages/1.json
   def destroy
-    @event_message = EventMessage.find(params[:id])
+    #@event_message = EventMessage.find(params[:id])
     @event_message.destroy
 
     respond_to do |format|
