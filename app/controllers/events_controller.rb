@@ -8,7 +8,6 @@ class EventsController < ApplicationController
     @events = Event.where(:group_id => current_user.group_ids)
     @groups = current_user.groups
 
-
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @events }
