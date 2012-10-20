@@ -90,6 +90,14 @@ class GroupsController < ApplicationController
     group = @user.groups.find(params[:group_id])
     @user.groups.delete(group)
     
+    if @user.groups.empty?
+      events = Event.where(:organizer => @user.id)
+      events.each do |event|
+        event.destroy
+      end
+      @user.destroy
+    end
+    
     respond_to do |format|
       format.js
     end

@@ -1,11 +1,11 @@
 class User < ActiveRecord::Base
   has_and_belongs_to_many :groups
-  has_many :entries
+  has_many :entries, :dependent => :destroy
   has_many :events, :through => :entries
-  has_many :discussions
-  has_many :discussion_messages
-  has_many :event_messages
-  has_many :authentications
+  has_many :discussions, :dependent => :destroy
+  has_many :discussion_messages, :dependent => :destroy
+  has_many :event_messages, :dependent => :destroy
+  has_many :authentications, :dependent => :destroy
   
   rolify
   # Include default devise modules. Others available are:

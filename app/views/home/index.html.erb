@@ -1,9 +1,8 @@
 <br />
 <br />
+<br />
 <div class="row-fluid">
   <div class="span5">
-			<h1><center>Our Workouts</center></h1>
-			<br />
 			<br />
 			<center><div class="sign-up-container"><p><%= link_to 'Group sign up', sign_up_path, :class => "btn btn-success btn-large" %><br /><br /></p></div>
 				<p>Sign in through:</p>
@@ -14,7 +13,7 @@
 			<p><%= link_to 'Sign in with your email', new_user_session_path, :class => "btn btn-primary btn-large" %></p></center>
 	</div>
 	<div class="span7" >
-		<h1>Workout tip of the day:</h1>
+		<h2>Workout tip of the day:</h2>
 		<div id="workout-tip">
 			<%= render :partial => "workout_tip", :object => @tip %>
 			<br />
@@ -28,8 +27,8 @@
 <br />
 <br />
 <br />
-
-
+<br />
+<br />
 
 <div class="row-fluid">
   <div class="span4" id="sub-fields">
