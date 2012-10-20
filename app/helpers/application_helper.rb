@@ -31,43 +31,33 @@ module ApplicationHelper
     return_value = ''
     # events for the timeline
     groups = current_user.groups
-    @milestone_event = Event.where(:group_id => current_user.group_ids).where(:milestone => true).order("start_time DESC").first
+    @timeline_events = Event.where(:group_id => current_user.group_ids).where('start_time BETWEEN ? AND ?', DateTime.now.beginning_of_day, DateTime.now.end_of_day + 30)
 
-    if @milestone_event.nil?
-      return_value += "<br /><h2>Hi there,</h2><h3>your group haven't created any events yet, so go to your group's "
+    if @timeline_events.nil?
+      return_value += "<br /><h2>Hi there,</h2><h3>your group haven't created any workouts yet, so go to your group's "
       return_value += link_to "calendar", events_path
-      return_value += ' and start your healthy lifestyle'
-      return_value += ' or '
+      return_value += ' and create kickass workouts or '
       return_value += link_to "invite", invite_path
-      return_value += ' your friends and colleagues to join ourworkouts.com</h3><br /><br />'
+      return_value += ' your friends and colleagues to join your group on ourworkouts.com</h3><br /><br />'
     else
-      @days_to_milestone_event = (@milestone_event.start_time.to_time - Time.now).to_i / 1.day + 1
-      @width_of_pillar = 62.0/@days_to_milestone_event
-      @spacing_between_pillars = 30.0/(@days_to_milestone_event - 1)
-
+      
+      @width_of_pillar = 57.0/30.0
+      @spacing_between_pillars = 35.0/30.0
 
       # return of the html used in the timeline
-      return_value += '<br /><br /><h1 class="pull-right" id="countdown">' + @days_to_milestone_event.to_s +  ' days to ' + @milestone_event.title + '</h1>
-      <br /><br /><div class="row-fluid" id="timeline-container">'
+      return_value += '<div class="row-fluid" id="timeline-container">'
 
-      (DateTime.now.beginning_of_day..DateTime.now.end_of_day + @days_to_milestone_event - 1).each do |day|
-        @todays_events = []
-        groups.each do |group|
-          tmp_events = Event.where(:group_id => group.id).where('start_time BETWEEN ? AND ?', day, day + 1)
-          tmp_events.each do |te|
-            @todays_events.push(te)
-          end
-          if @todays_events.empty?
-            return_value += '<div class="no-event" id="' + day.to_date.to_s + '" style="width:' + @width_of_pillar.to_s + '%">&nbsp;</div>'
-            return_value += '<div class="no-event" style="width:' + @spacing_between_pillars.to_s + '%">&nbsp;</div>'
-          else
-            return_value += '<div class="event" id="' + day.to_date.to_s + '" style="width:' + @width_of_pillar.to_s + '%">&nbsp;</div>'
-            return_value += '<div class="no-event" style="width:' + @spacing_between_pillars.to_s + '%">&nbsp;</div>'
-          end        
-        end
+      (DateTime.now.beginning_of_day..DateTime.now.end_of_day + 30 - 1).each do |day|
+        @todays_events = Event.where(:group_id => current_user.group_ids).where('start_time BETWEEN ? AND ?', day, day + 1)
+        
+        if @todays_events.empty?
+          return_value += '<div class="no-event" id="' + day.to_date.to_s + '" style="width:' + @width_of_pillar.to_s + '%">&nbsp;</div>'
+          return_value += '<div class="no-event" style="width:' + @spacing_between_pillars.to_s + '%">&nbsp;</div>'
+        else
+          return_value += '<div class="event" id="' + day.to_date.to_s + '" style="width:' + @width_of_pillar.to_s + '%">&nbsp;</div>'
+          return_value += '<div class="no-event" style="width:' + @spacing_between_pillars.to_s + '%">&nbsp;</div>'
+        end        
       end
-
-      return_value += '<div class="milestone-event" id="' + @milestone_event.start_time.to_date.to_s + '" style="width:' + @width_of_pillar.to_s + '%">&nbsp;</div>'
 
       return_value += '</div><div id="timeline-bar">&nbsp;</div><hr /><br />'
 

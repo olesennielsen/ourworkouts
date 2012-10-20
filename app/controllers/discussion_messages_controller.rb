@@ -1,5 +1,5 @@
 class DiscussionMessagesController < ApplicationController
-  load_authorize_resource
+  load_and_authorize_resource
   # POST /discussion_messages
   # POST /discussion_messages.json
   def create

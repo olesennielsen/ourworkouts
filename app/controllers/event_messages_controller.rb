@@ -1,6 +1,6 @@
 
 class EventMessagesController < ApplicationController
-  load_authorize_resource
+  load_and_authorize_resource
   
   # POST /event_messages
   # POST /event_messages.json

@@ -1,5 +1,5 @@
 class DiscussionsController < ApplicationController
-  load_authorize_resource
+  load_and_authorize_resource
   
   # GET /discussions
   # GET /discussions.json

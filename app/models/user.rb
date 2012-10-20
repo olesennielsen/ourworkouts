@@ -41,14 +41,6 @@ class User < ActiveRecord::Base
     authentications.build(:provider => omniauth['provider'], :uid => omniauth['uid'], :token => omniauth['credentials']['token'])
   end
   
-  def apply_twitter_omniauth(omniauth)
-    o =  [('a'..'z'),('A'..'Z')].map{|i| i.to_a}.flatten;  
-    string  =  (0..25).map{ o[rand(o.length)]  }.join;    
-    self.email = string + "@ourworkouts.com" if email.blank?
-    self.add_role :group_admin
-    authentications.build(:provider => omniauth['provider'], :uid => omniauth['uid'])
-  end
-  
   def apply_google_omniauth(omniauth)
     data = omniauth.info    
     self.email = data['email'] if email.blank?

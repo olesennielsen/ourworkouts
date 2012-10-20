@@ -18,17 +18,22 @@ class Ability
       can [:index, :show], Discussion, :group => { :id => user.group_ids }
       can [:edit, :update, :destroy], Discussion, :user_id => user.id
       
-      discussions = Discussion.where(:group_id => user.group_ids)
-      can :create, DiscussionMessage, :discussion_id => discussions
+      can :create, DiscussionMessage, :discussion => {:group => { :id => user.group_ids }}
       
       can [:new, :create], Event      
-      can [:index, :show, :add_entry, :remove_entry, :get_by_date], Event, :group => { :id => user.group_ids }
+      can :show, Event, :group => { :id => user.group_ids }
       can [:edit, :update, :destroy], Event, :organizer => user.id
       
-      events = Event.where(:group_id => user.group_ids)
-      can :create, EventMessage, :event_id => events
+      can [:add_entry, :remove_entry], Entry, :event => {:group => { :id => user.group_ids }}
       
-      can :manage, Group, :id => user.group_ids
+      can :create, EventMessage, :event => {:group => { :id => user.group_ids }}
+      
+      group_admins = GroupAdmin.where(:user_id => user.id)
+      group_admins.each do |group_admin|
+        can :manage, Group, :id => group_admin.group.id
+      end
+      
+      can :show, Group, :id => user.group_ids
       
       can :manage, User, :id => user.id
           
@@ -39,15 +44,15 @@ class Ability
       can [:index, :show], Discussion, :group => { :id => user.group_ids }
       can [:edit, :update, :destroy], Discussion, :user_id => user.id
       
-      discussions = Discussion.where(:group_id => user.group_ids)
-      can :create, DiscussionMessage, :discussion_id => discussions
+      can :create, DiscussionMessage, :discussion => {:group => { :id => user.group_ids }}
       
-      can [:new, :create], Event
-      can [:index, :show, :add_entry, :remove_entry, :get_by_date], Event, :group => { :id => user.group_ids }
+      can [:new, :create], Event      
+      can :show, Event, :group => { :id => user.group_ids }
       can [:edit, :update, :destroy], Event, :organizer => user.id
       
-      events = Event.where(:group_id => user.group_ids)
-      can :create, EventMessage, :event_id => events
+      can [:add_entry, :remove_entry], Entry, :event => {:group => { :id => user.group_ids }}
+      
+      can :create, EventMessage, :event => {:group => { :id => user.group_ids }}
       
       can :show, Group, :id => user.group_ids
       

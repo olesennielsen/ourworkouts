@@ -10,9 +10,7 @@ class EventsController < ApplicationController
     @event = Event.new
     @events = Event.where(:group_id => current_user.group_ids)
     @groups = current_user.groups
-    
-    authorize! :index, @event
-    authorize! :index, @events
+
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @events }
@@ -23,7 +21,7 @@ class EventsController < ApplicationController
   # GET /events/1
   # GET /events/1.json
   def show
-    #@event = Event.find(params[:id])
+    @event = Event.find(params[:id])
     @entries = Entry.where(:event_id => params[:id]).order("created_at DESC")
     @current_user_entry = Entry.where(:event_id => params[:id], :user_id => current_user.id).count
     @messages = EventMessage.where(:event_id => params[:id])
@@ -38,7 +36,7 @@ class EventsController < ApplicationController
   # GET /events/new
   # GET /events/new.json
   def new
-    #@event = Event.new
+    @event = Event.new
     authorize! :new, @event
     respond_to do |format|
       format.html # new.html.erb
@@ -48,14 +46,14 @@ class EventsController < ApplicationController
 
   # GET /events/1/edit
   def edit
-    #@event = Event.find(params[:id])
+    @event = Event.find(params[:id])
     authorize! :edit, @event
   end
 
   # POST /events
   # POST /events.json
   def create
-    #@event = Event.new(params[:event])
+    @event = Event.new(params[:event])
     
     authorize! :create, @event
     respond_to do |format|
@@ -73,7 +71,7 @@ class EventsController < ApplicationController
   # PUT /events/1
   # PUT /events/1.json
   def update
-    #@event = Event.find(params[:id])
+    @event = Event.find(params[:id])
     authorize! :update, @event
     respond_to do |format|
       if @event.update_attributes(params[:event])
@@ -89,7 +87,7 @@ class EventsController < ApplicationController
   # DELETE /events/1
   # DELETE /events/1.json
   def destroy
-    #@event = Event.find(params[:id])
+    @event = Event.find(params[:id])
     authorize! :destroy, @event
     @event.destroy
 
@@ -101,7 +99,6 @@ class EventsController < ApplicationController
   
   def get_by_date
     @events = Event.where(:group_id => current_user.group_ids).where('start_time BETWEEN ? AND ?', DateTime.parse(params[:date].to_s).beginning_of_day, DateTime.parse(params[:date].to_s).end_of_day)
-    authorize! :get_by_date, @events
     @json_events = @events.collect do |event|
       {:title => event.title, :id => event.id, :start => event.start_time, :entries => event.entries.count}
     end

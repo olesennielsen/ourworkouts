@@ -1,5 +1,5 @@
 class DirectMessagesController < ApplicationController
-  load_authorize_resource
+  load_and_authorize_resource
   
   # GET /direct_messages
   # GET /direct_messages.json
