@@ -1,27 +1,40 @@
-<h1>Listing groups</h1>
+<h1>Admin dashboard</h1>
 
-<table>
-  <tr>
-    <th>Name</th>
-    <th>Description</th>
-    <th>Public</th>
-    <th></th>
-    <th></th>
+<table class="table">
+  <thead>
+	<tr>
+    <th>Name</th>    
+    <th>Number of users</th>
+		<th>Group admins</th>
+		<th>Public</th>
     <th></th>
   </tr>
-
+	</thead>
+	<tbody>
 <% @groups.each do |group| %>
   <tr>
-    <td><%= group.name %></td>
-    <td><%= group.description %></td>
-    <td><%= group.public %></td>
-    <td><%= link_to 'Show', group %></td>
-    <td><%= link_to 'Edit', edit_group_path(group) %></td>
-    <td><%= link_to 'Destroy', group, confirm: 'Are you sure?', method: :delete %></td>
+    <td><%= link_to group.name, group_path(group) %></td>
+		<td><%= group.users.length %></td>
+		<td>
+			<% group_admins = GroupAdmin.get_by_group(group.id)%>
+			<% group_admins.each do |group_admin| %>
+				<%= group_admin.user.name %>
+				<% unless group_admins.last == group_admin %>
+				,
+				<% end %>
+			<% end %>
+		</td>
+    <td>
+			<% if group.public %>
+				<i class="icon-ok"></i>
+			<% end %>			
+		</td>
+    <td>
+			<%= link_to group, confirm: 'Are you sure you want to delete this group?', method: :delete do %>
+				<i class="icon-remove"></i>
+			<% end %>
+		</td>
   </tr>
 <% end %>
+	</tbody>
 </table>
-
-<br />
-
-<%= link_to 'New Group', new_group_path %>

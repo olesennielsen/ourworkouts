@@ -33,14 +33,13 @@ module ApplicationHelper
     groups = current_user.groups
     @timeline_events = Event.where(:group_id => current_user.group_ids).where('start_time BETWEEN ? AND ?', DateTime.now.beginning_of_day, DateTime.now.end_of_day + 30)
 
-    if @timeline_events.nil?
+    if @timeline_events.empty?
       return_value += "<br /><h2>Hi there,</h2><h3>your group haven't created any workouts yet, so go to your group's "
       return_value += link_to "calendar", events_path
       return_value += ' and create kickass workouts or '
       return_value += link_to "invite", invite_path
       return_value += ' your friends and colleagues to join your group on ourworkouts.com</h3><br /><br />'
-    else
-      
+    else      
       @width_of_pillar = 57.0/30.0
       @spacing_between_pillars = 35.0/30.0
 

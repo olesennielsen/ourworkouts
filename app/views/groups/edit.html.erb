@@ -1,4 +1,7 @@
-<h1>Edit group</h1>
+<h1>Edit <%= @group.name %></h1>
 
+<br />
+<div class="pull-right">
+<%= button_to 'Delete group', @group, confirm: 'Are you sure you want to delete this group?', method: :delete, :class => "btn btn-danger" %>
+</div>
 <%= render 'form' %>
-

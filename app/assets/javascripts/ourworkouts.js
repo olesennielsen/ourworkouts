@@ -29,8 +29,5 @@ $(document).ready(function() {
 		}
 	});
 	
-	var $alert = $('.alert').alert();
-	setTimeout(function () {
-	  	$alert.alert('close');
-	}, 5000);
+	$('.alert').fadeOut(3000);
 });

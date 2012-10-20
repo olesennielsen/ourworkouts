@@ -1,4 +1,3 @@
-
 class GroupsController < ApplicationController
   load_and_authorize_resource
   
@@ -17,6 +16,8 @@ class GroupsController < ApplicationController
   # GET /groups/1.json
   def show
     #@group = Group.find(params[:id])
+    
+    @users = @group.users
 
     respond_to do |format|
       format.html # show.html.erb
@@ -77,6 +78,17 @@ class GroupsController < ApplicationController
   # DELETE /groups/1.json
   def destroy
     #@group = Group.find(params[:id])
+    users = @group.users    
+    users.each do |user|
+      if user.groups.length == 1
+        events = Event.where(:organizer => user.id)
+        events.each do |event|
+          event.destroy
+        end
+        user.destroy
+      end
+    end    
+    
     @group.destroy
 
     respond_to do |format|
