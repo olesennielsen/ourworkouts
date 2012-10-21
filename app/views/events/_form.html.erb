@@ -27,19 +27,26 @@
     <div class="field">
       All Day: <%= f.check_box :all_day %>
     </div>
+    </br>
     <div class="field">
       <%= f.label :start_time %>
-      <%= f.datetime_select :start_time %>
+      <%= f.text_field :start_hour_minute, :class => "start_time" , :style => "width: 75px;" %>
+      <i class="icon-time" style="margin: -2px 0 0 -22.5px; pointer-events: none; position: relative;"></i>&nbsp;
+      <%= f.text_field :start_date, :id => "start_date", :style => "width: 100px;" %>
+      <i class="icon-calendar" style="margin: -2px 0 0 -22.5px; pointer-events: none; position: relative;"></i>
     </div>
     <div class="field">
       <%= f.label :end_time %>
-      <%= f.datetime_select :end_time %>
+      <%= f.text_field :end_hour_minute, :class => "end_time", :style => "width: 75px;" %>
+      <i class="icon-time" style="margin: -2px 0 0 -22.5px; pointer-events: none; position: relative;"></i>&nbsp;
+      <%= f.text_field :end_date, :id => "end_date", :style => "width: 100px;" %>
+      <i class="icon-calendar" style="margin: -2px 0 0 -22.5px; pointer-events: none; position: relative;"></i>
+
     </div>
     <div class="field">
       <%= f.label :description %>
-      <%= f.text_area :description, :size => "20x12" %>
+      <%= f.text_area :description, :size => "20x5" %>
     </div>
-
   </div>
   <div class="modal-footer">
       <%= f.submit :class => "btn btn-primary"  %>

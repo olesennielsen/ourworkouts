@@ -7,7 +7,13 @@ $(document).ready(function() {
     
     /*	Begin initializing and configurating the 
 	calendar plugin */
-    
+    $('#start_date').datepicker({
+	format: "dd-mm-yyyy"});
+    $('#end_date').datepicker({
+	format: "dd-mm-yyyy"});
+    $('.end_time').timepicker();
+    $('.start_time').timepicker();
+
     var calendar = $('#calendar').fullCalendar({
 	editable: true,        
 	header: {
