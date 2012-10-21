@@ -5,8 +5,6 @@ class EventsController < ApplicationController
   def index
     # The events visible should be the ones the belongs to the users groups
 
-
-
     @event = Event.new
     @events = Event.where(:group_id => current_user.group_ids)
     @groups = current_user.groups
@@ -37,6 +35,7 @@ class EventsController < ApplicationController
   # GET /events/new.json
   def new
     @event = Event.new
+
     authorize! :new, @event
     respond_to do |format|
       format.html # new.html.erb
