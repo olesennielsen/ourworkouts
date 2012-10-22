@@ -1,0 +1,2 @@
+module WorkoutTipsHelper
+end
