@@ -30,6 +30,7 @@ class Event < ActiveRecord::Base
       puts time
       return DateTime.new(date.year, date.month, date.day, time.hour, time.minute)
     else
+      date = Date.strptime(date_string, "%d-%m-%Y")
       return DateTime.new(date.year, date.month, date.day)
     end
   end    
