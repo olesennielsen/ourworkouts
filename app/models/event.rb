@@ -23,19 +23,26 @@ class Event < ActiveRecord::Base
     }
   end
 
+  def synthesize_time(date_string, time_string)
+    if date_string.present? && time_string.present?
+      date = Date.strptime(date_string, "%d-%m-%Y")
+      time = DateTime.strptime(time_string, "%l:%M%P")
+      puts time
+      return DateTime.new(date.year, date.month, date.day, time.hour, time.minute)
+    else
+      return DateTime.new(date.year, date.month, date.day)
+    end
+  end    
+
   def make_end_time
-    if @end_date.present? && @end_hour_minute.present?
-      @end_date = @end_date.to_date
-      @end_hour_minute = Time.parse(@end_hour_minute)
-      self.end_time = DateTime.new(@end_date.year, @end_date.month, @end_date.day, @end_hour_minute.hour, @end_hour_minute.min)
+    if not self.end_time.present?
+    self.end_time = synthesize_time(@end_date, @end_hour_minute)
     end
   end
 
   def make_start_time
-    if @start_date.present? && @start_hour_minute.present?
-      @start_date = @start_date.to_date
-      @start_hour_minute = Time.parse(@start_hour_minute)
-      self.start_time = DateTime.new(@start_date.year, @start_date.month, @start_date.day, @start_hour_minute.hour, @start_hour_minute.min)
+    if not self.start_time.present?
+      self.start_time = synthesize_time(@start_date, @start_hour_minute)
     end
   end
 end

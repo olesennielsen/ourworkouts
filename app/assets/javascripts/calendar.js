@@ -52,9 +52,8 @@ $(document).ready(function() {
 		calendar view using twitter-bootstraps modal plugin */
 	select: function(start, end, allDay) {
 	    $('#myModal').modal();
-	    document.getElementById('start_date').value = start;
-	    document.getElementById('end_date').value = end; 
-	    calendar.fullCalendar('unselect');
+	    document.getElementById('start_date').value = (start.getDate() + "-" + (start.getMonth()+1) + "-" + start.getFullYear());
+	    document.getElementById('end_date').value = (end.getDate() + "-" + (end.getMonth() + 1) + "-" + end.getFullYear()); 
 	},
         
         //http://arshaw.com/fullcalendar/docs/event_ui/eventDrop/
