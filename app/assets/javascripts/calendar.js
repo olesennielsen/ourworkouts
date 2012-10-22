@@ -52,8 +52,8 @@ $(document).ready(function() {
 		calendar view using twitter-bootstraps modal plugin */
 	select: function(start, end, allDay) {
 	    $('#myModal').modal();
-	    document.getElementById('event_starts_at').value = start
-	    document.getElementById('event_ends_at').value = end
+	    document.getElementById('start_date').value = start;
+	    document.getElementById('end_date').value = end; 
 	    calendar.fullCalendar('unselect');
 	},
         
