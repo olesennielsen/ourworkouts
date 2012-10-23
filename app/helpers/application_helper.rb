@@ -37,7 +37,7 @@ module ApplicationHelper
       return_value += "<br /><h2>Hi there,</h2><h3>your group haven't created any workouts yet, so go to your group's "
       return_value += link_to "calendar", events_path
       return_value += ' and create kickass workouts or '
-      return_value += link_to "invite", invite_path
+      return_value += link_to "invite", new_user_invitation_path
       return_value += ' your friends and colleagues to join your group on ourworkouts.com</h3><br /><br />'
     else      
       @width_of_pillar = 57.0/30.0

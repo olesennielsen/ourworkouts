@@ -57,7 +57,6 @@ class Ability
       can :show, Group, :id => user.group_ids
       
       can :manage, User, :id => user.id
-           
     end
   end
 end
