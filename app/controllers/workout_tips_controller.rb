@@ -1,4 +1,7 @@
 class WorkoutTipsController < ApplicationController
+  def index
+     @tips = WorkoutTip.where('tip_date <= ?', Date.today).order('tip_date DESC')
+  end  
   
   def new
     @workout_tips = WorkoutTip.find(:all, :order => "tip_date DESC")
