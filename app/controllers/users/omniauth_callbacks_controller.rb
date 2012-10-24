@@ -10,8 +10,8 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
       sign_in_and_redirect(:user, authentication.user)
     elsif current_user # if this authentication is the current_user then this authentication is added to authentications, not used at the moment but possible to add other providers
       current_user.authentications.create!(:provider => omniauth['provider'], :uid => omniauth['uid'], :token => omniauth['credentials']['token'])
-      flash[:notice] = "Authentication successful."
-      redirect_to authentications_url
+      flash[:notice] = "You successfully added the network"
+      redirect_to edit_user_registration_path
     else # if it does not exist the user is created by calling the apply_omniauth method
       group_name = params[:state]
       unless group_name.nil?
@@ -47,8 +47,8 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
       sign_in_and_redirect(:user, authentication.user)
     elsif current_user # if this authentication is the current_user then this authentication is added to authentications, not used at the moment but possible to add other providers
       current_user.authentications.create!(:provider => omniauth['provider'], :uid => omniauth['uid'])
-      flash[:notice] = "Authentication successful."
-      redirect_to authentications_url
+      flash[:notice] = "You successfully added the network"
+      redirect_to edit_user_registration_path
     else # if it does not exist the user is created by calling the apply_omniauth method
       group_name = params[:state]
       unless group_name.nil?
@@ -84,8 +84,8 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
       sign_in_and_redirect(:user, authentication.user)
     elsif current_user # if this authentication is the current_user then this authentication is added to authentications, not used at the moment but possible to add other providers
       current_user.authentications.create!(:provider => omniauth['provider'], :uid => omniauth['uid'])
-      flash[:notice] = "Authentication successful."
-      redirect_to authentications_url
+      flash[:notice] = "You successfully added the network"
+      redirect_to edit_user_registration_path
     else # if it does not exist the user is created by calling the apply_omniauth method
       group_name = params[:state]
       unless group_name.nil?

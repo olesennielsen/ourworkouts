@@ -41,8 +41,4 @@ class HomeController < ApplicationController
   
   def how
   end
-  
-  def workout_tips
-    @tips = WorkoutTip.where('tip_date <= ?', Date.today).order('tip_date DESC')
-  end  
 end

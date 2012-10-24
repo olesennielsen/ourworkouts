@@ -1,0 +1,42 @@
+<h2>New workout tip</h2>
+<br />
+<div class="row-fluid">
+	<div class="span6">
+		<p>Creates workout tip one day later than the latest workout tip, so do them in time</p>
+		<%= form_for WorkoutTip.new, :remote => true do |f| %>
+
+			<%= f.label :title %>
+		  <%= f.text_field :title %>
+
+			<%= f.label :author %>
+		  <%= f.text_field :author %>
+
+			<%= f.label :body %>
+			<%= f.text_area :body, :rows => 5 %>
+
+			<p>
+			<%= f.submit "Create tip", :class => "btn btn-primary" %>
+		  </p>
+
+		<% end %>
+	</div>	
+	<div class="span6">
+		<table class="table">
+		  <thead>
+			<tr>
+		    <th>Title</th>    
+		    <th>Date</th>
+				<th>Body</th>
+				<th>Author</th>
+		    <th></th>
+		  </tr>
+			</thead>
+			<tbody id="workout-tips">
+		<% @workout_tips.each do |workout_tip| %>
+			<%= render workout_tip %>
+		<% end %>
+			</tbody>
+		</table>
+	</div>
+</div>
+

@@ -11,6 +11,8 @@ Ourworkouts::Application.routes.draw do
   resources :groups
 
   resources :direct_messages
+  
+  resources :workout_tips
 
   get '/sign_up' => "home#sign_up"
   get '/who' => "home#who"
