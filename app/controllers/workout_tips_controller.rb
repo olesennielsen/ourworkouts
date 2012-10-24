@@ -1,17 +1,20 @@
 class WorkoutTipsController < ApplicationController
+  
   def new
     @workout_tips = WorkoutTip.find(:all, :order => "tip_date DESC")
+    authorize! :new, @workout_tips
   end
   
   def edit
     @workout_tip = WorkoutTip.find(params[:id])
+    authorize! :edit, @workout_tip
   end
   
   def create
     @workout_tip = WorkoutTip.new(params[:workout_tip])
     
     last_tip = WorkoutTip.find(:last)
-    
+    authorize! :create, @workout_tip
     respond_to do |format|
       if @workout_tip.save
         @workout_tip.update_attributes(:tip_date => last_tip.tip_date + 1.day)
@@ -27,7 +30,7 @@ class WorkoutTipsController < ApplicationController
   
   def update
     @workout_tip = WorkoutTip.find(params[:id])
-    
+    authorize! :update, @workout_tip
     respond_to do |format|
       if @workout_tip.update_attributes(params[:workout_tip])
         format.html { redirect_to new_workout_tip_path, notice: 'Workout tip was successfully updated' }
@@ -41,6 +44,7 @@ class WorkoutTipsController < ApplicationController
   
   def destroy
     @workout_tip = WorkoutTip.find(params[:id])
+    authorize! :destroy, @workout_tip
     @workout_tip.destroy
     
     respond_to do |format|
