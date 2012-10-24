@@ -3,18 +3,7 @@
 <div class="row-fluid">
 	<div class="span6">
 		<p>Creates workout tip one day later than the latest workout tip, so do them in time</p>
-		<%= form_for(@workout_tip) do |f| %>
-			<% if @workout_tip.errors.any? %>
-		    <div id="error_explanation">
-		      <h2><%= pluralize(@workout_tip.errors.count, "error") %> prohibited this workout_tip from being saved:</h2>
-
-		      <ul>
-		      <% @workout_tip.errors.full_messages.each do |msg| %>
-		        <li><%= msg %></li>
-		      <% end %>
-		      </ul>
-		    </div>
-		  <% end %>
+		<%= form_for WorkoutTip.new, :remote => true do |f| %>
 
 			<%= f.label :title %>
 		  <%= f.text_field :title %>
@@ -32,7 +21,22 @@
 		<% end %>
 	</div>	
 	<div class="span6">
-		
+		<table class="table">
+		  <thead>
+			<tr>
+		    <th>Title</th>    
+		    <th>Date</th>
+				<th>Body</th>
+				<th>Author</th>
+		    <th></th>
+		  </tr>
+			</thead>
+			<tbody id="workout-tips">
+		<% @workout_tips.each do |workout_tip| %>
+			<%= render workout_tip %>
+		<% end %>
+			</tbody>
+		</table>
 	</div>
 </div>
 

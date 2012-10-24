@@ -1,0 +1,19 @@
+<h2>Edit workout tip</h2>
+
+<%= form_for(@workout_tip) do |f| %>
+
+	<%= f.label :title %>
+  <%= f.text_field :title %>
+
+	<%= f.label :author %>
+  <%= f.text_field :author %>
+
+	<%= f.label :body %>
+	<%= f.text_area :body, :rows => 5 %>
+
+	<p>
+	<%= f.submit "Edit tip", :class => "btn btn-primary" %>
+	<%= link_to "Back", new_workout_tip_path, :class => "btn btn-primary" %>
+  </p>
+
+<% end %>

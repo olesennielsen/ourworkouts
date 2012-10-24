@@ -1,0 +1,11 @@
+<tr id="<%= workout_tip.id %>">
+  <td><%= link_to workout_tip.title, edit_workout_tip_path(workout_tip.id) %></td>
+	<td><%= workout_tip.tip_date %></td>
+	<td><%= workout_tip.body %></td>
+  <td><%= workout_tip.author %></td>
+  <td>
+		<%= link_to workout_tip, confirm: 'Are you sure you want to delete this tip?', :remote => true, method: :delete do %>
+			<i class="icon-remove"></i>
+		<% end %>
+	</td>
+</tr>
