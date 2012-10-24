@@ -17,6 +17,7 @@ group :production do
   gem 'thin'
 end
 
+gem 'rails-i18n'
 gem 'turbolinks'
 gem 'jquery-rails'
 gem "rspec-rails", ">= 2.11.0", :group => [:development, :test]
