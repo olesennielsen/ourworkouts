@@ -5,20 +5,20 @@
   <div class="span5">
 			<br />
 			<center><div class="sign-up-container"><p><%= link_to t(:sign_up), sign_up_path, :class => "btn btn-success btn-large" %><br /><br /></p></div>
-				<p>Sign in through:</p>
+				<p><%= t(:sign_in_through) %>:</p>
 				<p><%= link_to image_tag("facebook.png", :size => "60x60", :alt => "Sign in with Facebook", :title => "Sign in with Facebook"), user_omniauth_authorize_path(:facebook) %>
 				<%= link_to image_tag("google.png", :size => "60x60", :alt => "Sign in with Google", :title => "Sign in with Google"), user_omniauth_authorize_path(:google_oauth2) %>
 				<%= link_to image_tag("linkedin.png", :size => "60x60", :alt => "Sign in with LinkedIn", :title => "Sign in with LinkedIn"), user_omniauth_authorize_path(:linkedin) %></p>
-			<p>Or: </p>	
-			<p><%= link_to 'Sign in with your email', new_user_session_path, :class => "btn btn-primary btn-large" %></p></center>
+			<p><%= t(:or) %>:</p>	
+			<p><%= link_to t(:sign_in_email), new_user_session_path, :class => "btn btn-primary btn-large" %></p></center>
 	</div>
 	<div class="span7" >
-		<h2>Workout tip of the day:</h2>
+		<h2><%= t(:workout_tip_of_the_day) %>:</h2>
 		<div id="workout-tip">
 			<%= render :partial => "workout_tip", :object => @tip %>
 			<br />
 			<br />
-			<p class="pull-right"><%= link_to "All workout tips", workout_tips_path, :class => "btn btn-primary" %></p>
+			<p class="pull-right"><%= link_to t(:All) + " " + t(:workout) + " " + t(:tip), workout_tips_path, :class => "btn btn-primary" %></p>
 			<br />
 			<br />
 		</div>
@@ -32,20 +32,20 @@
 
 <div class="row-fluid">
   <div class="span4" id="sub-fields">
-		<h2><%= link_to "What?", what_path %></h2>
+		<h2><%= link_to t(:What) + "?", what_path %></h2>
 		<p>ourworkouts.com is a group based training community for your business, training group or just for a couple of friends. Your group will share a calendar and everybody can create events for everybody else to join. Use your group to get in the shape of your life.</p>
 	</div>	
 	<div class="span4" id="sub-fields">
-		<h2><%= link_to "Who?", who_path %></h2>
+		<h2><%= link_to t(:Who) + "?", who_path %></h2>
 		<p>A lot of the groups on ourworkouts.com are open groups where you can apply to become a member. To see a short presentation of the open groups click the Who? link above.</p>
 	</div>
 	<div class="span4" id="sub-fields">
-		<h2><%= link_to "How?", how_path %></h2>
+		<h2><%= link_to t(:How) + "?", how_path %></h2>
 		<p>By clicking the above How? link you can see a step-by-step guide on how easy and simple ourworkouts.com is to use from sign-up to fully-fledged training platform. We hope that this guide and the simplicity of ourworkouts.com will help you train and communicate more instead of sitting in front of your computer.</p>
 	</div>
 </div>
 <br />
 <hr />
 <div class="row-fluid">
-  <center>Designed and implemented in Denmark by <a href="http://olesennielsen.dk">Olesen &amp; Nielsen</a></center>
+  <center><%= t(:designed_and_implemented) %><a href="http://olesennielsen.dk">Olesen &amp; Nielsen</a></center>
 </div>

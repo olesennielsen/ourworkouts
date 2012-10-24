@@ -1,11 +1,11 @@
 <% if workout_tip.nil?%>
-	<h3>We are probably working out too much and forgot to create today's workout tip</h3>
+	<h3><%= t(:working_out_too_much) %></h3>
 <% else %>
 
 <h3><%= workout_tip.title %></h3>
 <br />
 <p><%= workout_tip.body %></p>
 <br />
-<p class="pull-right">Tip by <%= workout_tip.author %></p>
+<p class="pull-right"><%= t(:tip_by) %>: <%= workout_tip.author %></p>
 
 <% end %>

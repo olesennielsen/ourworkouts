@@ -1,10 +1,10 @@
-<h2>Group sign up</h2>
+<h2><%= t(:sign_up) %></h2>
 <br />
-<p>On this page you can sign up your group to ourworkouts.com</p>
+<p></p>
 
-<p>Use one of the services below to sign in and create your groups admin user, you will be required to enter credit card information later in the process through PayPal:</p>
+<p><%= t(:one_of_the_services) %>:</p>
 <br />
-<p><strong>Group name:</strong><br />
+<p><strong><%= t(:Group) %> <%= t(:name) %></strong><br />
 <%= text_field_tag "group_name" %></p>
 
 <br />
@@ -15,4 +15,4 @@
 
 <br />
 
-<p>or you can sign up by using an email and entering a password <%= link_to "here", email_sign_up_path %></p>
+<p><%= t(:or_you_can_sign_in) %><%= link_to t(:here), email_sign_up_path %></p>
