@@ -1,82 +1,81 @@
 <div class="visible-desktop">
-<%= timeline %>
 </div>
 <div id="tester"></div>
 <div class="row-fluid">
 	<div class="span6">
-		<h2>Today's workouts</h2>
+	  <h2>Today's workouts</h2>
 		<hr />
 		<table class="table">
-			<thead>
-				<tr>
-					<th>Name</th>
-					<th>Time</th>
-					<th>Organizer</th>
-				</tr>
-			</thead>
-			<tbody>
-				<% @events.each do |event| %>
-				<tr>
-					<td><%= event.title %></td>
-					<td><%= event.start_time.strftime("%H:%M") %></td>
-					<td><%= User.find_organizer(event.organizer).name %></td>
-				</tr>
-				<% end %>
-			</tbody>
+		  <thead>
+		    <tr>
+		      <th>Name</th>
+		      <th>Time</th>
+		      <th>Organizer</th>
+		    </tr>
+		  </thead>
+		  <tbody>
+		    <% @events.each do |event| %>
+		    <tr>
+		      <td><%= event.title %></td>
+		      <td><%= event.start_time.strftime("%H:%M") %></td>
+		      <td><%= User.find_organizer(event.organizer).name %></td>
+		    </tr>
+		    <% end %>
+		  </tbody>
 		</table>
 		<br />
 		<br />
-		<p class="pull-right"><%= link_to "Calendar", events_path, :class => "btn btn-primary" %></p>
-		<% %>
+	  <p class="pull-right"><%= link_to "Calendar", events_path, :class => "btn btn-primary" %></p>
+	  <% %>
 	</div>
 	<div class="span6">
-		<h2>Workout tip of the day</h2>
-		<hr />
-		<%= render :partial => "workout_tip", :object => @tip %>
-		<br />
-		<br />
-		<p class="pull-right"><%= link_to "All workout tips", workout_tips_path, :class => "btn btn-primary" %></p>
+	  <h2>Workout tip of the day</h2>
+	  <hr />
+	  <%= render :partial => "workout_tip", :object => @tip %>
+	  <br />
+	  <br />
+	  <p class="pull-right"><%= link_to "All workout tips", workout_tips_path, :class => "btn btn-primary" %></p>
 	</div>
 </div>
 <br />
 <br />
 
 <div class="row-fluid">
-	<div class="span6">
-		<h2>5 latest messages</h2>
-		<hr />
-		<% @direct_messages.each do |direct_message| %>
-			<p><%= User.find_sender_receiver(direct_message.sender_id).name %>: <strong><%= direct_message.body %></strong>
-			<span class="pull-right"><%= direct_message.created_at.strftime("%B %d %H:%M") %></span></p>
-		<% end %>
-		<br />
-		<p class="pull-right"><%= link_to "Direct Messages", direct_messages_path, :class => "btn btn-primary" %></p>
-		</div>
-		<div class="span6">
-			<h2>5 latest discussion updates</h2>
-			<hr />
-			<table class="table">
-				<thead>
-					<tr>
-						<th>Post</th>
-						<th>Discussion</th>
-						<th>Posted at</th>
-						<th>Author</th>
-					</tr>
-				</thead>
-				<tbody>
-					<% unless @discussion_messages.nil? %>
-					<% @discussion_messages.each do |discussion_message| %>
-					<tr>
-						<td><%= discussion_message.body.split(" ").first(4).join(" ") %>...</td>
-						<td><%= link_to discussion_message.discussion.title, discussion_path(discussion_message.discussion) %></td>
-						<td><%= discussion_message.created_at.strftime("%B %d %H:%M") %></td>
-						<td><%= discussion_message.user.name %></td>
-					</tr>
-					<% end %>
-					<% end %>
-				</tbody>
-			</table>
-			<p class="pull-right"><%= link_to "Discussions", discussions_path, :class => "btn btn-primary" %></p>
-		</div>
-	</div>
+  <div class="span6">
+    <h2>Latest messages</h2>
+    <hr />
+    <% @direct_messages.each do |direct_message| %>
+    <p><%= User.find(direct_message.sender_id).name %>: <strong><%= direct_message.body %></strong>
+      <span class="pull-right"><%= direct_message.created_at.strftime("%B %d %H:%M") %></span></p>
+    <% end %>
+    <br />
+    <p class="pull-right"><%= link_to "Direct Messages", direct_messages_path, :class => "btn btn-primary" %></p>
+  </div>
+  <div class="span6">
+    <h2>Latest discussion updates</h2>
+    <hr />
+    <table class="table">
+      <thead>
+	<tr>
+	  <th>Post</th>
+	  <th>Discussion</th>
+	  <th>Posted at</th>
+	  <th>Author</th>
+	</tr>
+      </thead>
+      <tbody>
+	<% unless @discussion_messages.nil? %>
+	<% @discussion_messages.each do |discussion_message| %>
+	<tr>
+	  <td><%= discussion_message.body.split(" ").first(4).join(" ") %>...</td>
+	  <td><%= link_to discussion_message.discussion.title, discussion_path(discussion_message.discussion) %></td>
+	  <td><%= discussion_message.created_at.strftime("%B %d %H:%M") %></td>
+	  <td><%= discussion_message.user.name %></td>
+	</tr>
+	<% end %>
+	<% end %>
+      </tbody>
+    </table>
+    <p class="pull-right"><%= link_to "Discussions", discussions_path, :class => "btn btn-primary" %></p>
+  </div>
+</div>

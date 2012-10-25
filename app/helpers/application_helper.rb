@@ -45,7 +45,12 @@ module ApplicationHelper
 
       # return of the html used in the timeline
       return_value += '<div class="row-fluid" id="timeline-container">'
-
+      @all_events_query = Event.where(:group_id => current_user.group_ids)
+      @all_event_hash = []
+      for event in @all_events_query
+        puts event.title
+        @all_event_hash << event.title
+      end
       (DateTime.now.beginning_of_day..DateTime.now.end_of_day + 30 - 1).each do |day|
         @todays_events = Event.where(:group_id => current_user.group_ids).where('start_time BETWEEN ? AND ?', day, day + 1)
         
