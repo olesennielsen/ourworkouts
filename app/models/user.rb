@@ -1,4 +1,5 @@
 class User < ActiveRecord::Base
+
   has_and_belongs_to_many :groups
   has_many :entries, :dependent => :destroy
   has_many :events, :through => :entries
@@ -6,6 +7,10 @@ class User < ActiveRecord::Base
   has_many :discussion_messages, :dependent => :destroy
   has_many :event_messages, :dependent => :destroy
   has_many :authentications, :dependent => :destroy
+  
+  after_create :assign_default_role
+
+  attr_accessible :groups
   
   rolify
   # Include default devise modules. Others available are:
@@ -17,6 +22,10 @@ class User < ActiveRecord::Base
   # Setup accessible (or protected) attributes for your model
   attr_accessible :name, :email, :password, :password_confirmation, :remember_me, :confirmed_at, :group_id, :groups_attributes  
   accepts_nested_attributes_for :groups, :allow_destroy => true
+
+  def assign_default_role
+    add_role(:ordinary_user)
+  end
   
   def self.reachable_users(user)
     groups = user.groups
