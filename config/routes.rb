@@ -21,13 +21,12 @@ Ourworkouts::Application.routes.draw do
   get '/workout_tips' => "home#workout_tips"
   
   get '/get_by_date/:date' => 'events#get_by_date'
-  get '/invite' => 'home#dashboard' 
   
   post 'add_entry' => 'events#add_entry'
   post 'remove_entry' => 'events#remove_entry'
   post 'remove_user' => 'groups#remove_user'
   
-  devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" } #do
+  devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks", :invitations => 'users/invitations' } #do
   #    get 'sign_in', :to => 'users/sessions#new', :as => :new_user_session
   #    get 'sign_out', :to => 'users/sessions#destroy', :as => :destroy_user_session
   # end
