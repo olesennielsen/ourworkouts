@@ -37,5 +37,5 @@ Ourworkouts::Application.configure do
   
   # ActionMailer Config
   config.action_mailer.default_url_options = { :host => 'example.com' }
-
+  config.i18n.available_locales = [:da, :de, 'sv-SE', 'en-US', 'es-CO', :fr]
 end

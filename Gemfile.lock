@@ -153,6 +153,8 @@ GEM
       activesupport (= 3.2.8)
       bundler (~> 1.0)
       railties (= 3.2.8)
+    rails-i18n (0.7.0)
+      i18n (~> 0.5)
     railties (3.2.8)
       actionpack (= 3.2.8)
       activesupport (= 3.2.8)
@@ -243,6 +245,7 @@ DEPENDENCIES
   omniauth-twitter
   pg
   rails
+  rails-i18n
   rolify (>= 3.2.0)
   rspec-rails (>= 2.11.0)
   sass-rails (~> 3.2.3)

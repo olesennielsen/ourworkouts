@@ -11,6 +11,7 @@
 #workout-tip {
 	font-size:115%;
 	border: solid 1px #006dcc;
+	border-radius: 5px 5px;
 	padding:15px;
 	margin-top:15px;
 }

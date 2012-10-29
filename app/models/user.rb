@@ -7,6 +7,7 @@ class User < ActiveRecord::Base
   has_many :discussion_messages, :dependent => :destroy
   has_many :event_messages, :dependent => :destroy
   has_many :authentications, :dependent => :destroy
+  has_many :group_admins, :dependent => :destroy
   
   after_create :assign_default_role
 
