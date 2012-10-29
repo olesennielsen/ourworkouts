@@ -200,7 +200,6 @@ GEM
       rack (~> 1.0)
       tilt (~> 1.1, != 1.3.0)
     sqlite3 (1.3.6)
-    state_machine (1.1.2)
     therubyracer (0.10.2)
       libv8 (~> 3.3.10)
     thin (1.5.0)
@@ -251,7 +250,6 @@ DEPENDENCIES
   sass-rails (~> 3.2.3)
   simple_form
   sqlite3
-  state_machine
   therubyracer
   thin
   turbolinks
