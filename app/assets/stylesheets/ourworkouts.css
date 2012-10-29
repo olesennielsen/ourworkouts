@@ -30,3 +30,9 @@
 .sign-up-container .btn {
 	font-size:24px;
 }
+
+.info-boxes {
+	font-size:130%;
+	font-weight:500;
+	line-height:150%;
+}
