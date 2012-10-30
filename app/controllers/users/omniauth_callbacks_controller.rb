@@ -95,7 +95,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
           user = User.new
           user.apply_google_omniauth(omniauth)
           if user.save
-            flash[:notice] = "Signed in successfully."
+            flash[:notice] = "Signed up successfully"
             user.groups << group
             GroupAdmin.create!(:user_id => user.id, :group_id => group.id)
             sign_in_and_redirect(:user, user)
@@ -114,6 +114,16 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   def email
     @user = User.new
     @user.groups.build
+  end
+  
+  def email_callback
+    user = User.create(params[:user])
+    user.add_role :group_admin
+    group = user.groups.first
+    GroupAdmin.create!(:user_id => user.id, :group_id => group.id)
+    
+    flash[:notice] = "Signed up successfully"
+    sign_in_and_redirect(:user, user)
   end
 
   def passthru    

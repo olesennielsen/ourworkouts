@@ -31,7 +31,7 @@ Ourworkouts::Application.configure do
     password: ENV["GMAIL_PASSWORD"]
   }
 
-
+  config.i18n.available_locales = [:da, :de, 'sv-SE', 'en-US', 'es-CO', :fr]
 
   # Print deprecation notices to the Rails logger
   config.active_support.deprecation = :log

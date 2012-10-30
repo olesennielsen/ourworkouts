@@ -1,5 +1,6 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
+  before_filter :set_locale
   
   rescue_from CanCan::AccessDenied do |exception|
     redirect_to root_path, :alert => exception.message
@@ -35,6 +36,10 @@ class ApplicationController < ActionController::Base
       format.html { render template: 'errors/internal_server_error', layout: 'layouts/application', status: 500 }
       format.all { render nothing: true, status: 500}
     end
+  end
+  
+  def set_locale
+    I18n.locale = params[:locale] || I18n.default_locale
   end
 
 end

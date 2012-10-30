@@ -12,8 +12,8 @@ Ourworkouts::Application.routes.draw do
 
   resources :direct_messages
   
-  resources :workout_tips
-
+  resources :workout_tips  
+  
   get '/sign_up' => "home#sign_up"
   get '/who' => "home#who"
   get '/what' => "home#what"
@@ -28,10 +28,12 @@ Ourworkouts::Application.routes.draw do
 
 
   
+
   devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks", :invitations => 'users/invitations', :registrations => "registrations" } do
   #    get 'sign_in', :to => 'users/sessions#new', :as => :new_user_session
   #    get 'sign_out', :to => 'users/sessions#destroy', :as => :destroy_user_session
-   end
+    post 'email_callback' => 'users/omniauth_callbacks#email_callback', :as => :user_registration
+  end
 
   devise_scope :user do
     get '/users/auth/:provider' => 'users/omniauth_callbacks#passthru'
@@ -42,7 +44,7 @@ Ourworkouts::Application.routes.draw do
   authenticated :user do
     root :to => 'home#dashboard'
   end
-
+  
   root :to => "home#index"
 
 end

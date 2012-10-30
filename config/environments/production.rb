@@ -79,7 +79,7 @@ Ourworkouts::Application.configure do
     password: ENV["GMAIL_PASSWORD"]
   }
 
-
+  config.i18n.available_locales = [:da, :de, 'sv-SE', 'en-US', 'es-CO', :fr]
 
   # Log the query plan for queries taking more than this (works
   # with SQLite, MySQL, and PostgreSQL)
