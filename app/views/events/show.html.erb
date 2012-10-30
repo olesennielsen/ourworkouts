@@ -4,69 +4,69 @@
 
 <br />
 <div class="row-fluid">
-	<div class="span6">
-		<p><b>Description:</b> <%= @event.description %></p>
-	</div>
+  <div class="span6">
+    <p><b>Description:</b> <%= @event.description %></p>
+  </div>
 </div>
 <br />
 <hr />
 <div class="row-fluid">
-	<div class="span6">
-		<h3>Messages</h3>
-		<br />
-		<div id="event-message-form">
-			<strong>Write new message:</strong>
-			<%= form_for EventMessage.new, :remote => true do |f| %>			
-				<%= f.text_area :body, :rows => 5 %><br />
-			
-				<%= f.hidden_field :user_id, :value => current_user.id %>
-				<%= f.hidden_field :event_id, :value => @event.id %>
-				<%= f.submit "Add message", :class => "btn btn-primary" %>		
-			<% end %>
-		</div>
-		
-		<button id="show-event-messages-form" class="btn btn-primary pull-right">Add message</button>
+  <div class="span6">
+    <h3>Messages</h3>
+    <br />
+    <div id="event-message-form">
+      <strong>Write new message:</strong>
+      <%= form_for EventMessage.new, :remote => true do |f| %>			
+      <%= f.text_area :body, :rows => 5 %><br />
+      
+      <%= f.hidden_field :user_id, :value => current_user.id %>
+      <%= f.hidden_field :event_id, :value => @event.id %>
+      <%= f.submit "Add message", :class => "btn btn-primary" %>		
+      <% end %>
+    </div>
+    
+    <button id="show-event-messages-form" class="btn btn-primary pull-right">Add message</button>
 
-		<br />
-		<br />
-		<div id="event-messages">
-			<%= render :partial => 'event_message', :collection => @messages.reverse %>
-		</div>
-	</div>
+    <br />
+    <br />
+    <div id="event-messages">
+      <%= render :partial => 'event_message', :collection => @messages.reverse %>
+    </div>
+  </div>
+  
+  <div class="span6">
+    <h3>Entries</h3>
+    <br />
+    <div id="join-button">
+      <% if @current_user_entry == 0 %>
+      <%= button_to "Join", {:action => "add_entry", :id => @event.id }, :remote => true, :id => "join", :class => "btn btn-success" %>
+      <% end %>
+</diversion>
+<table class="table">
+  <thead>
+    <th>Name</th>
+    <th>Joined on</th>
+    <th></th>
+  </thead>
+  <tbody id="entries">
+    <% @entries.each do |entry| %>
+    <tr id="<%= entry.id %>">
+      <td><%= entry.user.name %></td>
+      <td><%= entry.created_at.strftime("%B %d %H:%M") %></td>
+      <% if entry.user_id == current_user.id %>
+      <td>
+	<%= link_to remove_entry_path(:id => entry.id), :remote => true, :method => :post, :id => "remove" do %>
+	<i class="icon-remove"></i>
+	<% end %>			
 	
-	<div class="span6">
-		<h3>Entries</h3>
-		<br />
-		<div id="join-button">
-		<% if @current_user_entry == 0 %>
-			<%= button_to "Join", {:action => "add_entry", :id => @event.id }, :remote => true, :id => "join", :class => "btn btn-success" %>
-		<% end %>
-		</diversion>
-		<table class="table">
-			<thead>
-				<th>Name</th>
-				<th>Joined on</th>
-				<th></th>
-			</thead>
-			<tbody id="entries">
-				<% @entries.each do |entry| %>
-					<tr id="<%= entry.id %>">
-						<td><%= entry.user.name %></td>
-						<td><%= entry.created_at.strftime("%B %d %H:%M") %></td>
-						<% if entry.user_id == current_user.id %>
-							<td>
-							<%= link_to remove_entry_path(:id => entry.id), :remote => true, :method => :post, :id => "remove" do %>
-												<i class="icon-remove"></i>
-							<% end %>			
-													
-								
-								</td>
-						<% else %>
-							<td></td>
-						<% end %>
-					</tr>
-				<% end %>	
-			</tbody>
-		</table>
-	</div>
+	
+      </td>
+      <% else %>
+      <td></td>
+      <% end %>
+    </tr>
+    <% end %>	
+  </tbody>
+</table>
+</div>
 </div>
