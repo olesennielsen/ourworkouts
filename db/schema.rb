@@ -144,9 +144,10 @@ ActiveRecord::Schema.define(:version => 20121026103759) do
     t.datetime "updated_at", :null => false
   end
 
-  create_table "user_invitations", :id => false, :force => true do |t|
+  create_table "user_invitations", :force => true do |t|
     t.integer  "user_id"
     t.integer  "group_id"
+    t.integer  "inviter_id"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end

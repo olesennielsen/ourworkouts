@@ -7,6 +7,10 @@ class User < ActiveRecord::Base
   has_many :discussion_messages, :dependent => :destroy
   has_many :event_messages, :dependent => :destroy
   has_many :authentications, :dependent => :destroy
+
+  has_many :inviters, :class_name => "UserInvitations", :foreign_key => "inviter_id"
+  has_many :invitees, :class_name => "UserInvitations"
+  
   has_many :group_admins, :dependent => :destroy
   
   after_create :assign_default_role
@@ -79,8 +83,12 @@ class User < ActiveRecord::Base
     return User.find(id)
   end
   
+  def administrating_groups
+    return GroupAdmin.where(:user_id => self.id)
+  end
+
   def is_group_admin?
-    group_admins = GroupAdmin.where(:user_id => self.id)
+    group_admins = administrating_groups
     not group_admins.empty?
   end  
 end

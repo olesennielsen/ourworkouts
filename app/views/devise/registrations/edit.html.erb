@@ -24,7 +24,8 @@
     <div><%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
       <%= f.password_field :current_password %></div>
     <br />
-    <div><%= f.submit "Update", :class => "btn btn-primary" %></div>
+    <div><%= f.submit "Update", :class => "btn btn-primary" %>
+      <%= link_to "Back", :back, :class => "btn btn-primary" %></div>
     <% end %>
     <br />
     <h3>Cancel my account</h3>
@@ -32,29 +33,30 @@
     <p>Unhappy? <%= link_to "Cancel my account", registration_path(resource_name), :data => { :confirm => "Are you sure?" }, :method => :delete, :class => "btn btn-danger" %></p>
   </div>
   <div class="span6">
-    <% if current_user.is_group_admin? %>
-    <h2>Edit groups</h2>
+    <h2>Groups</h2>
     <br />
-    <% GroupAdmin.get_group_admins(current_user.id).each do |group_admin| %>
-    <%= link_to group_admin.group.name, edit_group_path(group_admin.group) %><br />
-    <% end %>
-    <% end %>
-    <hr>
+    <table class="table">
+      <thead>
+	<tr>
+	  <th>Group Name</th>
+	</tr>
+      </thead>
+      <tbody>
+	<% @groups.each do |group| %>
+	<tr>
+	  <td><%= link_to group.name, edit_group_path(group), :method => :get %>
+	    <% if @admin_groups.include?(group) %>(admin)<% end %></td>
+ 	  <td><%= link_to remove_user_path(:user_id => current_user.id, :group_id => group.id), :confirm => "Are you sure you want to leave the group?", :remote => true, :method => :post do %>
+	    <i class="icon-remove"></i>
+	  <% end %>
+	  </td>
+	</tr>
+	<% end %>
+      </tbody>
+    </table>
   </div>	
-  
-  <div class="span6">
-    <h2>Group invitations</h2>
-    <br />
-    <div id="join-button">
-      <% if @current_user_entry == 0 %>
-      <%= button_to "Join", {:action => "add_entry", :id => @event.id }, :remote => true, :id => "join", :class => "btn btn-success" %>
-      <% end %>
-    </div>
-
-  </div>
+  <br />
+  <%= render "group_invites" %>
 </div>
 
-<br />
 
-
-<%= link_to "Back", :back, :class => "btn btn-primary" %>

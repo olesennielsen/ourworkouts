@@ -30,7 +30,7 @@ class Ability
       
       group_admins = GroupAdmin.where(:user_id => user.id)
       group_admins.each do |group_admin|
-        can :manage, Group, :id => group_admin.group.id
+        can :manage, Group, :id => group_admin.group_id
       end
       
       can :show, Group, :id => user.group_ids

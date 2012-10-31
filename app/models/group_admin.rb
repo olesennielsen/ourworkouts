@@ -1,7 +1,7 @@
 class GroupAdmin < ActiveRecord::Base
-  belongs_to :user
-  belongs_to :group
-  
+  has_many :groups
+  has_many :users
+
   attr_accessible :user_id, :group_id
   
   def self.get_group_admins(user_id)
