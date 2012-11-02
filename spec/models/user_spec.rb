@@ -49,6 +49,11 @@ describe User do
     user_with_duplicate_email.should_not be_valid
   end
   
+  it "should have the role ordinary user after create" do
+    user = FactoryGirl.create(:user)
+    user.has_role? :ordinary_user
+  end
+  
   describe "passwords" do
 
     before(:each) do

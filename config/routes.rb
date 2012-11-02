@@ -26,19 +26,13 @@ Ourworkouts::Application.routes.draw do
   post 'remove_entry' => 'events#remove_entry'
   post 'remove_user' => 'groups#remove_user'
 
-
-  
-
-  devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks", :invitations => 'users/invitations', :registrations => "registrations" } do
-  #    get 'sign_in', :to => 'users/sessions#new', :as => :new_user_session
-  #    get 'sign_out', :to => 'users/sessions#destroy', :as => :destroy_user_session
-    post 'email_callback' => 'users/omniauth_callbacks#email_callback', :as => :user_registration
-  end
+  devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks", :invitations => 'users/invitations', :registrations => "registrations" } 
 
   devise_scope :user do
     get '/users/auth/:provider' => 'users/omniauth_callbacks#passthru'
     get '/email_sign_up' => "users/omniauth_callbacks#email"
     post 'add_user', :to => 'registrations#add_user'
+    post 'email_callback' => 'users/omniauth_callbacks#email_callback', :as => :user_registration
   end  
 
   authenticated :user do
