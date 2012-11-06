@@ -1,6 +1,6 @@
 <h2><%= @event.title %></h2>
 <br />
-<p>Organized by <strong><%= @event.group.name %></strong> and starts <strong><%= @event.start_time.strftime("%B %d %H:%M") %></strong></p>
+<p>Organized by <strong><%= @event.group.name %></strong> and <strong><%= User.find_organizer(@event.organizer).name %></strong>. The event starts at <strong><%= @event.start_time.strftime("%B %d %H:%M") %></strong></p>
 
 <br />
 <div class="row-fluid">

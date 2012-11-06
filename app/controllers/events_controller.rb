@@ -58,6 +58,7 @@ class EventsController < ApplicationController
     respond_to do |format|
       if @event.save
         @event.update_attributes(:organizer => current_user)
+        Entry.create!(:event_id => @event.id, :user_id => current_user.id)
         format.html { redirect_to @event, notice: 'Event was successfully created.' }
         format.json { render json: @event, status: :created, location: @event }
       else
