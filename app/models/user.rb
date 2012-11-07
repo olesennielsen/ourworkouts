@@ -90,5 +90,5 @@ class User < ActiveRecord::Base
   def is_group_admin?
     group_admins = administrating_groups
     not group_admins.empty?
-  end  
+  end
 end
