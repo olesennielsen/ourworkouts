@@ -1,0 +1,27 @@
+<h2>Sign up</h2>
+<br />
+
+<%= nested_form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
+  <%= devise_error_messages! %>
+
+	<%= f.fields_for :groups, @group do |groups_form| %>
+		<%= groups_form.label :name, "Group name" %>
+		<%= groups_form.text_field :name %>
+	<% end %>
+
+<p><%= f.label :name %><br />
+<%= f.text_field :name %></p>
+
+  <div><%= f.label :email %><br />
+  <%= f.email_field :email %></div>
+
+  <div><%= f.label :password %><br />
+  <%= f.password_field :password %></div>
+
+  <div><%= f.label :password_confirmation %><br />
+  <%= f.password_field :password_confirmation %></div>
+
+  <div><%= f.submit "Sign up", :class => "btn btn-primary" %></div>
+<% end %>
+
+<%= render "devise/shared/links" %>
