@@ -5,7 +5,6 @@
       <%= link_to 'Admin', groups_path, :class => "btn btn-primary" %>
 			<%= link_to 'Edit account and groups', edit_user_registration_path, :class => "btn btn-primary" %>
     <% elsif current_user.has_role? :group_admin %>
-    <%= link_to 'Invite', new_user_invitation_path, :class => "btn btn-primary" %>
 			<%= link_to 'Edit account and groups', edit_user_registration_path, :class => "btn btn-primary" %>
 		<% elsif current_user.has_role? :ordinary_user %>
 			<%= link_to 'Edit account', edit_user_registration_path, :class => "btn btn-primary" %>
