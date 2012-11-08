@@ -111,6 +111,7 @@ class GroupsController < ApplicationController
     end
     
     respond_to do |format|
+      format.html { redirect_to edit_user_registration_path(current_user) }
       format.js
     end
   end
