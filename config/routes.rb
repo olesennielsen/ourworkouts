@@ -26,7 +26,7 @@ Ourworkouts::Application.routes.draw do
 
 
   devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks", :invitations => 'users/invitations', :registrations => 'users/registrations' } do
-    post 'email_callback' => 'users/omniauth_callbacks#email_callback', :as => :user_registration
+    post 'email_callback' => 'users/omniauth_callbacks#email_callback'
     get '/users/auth/:provider' => 'users/omniauth_callbacks#passthru'
     get '/email_sign_up' => "users/omniauth_callbacks#email"
     post 'add_user', :to => 'users/registrations#add_user'
