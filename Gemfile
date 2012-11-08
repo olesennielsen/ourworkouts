@@ -2,6 +2,7 @@ source 'https://rubygems.org'
 ruby '1.9.3'
 gem 'heroku'
 gem 'rails'
+
 group :assets do
   gem 'jquery-ui-rails'
   gem 'sass-rails',   '~> 3.2.3'
@@ -11,7 +12,18 @@ end
 
 group :development, :test do
   gem 'sqlite3'
+  gem 'rspec-rails'
+  gem 'factory_girl_rails'
 end
+
+group :test do
+  gem "email_spec"
+  gem 'faker'
+  gem 'capybara'
+  gem 'guard-rspec'
+  gem 'launchy'
+end
+
 group :production do
   gem 'pg'
   gem 'thin'
@@ -20,9 +32,6 @@ end
 gem 'rails-i18n'
 gem 'turbolinks'
 gem 'jquery-rails'
-gem "rspec-rails", ">= 2.11.0", :group => [:development, :test]
-gem "capybara", ">= 1.1.2", :group => :test
-gem "email_spec", ">= 1.2.1", :group => :test
 gem "bootstrap-sass"
 gem "devise", ">= 2.1.2"
 gem "devise_invitable", ">= 1.0.3"
