@@ -27,7 +27,7 @@
 			<tbody>
 				<% @users.each do |user| %>
 				<tr id="<%= user.id %>">
-					<td><%= user.name %></td>
+					<td><%= link_to user.name, user %></td>
 					<td><%= user.email %></td>
 					<td>
 						<%= link_to remove_user_path(:user_id => user.id, :group_id => @group.id), :confirm => "Do you want to remove this person from your group?", :remote => true, :method => :post do %>
