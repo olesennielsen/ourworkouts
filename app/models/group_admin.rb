@@ -11,4 +11,8 @@ class GroupAdmin < ActiveRecord::Base
   def self.get_by_group(group_id)
     GroupAdmin.where(:group_id => group_id)
   end
+  
+  def user
+    User.find(self.user_id)
+  end
 end
