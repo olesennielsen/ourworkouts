@@ -33,7 +33,7 @@
 									<p>Unhappy? <%= link_to "Cancel my account", registration_path(resource_name), :data => { :confirm => "Are you sure?" }, :method => :delete, :class => "btn btn-danger" %></p>
 								</div>
 								<div class="span6">
-									<% unless current_user.has_role? :ordinary_user %>
+									
 									<h2>Groups</h2>
 									<br />
 									<table class="table">
@@ -45,19 +45,25 @@
 										<tbody>
 											<% @groups.each do |group| %>
 											<tr>
-												<td><%= link_to group.name, edit_group_path(group), :method => :get %>
-													<% if @admin_groups.include?(group) %>(admin)<% end %></td>
+												<td><% if current_user.has_role? :ordinary_user %> 
+															<%= group.name %>
+														<% else %>													
+															<%= link_to group.name, edit_group_path(group), :method => :get %>
+															<% if @admin_groups.include?(group) %>(admin)<% end %>
+														<% end %>
+												</td>
+													
+													<% unless current_user.has_role? :ordinary_user %>
 													<td><%= link_to remove_user_path(:user_id => current_user.id, :group_id => group.id), :confirm => "Are you sure you want to leave the group?", :method => :post do %>
 														<i class="icon-remove"></i>
 														<% end %>
+													<% end %>
 													</td>
 												</tr>
 												<% end %>
 											</tbody>
 										</table>
-										<% end %>	
+											
 									<br />
 									<%= render "group_invites" %>
 								</div>
-
-
