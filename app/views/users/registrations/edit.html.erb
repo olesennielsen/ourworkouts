@@ -45,15 +45,15 @@
 										<tbody>
 											<% @groups.each do |group| %>
 											<tr>
-												<td><% if current_user.has_role? :ordinary_user %> 
-															<%= group.name %>
+												<td><% if can? :edit, group %>
+													 		<%= link_to group.name, edit_group_path(group), :method => :get %>
+															<% if @admin_groups.include?(group) %>(admin)<% end %>															
 														<% else %>													
-															<%= link_to group.name, edit_group_path(group), :method => :get %>
-															<% if @admin_groups.include?(group) %>(admin)<% end %>
+															<%= group.name %>
 														<% end %>
 												</td>
 													
-													<% unless current_user.has_role? :ordinary_user %>
+													<% if can? :delete, group %>
 													<td><%= link_to remove_user_path(:user_id => current_user.id, :group_id => group.id), :confirm => "Are you sure you want to leave the group?", :method => :post do %>
 														<i class="icon-remove"></i>
 														<% end %>
