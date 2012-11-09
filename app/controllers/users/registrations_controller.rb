@@ -1,4 +1,5 @@
-class Users::RegistrationsController < Devise::RegistrationsController
+class User::RegistrationsController < Devise::RegistrationsController
+
   def new
     super
   end
@@ -16,7 +17,6 @@ class Users::RegistrationsController < Devise::RegistrationsController
   end
     
   def edit
-
     @admin_groups = Group.joins("INNER JOIN group_admins ON group_admins.group_id = groups.id AND user_id = #{current_user.id}")
     @groups = current_user.groups
     @invitations = current_user.invitees
