@@ -26,7 +26,8 @@ puts 'New user created: ' << user3.name
 
 user.add_role :admin
 GroupAdmin.create! :user_id => 1, :group_id => 1
-user2.add_role :ordinary_user
+user2.add_role :group_admin
+GroupAdmin.create! :user_id => 2, :group_id => 1
 user3.add_role :ordinary_user
 
 user.groups << group
