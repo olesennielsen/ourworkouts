@@ -1,4 +1,4 @@
-class User::InvitationsController < Devise::InvitationsController
+class Users::InvitationsController < Devise::InvitationsController
 
   def new
     @groups = current_user.groups
