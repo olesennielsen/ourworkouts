@@ -11,8 +11,8 @@ $(document).ready(function() {
 	format: "dd-mm-yyyy"});
     $('#end_date').datepicker({
 	format: "dd-mm-yyyy"});
-    $('.end_time').timepicker();
-    $('.start_time').timepicker();
+    $('#end_time').timepicker();
+    $('#start_time').timepicker();
 
     var calendar = $('#calendar').fullCalendar({
 	editable: true,        
@@ -55,6 +55,8 @@ $(document).ready(function() {
 		calendar view using twitter-bootstraps modal plugin */
 	select: function(start, end, allDay) {
 	    $('#myModal').modal();
+	    document.getElementById('start_time').value = $.fullCalendar.formatDate(start, "HH:mm");
+	    document.getElementById('end_time').value = $.fullCalendar.formatDate(end, "HH:mm");
 	    document.getElementById('start_date').value = (start.getDate() + "-" + (start.getMonth()+1) + "-" + start.getFullYear());
 	    document.getElementById('end_date').value = (end.getDate() + "-" + (end.getMonth() + 1) + "-" + end.getFullYear()); 
 	},
