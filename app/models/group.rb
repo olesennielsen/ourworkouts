@@ -6,4 +6,6 @@ class Group < ActiveRecord::Base
   has_many :user_invitations
   has_many :group_admins
   attr_accessible :description, :name, :public
+  
+  validates :name, :presence => true
 end

@@ -2,8 +2,9 @@
 <div class="row-fluid">
 	<div class="span4">
 		<%= simple_form_for(@group) do |f| %>
-		<%= f.error_notification %>
-
+		<div id="error-explanation">	
+			<%= f.error_notification %>
+		</div>
 		<div class="form-inputs">
 			<%= f.input :name %>
 			<%= f.input :description %>

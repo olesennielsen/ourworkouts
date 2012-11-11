@@ -27,6 +27,8 @@ class User < ActiveRecord::Base
   # Setup accessible (or protected) attributes for your model
   attr_accessible :name, :email, :password, :password_confirmation, :remember_me, :confirmed_at, :group_id, :groups_attributes  
   accepts_nested_attributes_for :groups, :allow_destroy => true
+  
+  validates :name, :presence => true
 
   def assign_default_role
     add_role(:ordinary_user)
