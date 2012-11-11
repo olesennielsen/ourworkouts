@@ -1,16 +1,16 @@
+<br />
 <%= nested_form_for(@discussion) do |f| %>
   <% if @discussion.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@discussion.errors.count, "error") %> prohibited this discussion from being saved:</h2>
-
-      <ul>
+		<div class="row-fluid">
+    <div id="error_explanation" class="span6">
+      <h4><%= pluralize(@discussion.errors.count, "error") %> prohibited this discussion from being saved:</h4>
       <% @discussion.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
+        <p><%= msg %></p>
       <% end %>
-      </ul>
     </div>
+		</div>
   <% end %>
-
+	<br />
   <div class="field">
     <%= f.label :title %>
     <%= f.text_field :title %>

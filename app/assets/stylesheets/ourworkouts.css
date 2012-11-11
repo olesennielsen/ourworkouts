@@ -36,3 +36,8 @@
 	font-weight:500;
 	line-height:150%;
 }
+
+#error_explanation {
+	background-color:#F8F8F8;
+	padding:15px;
+}

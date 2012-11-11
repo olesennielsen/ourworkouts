@@ -4,6 +4,10 @@ class DirectMessage < ActiveRecord::Base
   
   attr_accessible :body, :sender_id, :recipient_id, :created_at
   
+  validates :body, :presence => true
+  validates :recipient_id, :presence => true
+  validates :sender_id, :presence => true
+  
   def self.get_direct_messages(user)
     direct_messages = Hash.new
     

@@ -47,7 +47,8 @@ class DiscussionsController < ApplicationController
   # POST /discussions
   # POST /discussions.json
   def create
-    #@discussion = Discussion.new(params[:discussion])
+    #@discussion = Discussion.new(params[:discussion]) 
+    @groups = current_user.groups
 
     respond_to do |format|
       if @discussion.save
@@ -64,7 +65,7 @@ class DiscussionsController < ApplicationController
   # PUT /discussions/1.json
   def update
     #@discussion = Discussion.find(params[:id])
-
+    @groups = current_user.groups
     respond_to do |format|
       if @discussion.update_attributes(params[:discussion])
         format.html { redirect_to @discussion, notice: 'Discussion was successfully updated.' }
