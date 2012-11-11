@@ -22,9 +22,12 @@ $(document).ready(function() {
             right: 'month,agendaWeek'
         },
 	firstDay: 1,
-        defaultView: 'month',
+        defaultView: 'agendaWeek',
         height: 500,
         slotMinutes: 15,
+	firstHour: 8,
+	minTime: 6,
+	maxTime: 20,
         
         loading: function(bool){
             if (bool) 
