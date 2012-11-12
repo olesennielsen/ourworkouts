@@ -46,3 +46,4 @@ gem "omniauth-twitter"
 gem 'omniauth-google-oauth2'
 gem 'omniauth-linkedin'
 gem 'oauth2'
+gem "lazy_high_charts"
