@@ -4,6 +4,9 @@ class GroupAdmin < ActiveRecord::Base
 
   attr_accessible :user_id, :group_id
   
+  validates :user_id, :presence => true
+  validates :group_id, :presence => true
+  
   def self.get_group_admins(user_id)
     GroupAdmin.where(:user_id => user_id)
   end

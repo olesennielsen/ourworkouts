@@ -6,6 +6,10 @@ class Discussion < ActiveRecord::Base
   attr_accessible :title, :user_id, :group_id, :discussion_messages_attributes
   accepts_nested_attributes_for :discussion_messages, :allow_destroy => true
   
+  validates :title, :presence => true
+  validates :group_id, :presence => true
+  validates :user_id, :presence => true
+  
   def last_message
     return self.discussion_messages.last.body
   end

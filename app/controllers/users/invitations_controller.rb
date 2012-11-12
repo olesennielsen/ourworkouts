@@ -6,6 +6,7 @@ class Users::InvitationsController < Devise::InvitationsController
   end
 
   def create
+    @groups = current_user.groups
     new_user_group_id = resource_params["groups"]
     new_user_group = Group.find_by_id(new_user_group_id)
     new_user_email = resource_params["email"]

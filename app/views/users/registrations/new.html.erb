@@ -2,8 +2,9 @@
 <br />
 
 <%= nested_form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
-  <%= devise_error_messages! %>
-
+  <div id="error-explanation">
+	<%= devise_error_messages! %>
+	</div>
 	<%= f.fields_for :groups, @group do |groups_form| %>
 		<%= groups_form.label :name, "Group name" %>
 		<%= groups_form.text_field :name %>

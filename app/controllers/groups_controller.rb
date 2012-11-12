@@ -25,17 +25,6 @@ class GroupsController < ApplicationController
     end
   end
 
-  # GET /groups/new
-  # GET /groups/new.json
-  def new
-    @group = Group.new
-    @users = User.all
-    respond_to do |format|
-      format.html # new.html.erb
-      format.json { render json: @group }
-    end
-  end
-
   # GET /groups/1/edit
   def edit
     @group = Group.find(params[:id])
@@ -62,7 +51,7 @@ class GroupsController < ApplicationController
   # PUT /groups/1.json
   def update
     @group = Group.find(params[:id])
-
+    @users = @group.users
     respond_to do |format|
       if @group.update_attributes(params[:group])
         format.html { redirect_to edit_user_registration_path, notice: 'Group was successfully updated.' }

@@ -10,6 +10,12 @@ class Event < ActiveRecord::Base
 
   before_validation :make_start_time, :make_end_time
   
+  validates :title, :presence => true
+  validates :start_time, :presence => true
+  validates :end_time, :presence => true
+  validates :organizer, :presence => true
+  validates :group_id, :presence => true
+  
   def as_json(options = {})
     {
       :id => self.id,
