@@ -20,8 +20,8 @@ class HomeController < ApplicationController
       f.options[:chart][:type] = "column"
       f.options[:chart][:height] = 250
       f.options[:tooltip][:pointFormat] = "<span style='color:{series.color}'>Minutes of Joy</span>: <b>{point.y}</b><br/>"
-      f.options[:title][:text] = "TimeLine for: " + current_user.email
-      f.options[:plotOptions][:pointStart] = DateTime.now.to_date.to_time.to_i * 1000
+      f.options[:title][:text] = current_user.email
+      f.options[:rangeSelector] = { :enabled => false, :selected => 1, :inputEnabled => false }
       f.series(:name=>current_user.name, :data=> data_array )
     end 
 
