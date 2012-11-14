@@ -15,11 +15,14 @@ class HomeController < ApplicationController
     
     # the timeline data is handled exclusively by application_helper
     
-    data_array = [[1351728000000,12908846],[1351814400000,21406152],[1352073600000,18903032],[1352160000000,13389863],[1352246400000,28344598],[1352332800000,37719477],[1352419200000,33210928]]
+    data_array = current_user.event_data
     @timeline = LazyHighCharts::HighChart.new('graph') do |f|
-      f.options[:chart][:defaultSeriesType] = "column"
+      f.options[:chart][:type] = "column"
       f.options[:chart][:height] = 250
-      f.options[:title][:text] = "TimeLine for user " + current_user.email
+      f.options[:tooltip][:pointFormat] = "<span style='color:{series.color}'>Minutes of Joy</span>: <b>{point.y}</b><br/>"
+      f.options[:title][:text] = "TimeLine for: " + current_user.email
+      f.options[:plotOptions][:areaspline][:pointInterval] = 1.day.seconds * 1000
+      f.options[:plotOptions][:areaspline][:pointStart] = DateTime.now.to_date.to_time.to_i * 1000
       f.series(:name=>current_user.name, :data=> data_array )
     end 
 

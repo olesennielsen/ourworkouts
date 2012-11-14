@@ -73,6 +73,31 @@ class User < ActiveRecord::Base
     authentications.build(:provider => omniauth['provider'], :uid => omniauth['uid'])
   end
 
+  def event_data
+    events = self.events.sort_by! {|u| u.start_time}
+    
+    events.keep_if{|e| !e.all_day}
+    data = []
+
+    events.first.start_time.to_date.upto(events.last.start_time.to_date) do |day|
+      data << [day, 0]
+    end
+    
+    events.each do |e|
+      data.each do |d|
+        if d[0] == e.start_time.to_date then
+          d[1] += e.duration
+        end
+      end
+    end
+
+    data.each do |d|
+      d[0] = (d[0]+2.hours).to_time.to_i * 1000
+    end
+    return data
+  end
+
+
   def password_required?
     (authentications.empty? || !password.blank?) && super
   end

@@ -52,4 +52,12 @@ class Event < ActiveRecord::Base
       self.start_time = synthesize_time(@start_date, @start_hour_minute)
     end
   end
+  
+  def start_date_unix
+    self.start_time.to_date.to_time.to_i * 1000
+  end
+
+  def duration
+    (self.end_time - self.start_time) / 60
+  end
 end
