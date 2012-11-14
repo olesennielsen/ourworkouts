@@ -1,5 +1,7 @@
 <div class="visible-desktop"></div>
+<% if !current_user.events.empty? %>
 <%= high_stock("my_id", @timeline) %>
+<% end %>
 
 <div class="row-fluid">
   <div class="span6">
