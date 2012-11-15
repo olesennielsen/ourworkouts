@@ -28,7 +28,7 @@ class User < ActiveRecord::Base
   attr_accessible :name, :email, :password, :password_confirmation, :remember_me, :confirmed_at, :group_id, :groups_attributes  
   accepts_nested_attributes_for :groups, :allow_destroy => true
   
-  validates :name, :presence => true
+  #validates :name, :presence => true
 
   def assign_default_role
     add_role(:ordinary_user)
@@ -74,32 +74,40 @@ class User < ActiveRecord::Base
   end
 
   def event_data
-    if self.events.empty? then
-      return [] 
+
+    sessions = []
+
+    self.groups.each do |g|
+      g.events.each do |e|
+        sessions << e
+      end
+    end
+
+    if sessions.empty? then
+      return []
     else
-      events = self.events.sort_by! {|u| u.start_time}
-      
-      events.keep_if{|e| !e.all_day}
+      sessions = sessions.sort_by! {|u| u.start_time}
+      sessions.keep_if{|e| !e.all_day}
       data = []
 
-      events.first.start_time.to_date.upto(events.last.start_time.to_date) do |day|
+      sessions.first.start_time.to_date.upto(sessions.last.start_time.to_date) do |day|
         data << [day, 0]
       end
       
-      events.each do |e|
+      sessions.each do |e|
         data.each do |d|
           if d[0] == e.start_time.to_date then
             d[1] += e.duration
           end
         end
       end
-
       data.each do |d|
-        d[0] = (d[0]+2.hours).to_time.to_i * 1000
+      d[0] = (d[0]+2.hours).to_time.to_i * 1000
       end
       return data
     end
   end
+
 
 
   def password_required?

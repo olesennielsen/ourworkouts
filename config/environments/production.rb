@@ -61,7 +61,7 @@ Ourworkouts::Application.configure do
   # Send deprecation notices to registered listeners
   config.active_support.deprecation = :notify
 
-  config.action_mailer.default_url_options = { :host => 'example.com' }
+  config.action_mailer.default_url_options = { :host => 'http://localhost:3000/' }
   # ActionMailer Config
   # Setup for production - deliveries, no errors raised
   config.action_mailer.delivery_method = :smtp
@@ -75,8 +75,8 @@ Ourworkouts::Application.configure do
     domain: "example.com",
     authentication: "plain",
     enable_starttls_auto: true,
-    user_name: ENV["GMAIL_USERNAME"],
-    password: ENV["GMAIL_PASSWORD"]
+    user_name: "olesennielsen@gmail.com",
+    password: "evaBetty"
   }
 
   config.i18n.available_locales = [:da, :de, 'sv-SE', 'en-US', 'es-CO', :fr]

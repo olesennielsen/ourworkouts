@@ -1,7 +1,5 @@
 <div class="visible-desktop"></div>
-<% if !current_user.events.empty? %>
 <%= high_stock("my_id", @timeline) %>
-<% end %>
 
 <div class="row-fluid">
   <div class="span6">
@@ -44,7 +42,7 @@
 
 <div class="row-fluid">
   <div class="span6">
-    <h2>5 <%= t(:latest) %> <%= t(:messages) %></h2>
+    <h2><%= t(:messages) %></h2>
     <hr />
     <% @direct_messages.each do |direct_message| %>
     <p><%= User.find_sender_receiver(direct_message.sender_id).name %>: <strong><%= direct_message.body %></strong>
@@ -54,7 +52,7 @@
     <p class="pull-right"><%= link_to t(:Direct_message), direct_messages_path, :class => "btn btn-primary" %></p>
   </div>
   <div class="span6">
-    <h2>5 <%= t(:latest) %> <%= t(:discussions) %> <%= t(:updates) %></h2>
+    <h2><%= t(:discussion) %></h2>
     <hr />
     <table class="table">
       <thead>
