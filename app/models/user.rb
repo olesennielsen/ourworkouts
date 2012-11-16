@@ -93,4 +93,13 @@ class User < ActiveRecord::Base
     group_admins = administrating_groups
     not group_admins.empty?
   end
+  
+  def authenticated?(provider)
+    authentication = Authentication.where(:user_id => self.id, :provider => provider)
+    return ! authentication.empty?
+  end
+  
+  def number_of_authentications
+    return Authentication.where(:user_id => self.id).count
+  end
 end
