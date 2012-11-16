@@ -28,7 +28,7 @@ class User < ActiveRecord::Base
   attr_accessible :name, :email, :password, :password_confirmation, :remember_me, :confirmed_at, :group_id, :groups_attributes  
   accepts_nested_attributes_for :groups, :allow_destroy => true
   
-  validates :name, :presence => true
+  #validates :name, :presence => true
 
   def assign_default_role
     add_role(:ordinary_user)
@@ -73,6 +73,41 @@ class User < ActiveRecord::Base
     authentications.build(:provider => omniauth['provider'], :uid => omniauth['uid'])
   end
 
+  def event_data
+
+    sessions = []
+
+    self.groups.each do |g|
+      g.events.each do |e|
+        sessions << e
+      end
+    end
+
+    if sessions.empty? then
+      return []
+    else
+      sessions = sessions.sort_by! {|u| u.start_time}
+      sessions.keep_if{|e| !e.all_day}
+      data = []
+
+      sessions.first.start_time.to_date.upto(sessions.last.start_time.to_date) do |day|
+        data << [day, 0]
+      end
+      
+      sessions.each do |e|
+        data.each do |d|
+          if d[0] == e.start_time.to_date then
+            d[1] += e.duration
+          end
+        end
+      end
+      data.each do |d|
+      d[0] = (d[0]+2.hours).to_time.to_i * 1000
+      end
+      return data
+    end
+  end
+
   def password_required?
     (authentications.empty? || !password.blank?) && super
   end
@@ -93,7 +128,7 @@ class User < ActiveRecord::Base
     group_admins = administrating_groups
     not group_admins.empty?
   end
-  
+    
   def authenticated?(provider)
     authentication = Authentication.where(:user_id => self.id, :provider => provider)
     return ! authentication.empty?
@@ -103,3 +138,4 @@ class User < ActiveRecord::Base
     return Authentication.where(:user_id => self.id).count
   end
 end
+

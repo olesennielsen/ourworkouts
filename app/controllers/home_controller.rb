@@ -1,4 +1,6 @@
 class HomeController < ApplicationController
+  require 'open-uri'
+  require 'json'
   def index
     @tip = WorkoutTip.where(:tip_date => Date.today).first
   end
@@ -13,6 +15,16 @@ class HomeController < ApplicationController
     
     # the timeline data is handled exclusively by application_helper
     
+    data_array = current_user.event_data
+    @timeline = LazyHighCharts::HighChart.new('graph') do |f|
+      f.options[:chart][:type] = "column"
+      f.options[:chart][:height] = 250
+      f.options[:tooltip][:pointFormat] = "<span style='color:{series.color}'>Minutes of Joy</span>: <b>{point.y}</b><br/>"
+      f.options[:title][:text] = current_user.email
+      f.options[:rangeSelector] = { :enabled => false, :selected => 1, :inputEnabled => false }
+      f.series(:name=>current_user.name, :data=> data_array )
+    end 
+
     # rest of the page
     @tip = WorkoutTip.where(:tip_date => Date.today).first
     @direct_messages = DirectMessage.where(:recipient_id => current_user).order('created_at DESC').limit(5)

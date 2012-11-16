@@ -11,8 +11,8 @@ $(document).ready(function() {
 	format: "dd-mm-yyyy"});
     $('#end_date').datepicker({
 	format: "dd-mm-yyyy"});
-    $('.end_time').timepicker();
-    $('.start_time').timepicker();
+    $('#end_time').timepicker();
+    $('#start_time').timepicker();
 
     var calendar = $('#calendar').fullCalendar({
 	editable: true,        
@@ -22,9 +22,12 @@ $(document).ready(function() {
             right: 'month,agendaWeek'
         },
 	firstDay: 1,
-        defaultView: 'month',
+        defaultView: 'agendaWeek',
         height: 500,
         slotMinutes: 15,
+	firstHour: 8,
+	minTime: 6,
+	maxTime: 20,
         
         loading: function(bool){
             if (bool) 
@@ -52,6 +55,8 @@ $(document).ready(function() {
 		calendar view using twitter-bootstraps modal plugin */
 	select: function(start, end, allDay) {
 	    $('#myModal').modal();
+	    document.getElementById('start_time').value = $.fullCalendar.formatDate(start, "h:mmtt");
+	    document.getElementById('end_time').value = $.fullCalendar.formatDate(end, "h:mmtt");
 	    document.getElementById('start_date').value = (start.getDate() + "-" + (start.getMonth()+1) + "-" + start.getFullYear());
 	    document.getElementById('end_date').value = (end.getDate() + "-" + (end.getMonth() + 1) + "-" + end.getFullYear()); 
 	},
