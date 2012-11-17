@@ -39,15 +39,24 @@
 
 #error_explanation {
 	background-color:#F8F8F8;
-	padding:15px;
+	padding:16px;
 }
 
 .login-images {
-	width:60px;
-	height:60px;
+	width:64px;
+	height:64px;
 }
 
 .dashboard-icon {
 	width:256px;
 	height:256px;
+}
+
+.sport-pictogram {
+	width:32px;
+	height:32px;
+}
+
+.public-group-name {
+	font-size:200%;
 }

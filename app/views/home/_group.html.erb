@@ -1,13 +1,15 @@
 <hr />
 <div class="row-fluid" id="<%= group.id %>">
-  <div class="span5">
-		<h3><%= group.name %></h3>
+  <div class="span3">
+		<p class="public-group-name"><%= group.name %></p>
+	</div>
+	<div class="span5">
 		<p><%= group.description %></p>
 	</div>	
-	<div class="span4">
+	<div class="span2">
 		<%= show_sports(group) %>
 	</div>
-	<div class="span3">
+	<div class="span2">
 		<p>Apply to this group</p>
 	</div>
 </div>
