@@ -1,0 +1,6 @@
+<h2>Change organizer</h2>
+<br />
+<%= form_for(@event, :url => update_organizer_path(:event_id => @event.id)) do |f| %>
+	<%= f.collection_select(:organizer, @entries, :id, :name) %><br /><br />
+	<%= f.submit "Change organizer", :class => "btn btn-primary" %>
+<% end %>

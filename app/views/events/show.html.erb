@@ -54,11 +54,17 @@
       <td><%= entry.user.name %></td>
       <td><%= entry.created_at.strftime("%B %d %H:%M") %></td>
       <% if entry.user_id == current_user.id %>
-      <td>
-	<%= link_to remove_entry_path(:id => entry.id), :remote => true, :method => :post, :id => "remove" do %>
-	<i class="icon-remove"></i>
-	<% end %>			
-      </td>
+				<td>
+				<% if entry.user_id == entry.event.organizer %>
+					<%= link_to remove_entry_path(:id => entry.id), :method => :post, :id => "remove" do %>
+						<i class="icon-remove"></i>
+					<% end %>
+				<% else %>
+						<%= link_to remove_entry_path(:id => entry.id), :remote => true, :method => :post, :id => "remove" do %>
+							<i class="icon-remove"></i>
+						<% end %>			
+				<% end %>
+				</td>
       <% else %>
       <td></td>
       <% end %>
