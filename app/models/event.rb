@@ -15,6 +15,13 @@ class Event < ActiveRecord::Base
   validates :end_time, :presence => true
   validates :organizer, :presence => true
   validates :group_id, :presence => true
+  validate :ends_at_later_than_starts_at
+  
+  def ends_at_later_than_starts_at
+    if self.end_time < self.start_time 
+      errors.add(:ends_at_later_than_starts_at, "You specify a start time later than end time")
+    end
+  end
   
   def as_json(options = {})
     {

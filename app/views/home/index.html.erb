@@ -30,16 +30,22 @@
 
 <div class="row-fluid">
   <div class="span4" id="sub-fields">
+	<div class="hero-unit">
 		<h1><%= link_to t(:What) + "?", what_path %></h1>
 		<p class="info-boxes"><%= t(:group_based) %></p>
 	</div>	
-	<div class="span4" id="sub-fields">
-		<h1><%= link_to t(:Who) + "?", who_path %></h1>
-		<p class="info-boxes">OK Denseln, AGF, Novo Nordisk, AP Moller Maersk</p>
 	</div>
 	<div class="span4" id="sub-fields">
+			<div class="hero-unit">
+		<h1><%= link_to t(:Who) + "?", who_path %></h1>
+		<p class="info-boxes">Communities and Cooporations</p>
+	</div>
+	</div>
+	<div class="span4" id="sub-fields">
+			<div class="hero-unit">
 		<h1><%= link_to t(:How) + "?", how_path %></h1>
-		<p class="info-boxes"><%= t(:sign_up) %><br /><%= t(:invite_friends) %><br /><%= t(:work_out) %></p>
+		<p class="info-boxes"><%= t(:sign_up) %>, <%= t(:invite_friends) %>, <%= t(:work_out) %></p>
+	</div>
 	</div>
 </div>
 <br />
