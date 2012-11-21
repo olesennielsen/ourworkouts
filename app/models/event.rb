@@ -1,7 +1,7 @@
 class Event < ActiveRecord::Base
   belongs_to :group
-  has_many :event_messages
-  has_many :entries
+  has_many :event_messages, :dependent => :destroy
+  has_many :entries, :dependent => :destroy
   has_many :users, :through => :entries  
 
   attr_accessor :end_hour_minute, :end_date, :start_hour_minute, :start_date
@@ -66,5 +66,18 @@ class Event < ActiveRecord::Base
 
   def duration
     (self.end_time - self.start_time) / 60
+  end
+  
+  def number_of_entries
+    return Entry.where(:event_id => self.id).count
+  end
+  
+  def entered_users
+    @users = []
+    entries = self.entries
+    entries.each do |entry|
+      @users.push(entry.user)
+    end
+    return @users
   end
 end

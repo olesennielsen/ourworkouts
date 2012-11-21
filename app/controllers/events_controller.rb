@@ -125,12 +125,47 @@ class EventsController < ApplicationController
   
   def remove_entry
     @entry = Entry.find(params[:id])
+    
+    if @entry.user == User.find_organizer(@entry.event.organizer)
+      if @entry.event.number_of_entries == 1 # only organizer that is entried
+        @entry.event.destroy
+        redirect_to root_path, notice: 'Event was deleted because you as the organizer was the only one who had joined'
+        return
+      else
+        redirect_to edit_organizer_path(:event_id => @entry.event.id)
+        return
+      end      
+    end
+    
     authorize! :remove_entry, @entry
     @entry.destroy
     
     respond_to do |format|
       format.html { redirect_to event_path(params[:id]) }
       format.js
+    end
+  end
+  
+  def edit_organizer
+    @event = Event.find(params[:event_id])    
+    @entries = @event.entered_users
+    @entries.delete_if { |entry| entry.id == @event.organizer }
+  end
+  
+  def update_organizer
+    @event = Event.find(params[:event_id])    
+    
+    @entry = Entry.where(:user_id => @event.organizer, :event_id => @event.id).first
+     
+    respond_to do |format|
+      if  @event.update_attributes(:organizer => params[:event][:organizer])
+        @entry.destroy
+        format.html { redirect_to root_path, notice: 'Organizer successfully changed' }
+        format.json { head :no_content }
+      else
+        format.html { redirect_to edit_organizer_path(:event_id => @event), notice: "I'm sorry something went wrong. Please try again" }
+        format.json { render json: @event.errors, status: :unprocessable_entity }
+      end
     end
   end
 end
