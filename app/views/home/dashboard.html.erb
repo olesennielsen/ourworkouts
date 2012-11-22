@@ -2,19 +2,80 @@
 <%= high_stock("my_id", @timeline) %>
 
 <div class="row-fluid">
-	<div class="span4">
-		<center>
-    <%= link_to image_tag("calendar.png", :alt => "Calendar", :title => "Calendar", :class => "dashboard-icon"), events_path %>
-  	</center>
-	</div>
-  <div class="span4">
-		<center>
-    <%= link_to image_tag("messages.png", :alt => "Direct Messages", :title => "Direct Messages", :class => "dashboard-icon"), direct_messages_path %>
-		</center>
+  <div class="span6">
+    <h2><%= t(:todays) %> <%= t(:workouts) %></h2>
+    <hr />
+    <table class="table">
+      <thead>
+	<tr>
+	  <th><%= t(:Name) %></th>
+	  <th><%= t(:Time) %></th>
+	  <th><%= t(:Organizer) %></th>
+	</tr>
+      </thead>
+      <tbody>
+	<% @events.each do |event| %>
+	<tr>
+	  <td><%= event.title %></td>
+	  <td><%= event.start_time.strftime("%H:%M") %></td>
+	  <td><%= User.find_organizer(event.organizer).name %></td>
+	</tr>
+	<% end %>
+      </tbody>
+    </table>
+    <br />
+    <br />
+    <p class="pull-right"><%= link_to t(:Calendar), events_path, :class => "btn btn-primary" %></p>
+    <% %>
   </div>
-  <div class="span4">
-		<center>
-    <%= link_to image_tag("discussion.png", :alt => "Discussions", :title => "Discussions", :class => "dashboard-icon"), discussions_path %>
-  	</center>
-	</div>
+  <div class="span6">
+    <h2><%= t(:workout_tip_of_the_day) %></h2>
+    <hr />
+    <%= render :partial => "workout_tip", :object => @tip %>
+    <br />
+    <br />
+    <p class="pull-right"><%= link_to t(:All) + " " + t(:workout) + " " + t(:tip), workout_tips_path, :class => "btn btn-primary" %></p>
+  </div>
+</div>
+<br />
+<br />
+
+<div class="row-fluid">
+  <div class="span6">
+    <h2><%= t(:messages) %></h2>
+    <hr />
+    <% @direct_messages.each do |direct_message| %>
+    <p><%= User.find_sender_receiver(direct_message.sender_id).name %>: <strong><%= direct_message.body %></strong>
+      <span class="pull-right"><%= direct_message.created_at.strftime("%B %d %H:%M") %></span></p>
+    <% end %>
+    <br />
+    <p class="pull-right"><%= link_to t(:Direct_message), direct_messages_path, :class => "btn btn-primary" %></p>
+  </div>
+  <div class="span6">
+    <h2><%= t(:discussion) %></h2>
+    <hr />
+    <table class="table">
+      <thead>
+	<tr>
+	  <th><%= t(:Post) %></th>
+	  <th><%= t(:discussion) %></th>
+	  <th><%= t(:Posted_at) %></th>
+	  <th><%= t(:Author) %></th>
+	</tr>
+      </thead>
+      <tbody>
+	<% unless @discussion_messages.nil? %>
+	<% @discussion_messages.each do |discussion_message| %>
+	<tr>
+	  <td><%= discussion_message.body.split(" ").first(4).join(" ") %>...</td>
+	  <td><%= link_to discussion_message.discussion.title, discussion_path(discussion_message.discussion) %></td>
+	  <td><%= discussion_message.created_at.strftime("%B %d %H:%M") %></td>
+	  <td><%= discussion_message.user.name %></td>
+	</tr>
+	<% end %>
+	<% end %>
+      </tbody>
+    </table>
+    <p class="pull-right"><%= link_to t(:Discussions), discussions_path, :class => "btn btn-primary" %></p>
+  </div>
 </div>
