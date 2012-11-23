@@ -6,7 +6,7 @@ class Event < ActiveRecord::Base
 
   attr_accessor :end_hour_minute, :end_date, :start_hour_minute, :start_date
 
-  attr_accessible :end_time, :end_hour_minute, :end_date, :milestone, :description, :start_time, :start_hour_minute, :start_date, :title, :group_id, :all_day, :organizer
+  attr_accessible :end_time, :end_hour_minute, :end_date, :milestone, :description, :start_time, :start_hour_minute, :start_date, :title, :group_id, :all_day, :organizer, :sport_id
 
   before_validation :make_start_time, :make_end_time
   

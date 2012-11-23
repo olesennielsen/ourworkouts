@@ -8,6 +8,7 @@ class EventsController < ApplicationController
     @event = Event.new
     @events = Event.where(:group_id => current_user.group_ids)
     @groups = current_user.groups
+    @sports = Sport.find(:all, :order => "name")
 
     respond_to do |format|
       format.html # index.html.erb
@@ -23,6 +24,7 @@ class EventsController < ApplicationController
     @entries = Entry.where(:event_id => params[:id]).order("created_at DESC")
     @current_user_entry = Entry.where(:event_id => params[:id], :user_id => current_user.id).count
     @messages = EventMessage.where(:event_id => params[:id])
+    @sport = Sport.find(@event.sport_id)
     
     authorize! :show, @event
     respond_to do |format|
@@ -54,7 +56,12 @@ class EventsController < ApplicationController
   def create
     @event = Event.new(params[:event])
     @event.organizer = current_user.id
-   
+    
+    group = Group.find(params[:event][:group_id])
+    sport = Sport.find(params[:event][:sport_id])
+    unless group.sports.include?(sport)
+      sport.groups << group
+    end
     authorize! :create, @event
     respond_to do |format|
       if @event.save

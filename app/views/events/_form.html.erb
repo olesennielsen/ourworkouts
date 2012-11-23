@@ -1,46 +1,50 @@
 <div class="modal hide" id="myModal">
-  <div class="modal-header">
-    <button type="button" class="close" data-dismiss="modal">&times;</button>
-    <h3>Create a new Event</h3>
-  </div>
-  <div class="modal-body">
-    <%= form_for @event do |f| %>
-    <% if @event.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@event.errors.count, "error") %> prohibited this event from being saved:</h2>
-      <ul>
-	<% @event.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-	<% end %>
-      </ul>
-    </div>
-    <% end %>
-    <div class="field">
-      <%= f.label :title %>
-      <%= f.text_field :title %>
-    </div>
-    <div class="field">
-      <%= f.label :group %>
-      <%= f.collection_select :group_id, @groups, :id, :name %>
-    </div>
-    <br />
-    <div class="field">
-      All Day: <%= f.check_box :all_day %>
-    </div>
-    </br>
-    <div class="field">
-      <%= f.label :start_time %>
-      <%= f.text_field :start_hour_minute, :id => "start_time", :class => "start_time" , :style => "width: 75px;" %>
-      <i class="icon-time" style="margin: -2px 0 0 -22.5px; pointer-events: none; position: relative;"></i>&nbsp;
-      <%= f.text_field :start_date, :id => "start_date", :style => "width: 100px;" %>
-      <i class="icon-calendar" style="margin: -2px 0 0 -22.5px; pointer-events: none; position: relative;"></i>
-    </div>
-    <div class="field">
-      <%= f.label :end_time %>
-      <%= f.text_field :end_hour_minute, :id => "end_time", :style => "width: 75px;" %>
-      <i class="icon-time" style="margin: -2px 0 0 -22.5px; pointer-events: none; position: relative;"></i>&nbsp;
-      <%= f.text_field :end_date, :id => "end_date", :style => "width: 100px;" %>
-      <i class="icon-calendar" style="margin: -2px 0 0 -22.5px; pointer-events: none; position: relative;"></i>
+	<div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal">&times;</button>
+		<h3>Create a new Event</h3>
+	</div>
+	<div class="modal-body">
+		<%= form_for @event do |f| %>
+		<% if @event.errors.any? %>
+		<div id="error_explanation">
+			<h2><%= pluralize(@event.errors.count, "error") %> prohibited this event from being saved:</h2>
+			<ul>
+				<% @event.errors.full_messages.each do |msg| %>
+				<li><%= msg %></li>
+				<% end %>
+			</ul>
+		</div>
+		<% end %>
+		<div class="field">
+			<%= f.label :title %>
+			<%= f.text_field :title %>
+		</div>
+		<div class="field">
+			<%= f.label :group %>
+			<%= f.collection_select :group_id, @groups, :id, :name %>
+		</div>
+		<br />
+		<div class="field">
+			All Day: <%= f.check_box :all_day %>
+		</div>
+	</br>
+	<div class="field">
+		<%= f.label :start_time %>
+		<%= f.text_field :start_hour_minute, :id => "start_time", :class => "start_time" , :style => "width: 75px;" %>
+		<i class="icon-time" style="margin: -2px 0 0 -22.5px; pointer-events: none; position: relative;"></i>&nbsp;
+		<%= f.text_field :start_date, :id => "start_date", :style => "width: 100px;" %>
+		<i class="icon-calendar" style="margin: -2px 0 0 -22.5px; pointer-events: none; position: relative;"></i>
+	</div>
+	<div class="field">
+		<%= f.label :end_time %>
+		<%= f.text_field :end_hour_minute, :id => "end_time", :style => "width: 75px;" %>
+		<i class="icon-time" style="margin: -2px 0 0 -22.5px; pointer-events: none; position: relative;"></i>&nbsp;
+		<%= f.text_field :end_date, :id => "end_date", :style => "width: 100px;" %>
+		<i class="icon-calendar" style="margin: -2px 0 0 -22.5px; pointer-events: none; position: relative;"></i>
+	</div>
+	<div class="field">
+		<%= f.label :sport_id %>
+		<%= f.collection_select :sport_id, @sports, :id, :name %>
 	</div>
 	<div class="field">
 		<%= f.label :description %>

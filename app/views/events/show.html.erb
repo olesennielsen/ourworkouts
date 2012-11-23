@@ -6,9 +6,10 @@
 <div class="row-fluid">
   <div class="span6">
     <p><b>Description:</b> <%= @event.description %></p>
+		<br />
+		<p><%= image_tag(@sport.link, :alt => @sport.name, :title => @sport.name, :class => 'sport-pictogram') %></p>
   </div>
 </div>
-<br />
 <hr />
 <div class="row-fluid">
   <div class="span6">
