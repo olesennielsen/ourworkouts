@@ -1,0 +1,39 @@
+<h2>Sports</h2>
+<br />
+<br />
+<div class="row-fluid">
+	<div class="span6">
+		<strong>Create new sport:</strong><br /><br />
+		<%= form_for Sport.new, :remote => true do |f| %>
+
+			<%= f.label :name %>
+		  <%= f.text_field :name %>
+			<br />
+			<br />
+			<%= f.label :link %>
+		  <%= f.text_field :link %>
+			<br />
+			<br />
+			<p>
+			<%= f.submit "Create sport", :class => "btn btn-primary" %>
+		  </p>
+
+		<% end %>
+	</div>	
+	<div class="span6">
+		<table class="table">
+		  <thead>
+			<tr>
+		    <th>Name</th>    
+		    <th>Logo</th>
+		    <th></th>
+		  </tr>
+			</thead>
+			<tbody id="sports">
+				<% @sports.each do |sport| %>
+					<%= render sport %>
+				<% end %>				
+			</tbody>
+		</table>
+	</div>
+</div>

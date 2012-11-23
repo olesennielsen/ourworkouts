@@ -1,0 +1,9 @@
+<tr id="<%= sport.id %>">
+	<td><%= sport.name %></td>
+	<td><%= image_tag(sport.link, :alt => sport.name, :title => sport.name, :class => 'sport-pictogram') %></td>
+	<td>
+		<%= link_to sport, confirm: 'Are you sure you want to delete this tip?', :remote => true, method: :delete do %>
+			<i class="icon-remove"></i>
+		<% end %>
+	</td>
+</tr>

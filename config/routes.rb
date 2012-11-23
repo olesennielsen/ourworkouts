@@ -12,7 +12,9 @@ Ourworkouts::Application.routes.draw do
 
   resources :direct_messages
   
-  resources :workout_tips  
+  resources :workout_tips
+  
+  resources :sports 
   
   get '/sign_up' => "home#sign_up"
   get '/who' => "home#who"

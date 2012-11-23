@@ -14,9 +14,9 @@ class WorkoutTipsController < ApplicationController
   end
   
   def create
+    last_tip = WorkoutTip.find(:last)
     @workout_tip = WorkoutTip.new(params[:workout_tip])
     @workout_tips = WorkoutTip.find(:all, :order => "tip_date DESC")
-    last_tip = WorkoutTip.find(:last)
     authorize! :create, @workout_tip
     respond_to do |format|
       if @workout_tip.save

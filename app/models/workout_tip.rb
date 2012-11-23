@@ -3,6 +3,5 @@ class WorkoutTip < ActiveRecord::Base
   
   validates :author, :presence => true
   validates :body, :presence => true
-  validates :tip_date, :presence => true
   validates :title, :presence => true
 end
