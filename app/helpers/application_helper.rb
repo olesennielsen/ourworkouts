@@ -40,9 +40,6 @@ module ApplicationHelper
       return_value += link_to "invite", new_user_invitation_path
       return_value += ' your friends and colleagues to join your group on ourworkouts.com</h3><br /><br />'
     else      
-      @width_of_pillar = 57.0/30.0
-      @spacing_between_pillars = 35.0/30.0
-
       # return of the html used in the timeline
       return_value += '<div class="row-fluid" id="timeline-container">'
       @all_events_query = Event.where(:group_id => current_user.group_ids)
@@ -55,11 +52,19 @@ module ApplicationHelper
         @todays_events = Event.where(:group_id => current_user.group_ids).where('start_time BETWEEN ? AND ?', day, day + 1)
         
         if @todays_events.empty?
-          return_value += '<div class="no-event" id="' + day.to_date.to_s + '" style="width:' + @width_of_pillar.to_s + '%">&nbsp;</div>'
-          return_value += '<div class="no-event" style="width:' + @spacing_between_pillars.to_s + '%">&nbsp;</div>'
+          return_value += '<div class="no-event" id="' + day.to_date.to_s + '>&nbsp;</div>'
+          return_value += '<div class="no-event" id="' + day.to_date.to_s + '>&nbsp;</div>'
+          return_value += '<div class="no-event">&nbsp;</div>'
         else
-          return_value += '<div class="event" id="' + day.to_date.to_s + '" style="width:' + @width_of_pillar.to_s + '%">&nbsp;</div>'
-          return_value += '<div class="no-event" style="width:' + @spacing_between_pillars.to_s + '%">&nbsp;</div>'
+          count = @todays_events.size
+          if count > 3
+            count = 3
+          end
+          
+          height = count * 100.0 / 3.0
+          
+          return_value += '<div class="event" id="' + day.to_date.to_s + '" style="height:' + height.to_s + '%;min-height:' + height.to_s + '%">&nbsp;</div>'
+          return_value += '<div class="no-event">&nbsp;</div>'
         end        
       end
 
