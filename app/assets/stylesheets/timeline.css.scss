@@ -3,11 +3,14 @@
 	padding-top:20px;
 	padding-left:20px;
 	padding-right:20px;
+	position:relative;
 }
 
 #timeline-bar {
 	background-color:#BDBDBD;
-	border-radius:5px;
+	border-radius:2px;
+	opacity:0.4;
+	filter:alpha(opacity=40); /* For IE8 and earlier */
 }
 
 .no-event {
@@ -16,18 +19,22 @@
 	background-color:#FFF;
 	height: 100%;
 	float:left;
-	width: 1.0%;
+	width: 1%;
+	min-width:1%;
 }
 
 .event {
+	content: "";
 	min-height: 33%;
 	background-color:#006dcc;
 	float:left;
-	border-top-left-radius: 6px 6px;
-	border-top-right-radius: 6px 6px;
+	border-top-left-radius: 2px 2px;
+	border-top-right-radius: 2px 2px;
 	opacity:0.4;
 	filter:alpha(opacity=40); /* For IE8 and earlier */
-	width:2.0%;
+	width:2%;
+	min-width:2%;
+	vertical-xalign: bottom;
 }
 
 #eventPopupContainer

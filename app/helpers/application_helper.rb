@@ -41,7 +41,7 @@ module ApplicationHelper
       return_value += ' your friends and colleagues to join your group on ourworkouts.com</h3><br /><br />'
     else      
       # return of the html used in the timeline
-      return_value += '<div class="row-fluid" id="timeline-container">'
+      return_value += '<div id="timeline-container">'
       @all_events_query = Event.where(:group_id => current_user.group_ids)
       @all_event_hash = []
       for event in @all_events_query
@@ -53,7 +53,7 @@ module ApplicationHelper
         
         if @todays_events.empty?
           return_value += '<div class="no-event" id="' + day.to_date.to_s + '>&nbsp;</div>'
-          return_value += '<div class="no-event" id="' + day.to_date.to_s + '>&nbsp;</div>'
+          return_value += '<div class="no-event">&nbsp;</div>'
           return_value += '<div class="no-event">&nbsp;</div>'
         else
           count = @todays_events.size
