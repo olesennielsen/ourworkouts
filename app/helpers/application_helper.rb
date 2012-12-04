@@ -48,25 +48,25 @@ module ApplicationHelper
         @all_event_hash << event.title
       end
       
-      counter = 0
+      counter = 3
       
       (DateTime.now.beginning_of_day..DateTime.now.end_of_day + 30 - 1).each do |day|
         @todays_events = Event.where(:group_id => current_user.group_ids).where('start_time BETWEEN ? AND ?', day, day + 1)
         
         if @todays_events.empty?
-          return_value += '<div class="no-event" id="' + day.to_date.to_s + '" style="left:' + counter.to_s + '%">&nbsp;</div>'
-          return_value += '<div class="no-event" style="left:' + (counter + 1).to_s + '%">&nbsp;</div>'
-          return_value += '<div class="no-event" style="left:' + (counter + 2).to_s + '%">&nbsp;</div>'
+          return_value += '<div class="no-event" id="' + day.to_date.to_s + '" style="left:' + counter.to_s + '%">' + day.to_date.to_s + '</div>'
         else
-          count = @todays_events.size
-          if count > 3
-            count = 3
+          number_of_events = @todays_events.size
+          if number_of_events > 3
+            number_of_events = 3
           end
           
-          height = count * 100.0 / 3.0
-          
-          return_value += '<div class="event" id="' + day.to_date.to_s + '" style="height:' + height.to_s + '%;min-height:' + height.to_s + '%;left:' + counter.to_s + '%">&nbsp;</div>'
-          return_value += '<div class="no-event"style="left:' + (counter + 2).to_s + '%">&nbsp;</div>'
+          height = number_of_events * 100.0 / 3.0
+          if Event.contain_goal_event(@todays_events)
+            return_value += '<div class="event" id="' + day.to_date.to_s + '" style="height:' + height.to_s + '%;min-height:' + height.to_s + '%;left:' + counter.to_s + '%;background-color:red;opacity:0.55;filter:alpha(opacity=55);">' + day.to_date.to_s + '</div>'
+          else
+            return_value += '<div class="event" id="' + day.to_date.to_s + '" style="height:' + height.to_s + '%;min-height:' + height.to_s + '%;left:' + counter.to_s + '%">' + day.to_date.to_s + '</div>'
+          end
         end
         counter += 3        
       end
