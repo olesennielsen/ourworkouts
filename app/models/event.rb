@@ -25,7 +25,8 @@ class Event < ActiveRecord::Base
       :end => end_time,
       :allDay => self.all_day,
       :recurring => false,
-      :url => Rails.application.routes.url_helpers.event_path(id)
+      :url => Rails.application.routes.url_helpers.event_path(id),
+      :sport_link => Sport.find(self.sport_id).link
     }
   end
 
