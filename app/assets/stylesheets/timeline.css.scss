@@ -34,7 +34,8 @@
 	filter:alpha(opacity=40); /* For IE8 and earlier */
 	width:2%;
 	min-width:2%;
-	vertical-xalign: bottom;
+	position:absolute;
+	bottom:0px;
 }
 
 #eventPopupContainer

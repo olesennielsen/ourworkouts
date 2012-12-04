@@ -45,16 +45,18 @@ module ApplicationHelper
       @all_events_query = Event.where(:group_id => current_user.group_ids)
       @all_event_hash = []
       for event in @all_events_query
-        puts event.title
         @all_event_hash << event.title
       end
+      
+      counter = 0
+      
       (DateTime.now.beginning_of_day..DateTime.now.end_of_day + 30 - 1).each do |day|
         @todays_events = Event.where(:group_id => current_user.group_ids).where('start_time BETWEEN ? AND ?', day, day + 1)
         
         if @todays_events.empty?
-          return_value += '<div class="no-event" id="' + day.to_date.to_s + '>&nbsp;</div>'
-          return_value += '<div class="no-event">&nbsp;</div>'
-          return_value += '<div class="no-event">&nbsp;</div>'
+          return_value += '<div class="no-event" id="' + day.to_date.to_s + '" style="left:' + counter.to_s + '%">&nbsp;</div>'
+          return_value += '<div class="no-event" style="left:' + (counter + 1).to_s + '%">&nbsp;</div>'
+          return_value += '<div class="no-event" style="left:' + (counter + 2).to_s + '%">&nbsp;</div>'
         else
           count = @todays_events.size
           if count > 3
@@ -63,13 +65,14 @@ module ApplicationHelper
           
           height = count * 100.0 / 3.0
           
-          return_value += '<div class="event" id="' + day.to_date.to_s + '" style="height:' + height.to_s + '%;min-height:' + height.to_s + '%">&nbsp;</div>'
-          return_value += '<div class="no-event">&nbsp;</div>'
-        end        
+          return_value += '<div class="event" id="' + day.to_date.to_s + '" style="height:' + height.to_s + '%;min-height:' + height.to_s + '%;left:' + counter.to_s + '%">&nbsp;</div>'
+          return_value += '<div class="no-event"style="left:' + (counter + 2).to_s + '%">&nbsp;</div>'
+        end
+        counter += 3        
       end
 
       return_value += '</div><div id="timeline-bar">&nbsp;</div><hr /><br />'
-
+      
     end 
     return return_value.html_safe
 

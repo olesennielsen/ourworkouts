@@ -73,4 +73,13 @@ class Event < ActiveRecord::Base
     end
     return @users
   end
+  
+  def self.contain_goal_event(events)
+    events.each do |event|
+      if event.milestone
+        return true
+      end
+    end
+    return false    
+  end
 end
