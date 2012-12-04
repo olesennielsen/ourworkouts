@@ -137,5 +137,12 @@ class User < ActiveRecord::Base
   def number_of_authentications
     return Authentication.where(:user_id => self.id).count
   end
+  
+  def got_any_new_direct_messages
+    if DirectMessage.where(:recipient_id => self.id).where('created_at BETWEEN ? AND ?', self.last_sign_in_at, DateTime.now)
+      return true
+    end
+    return false
+  end
 end
 
