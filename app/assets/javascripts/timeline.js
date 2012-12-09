@@ -52,10 +52,7 @@ $(function()
 					
 					date_events += '<p><strong><a href="/events/' + item.id +'">' + item.title + '</a></strong> at ';
 					date_events += datestr + '<br />';
-					date_events += item.entries + ' have already joined';				
-					date_events += '</p>';
-					date_events += '<p><img src="' + item.sport_link + '" alt="sport-icon" /></p>'; 
-					date_events += '<br />';
+					date_events += item.entries + ' have already joined</p><br />';
 				});
 
 				$('#eventPopupContent').html(date_events);

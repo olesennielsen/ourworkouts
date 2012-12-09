@@ -29,9 +29,12 @@ module ApplicationHelper
 
   def timeline
     return_value = ''
+    number_of_days = 14
+    
     # events for the timeline
-    groups = current_user.groups
-    @timeline_events = Event.where(:group_id => current_user.group_ids).where('start_time BETWEEN ? AND ?', DateTime.now.beginning_of_day, DateTime.now.end_of_day + 30)
+    groups = current_user.groups    
+    
+    @timeline_events = Event.where(:group_id => current_user.group_ids).where('start_time BETWEEN ? AND ?', DateTime.now.beginning_of_day, DateTime.now.end_of_day + number_of_days + 1)
 
     if @timeline_events.empty?
       return_value += "<br /><h2>Hi there,</h2><h3>your group haven't created any workouts yet, so go to your group's "
@@ -48,13 +51,13 @@ module ApplicationHelper
         @all_event_hash << event.title
       end
       
-      counter = 3
+      counter = 6
       
-      (DateTime.now.beginning_of_day..DateTime.now.end_of_day + 30 - 1).each do |day|
+      (DateTime.now.beginning_of_day..DateTime.now.end_of_day + number_of_days).each do |day|
         @todays_events = Event.where(:group_id => current_user.group_ids).where('start_time BETWEEN ? AND ?', day, day + 1)
         
         if @todays_events.empty?
-          return_value += '<div class="no-event" id="' + day.to_date.to_s + '" style="left:' + counter.to_s + '%">' + day.to_date.to_s + '</div>'
+          return_value += '<div class="no-event" id="' + day.to_date.to_s + '" style="left:' + counter.to_s + '%">&nbsp;</div>'
         else
           number_of_events = @todays_events.size
           if number_of_events > 3
@@ -63,12 +66,12 @@ module ApplicationHelper
           
           height = number_of_events * 100.0 / 3.0
           if Event.contain_goal_event(@todays_events)
-            return_value += '<div class="event" id="' + day.to_date.to_s + '" style="height:' + height.to_s + '%;min-height:' + height.to_s + '%;left:' + counter.to_s + '%;background-color:red;opacity:0.55;filter:alpha(opacity=55);">' + day.to_date.to_s + '</div>'
+            return_value += '<div class="event" id="' + day.to_date.to_s + '" style="height:' + height.to_s + '%;min-height:' + height.to_s + '%;left:' + counter.to_s + '%;background-color:red;opacity:0.55;filter:alpha(opacity=55);">&nbsp;</div>'
           else
-            return_value += '<div class="event" id="' + day.to_date.to_s + '" style="height:' + height.to_s + '%;min-height:' + height.to_s + '%;left:' + counter.to_s + '%">' + day.to_date.to_s + '</div>'
+            return_value += '<div class="event" id="' + day.to_date.to_s + '" style="height:' + height.to_s + '%;min-height:' + height.to_s + '%;left:' + counter.to_s + '%">&nbsp;</div>'
           end
         end
-        counter += 3        
+        counter += 6        
       end
 
       return_value += '</div><div id="timeline-bar">&nbsp;</div><hr /><br />'
