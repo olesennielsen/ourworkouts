@@ -11,10 +11,10 @@
 	</div>
   <div class="span4">
 		<center>
-			<% if current_user.got_any_new_direct_messages %>
-    		<%= link_to image_tag("messages_new.png", :alt => "Direct Messages", :title => "Direct Messages", :class => "dashboard-icon"), direct_messages_path %>
-			<% else %>
+			<% if current_user.got_any_new_direct_messages? %>
 				<%= link_to image_tag("messages.png", :alt => "Direct Messages", :title => "Direct Messages", :class => "dashboard-icon"), direct_messages_path %>
+			<% else %>
+				<%= link_to image_tag("messages_new.png", :alt => "Direct Messages", :title => "Direct Messages", :class => "dashboard-icon"), direct_messages_path %>
 			<% end %>
 		</center>
   </div>

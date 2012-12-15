@@ -25,7 +25,7 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable, :omniauthable
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :name, :email, :password, :password_confirmation, :remember_me, :confirmed_at, :group_id, :groups_attributes  
+  attr_accessible :name, :email, :password, :password_confirmation, :remember_me, :confirmed_at, :group_id, :groups_attributes, :last_direct_message_check  
   accepts_nested_attributes_for :groups, :allow_destroy => true
   
   #validates :name, :presence => true
@@ -138,11 +138,10 @@ class User < ActiveRecord::Base
     return Authentication.where(:user_id => self.id).count
   end
   
-  def got_any_new_direct_messages
-    if DirectMessage.where(:recipient_id => self.id).where('created_at BETWEEN ? AND ?', self.last_sign_in_at, DateTime.now)
-      return true
-    end
-    return false
+  def got_any_new_direct_messages?
+    messages = DirectMessage.where(:recipient_id => self.id).where('created_at BETWEEN ? AND ?', self.last_direct_message_check, DateTime.now)
+    self.update_attributes(:last_direct_message_check => DateTime.now)
+    return messages.empty?
   end
 end
 
