@@ -19,8 +19,12 @@
 		</center>
   </div>
   <div class="span4">
-		<center>
-    <%= link_to image_tag("discussion.png", :alt => "Discussions", :title => "Discussions", :class => "dashboard-icon"), discussions_path %>
+		<center>    
+			<% if current_user.got_any_new_discussion_messages? %>
+				<%= link_to image_tag("discussion.png", :alt => "Discussions", :title => "Discussions", :class => "dashboard-icon"), discussions_path %>
+			<% else %>
+				<%= link_to image_tag("discussion_new.png", :alt => "Discussions", :title => "Discussions", :class => "dashboard-icon"), discussions_path %>
+			<% end %>
   	</center>
 	</div>
 </div>

@@ -140,8 +140,22 @@ class User < ActiveRecord::Base
   
   def got_any_new_direct_messages?
     messages = DirectMessage.where(:recipient_id => self.id).where('created_at BETWEEN ? AND ?', self.last_direct_message_check, DateTime.now)
-    self.update_attributes(:last_direct_message_check => DateTime.now)
     return messages.empty?
+  end
+  
+  def got_any_new_discussion_messages?
+    discussions = Discussion.where(:group_id => self.group_ids)
+    
+    discussion_messages = []
+    discussions.each do |discussion| 
+      tmp_discussion_messages = DiscussionMessage.where(:discussion_id => discussion.id).where('created_at BETWEEN ? AND ?', self.last_direct_message_check, DateTime.now).where('user_id != ?', self)
+      tmp_discussion_messages.each do |tdm|
+        discussion_messages.push(tdm)
+      end
+    end
+      
+    self.update_attributes(:last_direct_message_check => DateTime.now)
+    return discussion_messages.empty?  
   end
 end
 
