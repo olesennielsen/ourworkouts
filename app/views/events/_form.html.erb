@@ -46,6 +46,11 @@
 		<%= f.label :sport_id %>
 		<%= f.collection_select :sport_id, @sports, :id, :name %>
 	</div>
+	<br />
+	<div class="field">
+		Goal event: <%= f.check_box :milestone %>
+	</div>
+	</br>
 	<div class="field">
 		<%= f.label :description %>
 		<%= f.text_area :description, :size => "20x5" %>

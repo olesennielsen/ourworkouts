@@ -4,23 +4,7 @@ $(function()
 	var hideTimer = null;
 
 	var container = $('<div id="eventPopupContainer">'
-	+ '<table width="" border="0" cellspacing="0" cellpadding="0" align="center" class="eventPopupPopup">'
-	+ '<tr>'
-	+ '   <td class="corner topLeft"></td>'
-	+ '   <td class="top"></td>'
-	+ '   <td class="corner topRight"></td>'
-	+ '</tr>'
-	+ '<tr>'
-	+ '   <td class="left">&nbsp;</td>'
-	+ '   <td><div id="eventPopupContent"></div></td>'
-	+ '   <td class="right">&nbsp;</td>'
-	+ '</tr>'
-	+ '<tr>'
-	+ '   <td class="corner bottomLeft">&nbsp;</td>'
-	+ '   <td class="bottom">&nbsp;</td>'
-	+ '   <td class="corner bottomRight"></td>'
-	+ '</tr>'
-	+ '</table>'
+	+ '<div id="eventPopupContent"></div>'
 	+ '</div>');
 
 	$('body').append(container);
@@ -35,7 +19,7 @@ $(function()
 		var pos = $(this).offset();
 		var width = $(this).width();
 		container.css({
-			left: (pos.left + width) + 'px',
+			left: (pos.left + width + 2) + 'px',
 			top: pos.top - 5 + 'px'
 		});
 

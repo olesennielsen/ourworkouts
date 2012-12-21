@@ -89,7 +89,12 @@ class User < ActiveRecord::Base
       sessions = sessions.sort_by! {|u| u.start_time}
       sessions.keep_if{|e| !e.all_day}
       data = []
-
+      
+      # fixed problem with crash if only goal sessions
+      if sessions.empty? then
+        return []
+      end
+      
       sessions.first.start_time.to_date.upto(sessions.last.start_time.to_date) do |day|
         data << [day, 0]
       end
