@@ -2,7 +2,7 @@ class HomeController < ApplicationController
   require 'open-uri'
   require 'json'
   def index
-    @tip = WorkoutTip.where(:tip_date => Date.today).first
+    #@tip = WorkoutTip.where(:tip_date => Date.today).first
   end
   
   def dashboard

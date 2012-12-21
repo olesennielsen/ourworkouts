@@ -15,12 +15,16 @@ class WorkoutTipsController < ApplicationController
   
   def create
     last_tip = WorkoutTip.find(:last)
+    if last_tip.nil?
+      last_tip_date = Date.today
+    else
+      last_tip_date = last_tip.tip_date
+    end  
     @workout_tip = WorkoutTip.new(params[:workout_tip])
-    @workout_tips = WorkoutTip.find(:all, :order => "tip_date DESC")
     authorize! :create, @workout_tip
     respond_to do |format|
       if @workout_tip.save
-        @workout_tip.update_attributes(:tip_date => last_tip.tip_date + 1.day)
+        @workout_tip.update_attributes(:tip_date => last_tip_date + 1.day)
         format.html { redirect_to new_workout_tip_path, notice: 'Workout tip was successfully created' }
         format.json { render json: @workout_tip, status: :created, location: @workout_tip }
         format.js

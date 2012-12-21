@@ -13,7 +13,7 @@
 	<div class="span7" >
 		<h2><%= t(:workout_tip_of_the_day) %>:</h2>
 		<div id="workout-tip">
-			<%= render :partial => "workout_tip", :object => @tip %>
+			<%= render :partial => "workout_tip", :object => WorkoutTip.get_tip %>
 			<br />
 			<br />
 			<p class="pull-right"><%= link_to t(:All) + " " + t(:workout) + " " + t(:tip), workout_tips_path, :class => "btn btn-primary" %></p>
