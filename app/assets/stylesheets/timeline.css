@@ -58,6 +58,7 @@
 #eventPopupContent
 {
     background-color: #FFF;
-    min-width: 175px;
+    min-width: 200px;
+		width:200px;
     min-height: 50px;
 }

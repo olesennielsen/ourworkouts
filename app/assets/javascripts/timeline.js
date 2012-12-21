@@ -11,16 +11,36 @@ $(function()
 
 	$('.event').live('mouseover', function()
 	{
+		var current_time = new Date();
+		var current_day = current_time.getDate();
+		
 		var date = this.id;
-
+		var day_of_event = date.substring(8,10);
+		
+		var difference = day_of_event - current_day;
+		
+		if (difference < 0) 
+			difference = 30 + difference;
+			
 		if (hideTimer)
-			clearTimeout(hideTimer);
-
+			clearTimeout(hideTimer);  	
+		
 		var pos = $(this).offset();
 		var width = $(this).width();
+		
+		var container_left = 0;
+		var container_top = 0;
+		
+		if (difference > 7) {
+			container_left = pos.left - 200 - 14;
+		} else {
+			container_left = (pos.left + width + 2);			
+		}
+		
+		container_top = pos.top - 5;
 		container.css({
-			left: (pos.left + width + 2) + 'px',
-			top: pos.top - 5 + 'px'
+			left: container_left + 'px',
+			top: container_top + 'px'
 		});
 
 		$('#eventPopupContent').html('&nbsp;');
