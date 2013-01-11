@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 ruby '1.9.3'
 gem 'heroku'
-gem 'rails'
+gem 'rails', '3.2.11'
 
 group :assets do
   gem 'jquery-ui-rails'
